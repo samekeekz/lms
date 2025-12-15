@@ -65,6 +65,7 @@ model Chapter {
   isFree      Boolean @default(false)
 
   muxData MuxData?
+  quiz    Quiz?
 
   courseId String
   course   Course @relation(fields: [courseId], references: [id], onDelete: Cascade)
@@ -123,4 +124,119 @@ model StripeCustomer {
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+}
+
+// Quiz Model - One quiz per chapter
+model Quiz {
+  id          String   @id @default(uuid())
+  title       String
+  description String?  @db.Text
+  passingScore Int     @default(70)
+  timeLimit   Int?
+  maxAttempts Int?
+  isPublished Boolean  @default(false)
+  shuffleQuestions Boolean @default(false)
+  showCorrectAnswers Boolean @default(true)
+
+  chapterId String  @unique
+  chapter   Chapter @relation(fields: [chapterId], references: [id], onDelete: Cascade)
+
+  questions Question[]
+  attempts  QuizAttempt[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([chapterId])
+}
+
+// Question Model - Multiple questions per quiz
+model Question {
+  id          String       @id @default(uuid())
+  question    String       @db.Text
+  type        QuestionType @default(MULTIPLE_CHOICE)
+  points      Int          @default(1)
+  position    Int
+  explanation String?      @db.Text
+
+  quizId String
+  quiz   Quiz @relation(fields: [quizId], references: [id], onDelete: Cascade)
+
+  options QuestionOption[]
+  answers UserAnswer[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([quizId])
+}
+
+// Enum for question types
+enum QuestionType {
+  MULTIPLE_CHOICE
+  MULTIPLE_SELECT
+  TRUE_FALSE
+  SHORT_ANSWER
+}
+
+// Question Options - For multiple choice questions
+model QuestionOption {
+  id        String  @id @default(uuid())
+  text      String  @db.Text
+  isCorrect Boolean @default(false)
+  position  Int
+
+  questionId String
+  question   Question @relation(fields: [questionId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([questionId])
+}
+
+// Quiz Attempt - Track each student's quiz attempt
+model QuizAttempt {
+  id          String    @id @default(uuid())
+  userId      String
+  score       Float?
+  isPassed    Boolean?
+  isCompleted Boolean   @default(false)
+  startedAt   DateTime  @default(now())
+  completedAt DateTime?
+  timeSpent   Int?
+
+  quizId String
+  quiz   Quiz @relation(fields: [quizId], references: [id], onDelete: Cascade)
+
+  answers UserAnswer[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([quizId])
+  @@index([userId])
+}
+
+// User Answer - Individual answers for each question
+model UserAnswer {
+  id              String   @id @default(uuid())
+  userId          String
+  selectedOptions String[]
+  textAnswer      String?  @db.Text
+  isCorrect       Boolean?
+  pointsEarned    Int      @default(0)
+
+  questionId String
+  question   Question @relation(fields: [questionId], references: [id], onDelete: Cascade)
+
+  attemptId String
+  attempt   QuizAttempt @relation(fields: [attemptId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([questionId])
+  @@index([attemptId])
+  @@index([userId])
 }

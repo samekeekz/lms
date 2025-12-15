@@ -8,6 +8,7 @@ import { Separator } from "@/components/ui/separator";
 import { Preview } from "@/components/preview";
 import { File } from "lucide-react";
 import { CourseProgressButton } from "./_components/course-progress-button";
+import { QuizPlayer } from "./_components/quiz-player";
 
 const ChapterIdPage = async ({
   params,
@@ -28,6 +29,7 @@ const ChapterIdPage = async ({
     nextChapter,
     userProgress,
     purchase,
+    quiz,
   } = await getChapter({
     userId,
     chapterId: params.chapterId,
@@ -107,6 +109,18 @@ const ChapterIdPage = async ({
             </>
           )}
         </div>
+
+        {/* Quiz Section */}
+        {quiz && !isLocked && (
+          <div className="mt-8">
+            <Separator />
+            <QuizPlayer
+              courseId={params.courseId}
+              chapterId={params.chapterId}
+              quiz={quiz}
+            />
+          </div>
+        )}
       </div>
     </div>
   );

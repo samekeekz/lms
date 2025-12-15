@@ -58,6 +58,23 @@ export const getChapter = async ({
         id: chapterId,
         isPublished: true,
       },
+      include: {
+        quiz: {
+          where: {
+            isPublished: true,
+          },
+          include: {
+            questions: {
+              include: {
+                options: true,
+              },
+              orderBy: {
+                position: "asc",
+              },
+            },
+          },
+        },
+      },
     });
 
     if (!chapter || !course) {
@@ -123,6 +140,8 @@ export const getChapter = async ({
       },
     });
 
+    const quiz = chapter?.quiz || null;
+
     return {
       chapter,
       course,
@@ -131,6 +150,7 @@ export const getChapter = async ({
       nextChapter,
       userProgress,
       purchase,
+      quiz,
     };
   } catch (error) {
     console.log("Get chapter", error);
@@ -142,6 +162,7 @@ export const getChapter = async ({
       nextChapter: null,
       userProgress: null,
       purchase: null,
+      quiz: null,
     };
   }
 };

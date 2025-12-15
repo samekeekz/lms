@@ -3,7 +3,7 @@ import { redirect } from "next/navigation";
 
 import { db } from "@/lib/db";
 import Link from "next/link";
-import { ArrowLeft, Eye, LayoutDashboard, Video } from "lucide-react";
+import { ArrowLeft, Eye, LayoutDashboard, Video, FileQuestion } from "lucide-react";
 import { IconBadge } from "@/components/icon-badge";
 import { ChapterTitleForm } from "./_components/chapter-title-form";
 import { ChapterDescriptionForm } from "./_components/chapter-description-form";
@@ -11,6 +11,10 @@ import { ChapterAccessForm } from "./_components/chapter-access-form";
 import { ChapterVideoForm } from "./_components/chapter-video-form";
 import { Banner } from "@/components/banner";
 import { ChapterActions } from "./_components/chapter-actions";
+import { QuizForm } from "./_components/quiz-form";
+import { QuestionForm } from "./_components/question-form";
+import { QuestionsList } from "./_components/questions-list";
+import { QuizActions } from "./_components/quiz-actions";
 
 const ChapterIdPage = async ({
   params,
@@ -30,6 +34,18 @@ const ChapterIdPage = async ({
     },
     include: {
       muxData: true,
+      quiz: {
+        include: {
+          questions: {
+            include: {
+              options: true,
+            },
+            orderBy: {
+              position: "asc",
+            },
+          },
+        },
+      },
     },
   });
 
@@ -122,6 +138,47 @@ const ChapterIdPage = async ({
               courseId={params.courseId}
             />
           </div>
+        </div>
+
+        {/* Quiz Section */}
+        <div className="mt-10">
+          <div className="flex items-center gap-x-2 mb-6">
+            <IconBadge icon={FileQuestion} />
+            <h2 className="text-xl">Chapter Quiz</h2>
+            {chapter.quiz && (
+              <QuizActions
+                disabled={!chapter.quiz.questions.length}
+                courseId={params.courseId}
+                chapterId={params.chapterId}
+                isPublished={chapter.quiz.isPublished}
+              />
+            )}
+          </div>
+
+          <QuizForm
+            initialData={chapter.quiz}
+            courseId={params.courseId}
+            chapterId={params.chapterId}
+          />
+
+          {chapter.quiz && (
+            <>
+              <QuestionForm
+                courseId={params.courseId}
+                chapterId={params.chapterId}
+              />
+
+              {chapter.quiz.questions.length > 0 && (
+                <div className="mt-6">
+                  <QuestionsList
+                    items={chapter.quiz.questions}
+                    courseId={params.courseId}
+                    chapterId={params.chapterId}
+                  />
+                </div>
+              )}
+            </>
+          )}
         </div>
       </div>
     </>
