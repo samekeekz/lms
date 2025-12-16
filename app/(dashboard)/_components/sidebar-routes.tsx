@@ -1,6 +1,6 @@
 "use client";
 
-import { BarChart, Compass, Layout, List, Shield } from "lucide-react";
+import { BarChart, Compass, Layout, List, Shield, Award } from "lucide-react";
 import { SidebarItem } from "./sidebar-item";
 import { usePathname } from "next/navigation";
 
@@ -8,7 +8,12 @@ const guestRoutes = [
   {
     icon: Layout,
     label: "Dashboard",
-    href: "/",
+    href: "/dashboard",
+  },
+  {
+    icon: Award,
+    label: "Free Quiz",
+    href: "/free-quiz",
   },
   {
     icon: Compass,
@@ -35,6 +40,11 @@ const adminRoutes = [
     icon: Shield,
     label: "Manage Access",
     href: "/admin/access",
+  },
+  {
+    icon: Award,
+    label: "Free Quiz",
+    href: "/admin/free-quiz",
   },
 ];
 
