@@ -63,6 +63,7 @@ export const QuizPlayer = ({
   };
 
   // Timer countdown
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     if (timeRemaining === null || timeRemaining <= 0 || result || showReview) return;
 

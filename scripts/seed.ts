@@ -1,10 +1,8 @@
-const { PrismaClient } = require("@prisma/client");
-
+import { PrismaClient, QuestionType } from "@prisma/client";
 const db = new PrismaClient();
 
 async function main() {
   try {
-    // Seed categories
     await db.category.createMany({
       data: [
         { name: "Math" },
@@ -16,7 +14,6 @@ async function main() {
 
     console.log("✅ Categories seeded!");
 
-    // Find or create a test course
     let course = await db.course.findFirst({
       where: {
         title: {
@@ -32,7 +29,7 @@ async function main() {
 
       course = await db.course.create({
         data: {
-          userId: process.env.NEXT_PUBLIC_TEACHER_ID, // Replace with your actual Clerk user ID
+          userId: process.env.NEXT_PUBLIC_TEACHER_ID!,
           title: "Test Course for Quiz",
           description: "A test course to demonstrate the quiz feature",
           imageUrl: "https://images.unsplash.com/photo-1516321497487-e288fb19713f",
@@ -45,7 +42,6 @@ async function main() {
       console.log("✅ Test course created!");
     }
 
-    // Find or create a test chapter
     let chapter = await db.chapter.findFirst({
       where: {
         courseId: course.id,
@@ -67,7 +63,6 @@ async function main() {
       console.log("✅ Test chapter created!");
     }
 
-    // Check if quiz already exists
     const existingQuiz = await db.quiz.findUnique({
       where: {
         chapterId: chapter.id,
@@ -79,7 +74,6 @@ async function main() {
       return;
     }
 
-    // Create a quiz
     const quiz = await db.quiz.create({
       data: {
         chapterId: chapter.id,
@@ -96,12 +90,17 @@ async function main() {
 
     console.log("✅ Quiz created!");
 
-    // Create 10 diverse questions
-    const questions = [
-      // Question 1 - Multiple Choice
+    const questions: Array<{
+      question: string;
+      type: QuestionType;
+      points: number;
+      position: number;
+      explanation: string;
+      options: Array<{ text: string; isCorrect: boolean; position: number }>;
+    }> = [
       {
         question: "What is the primary goal of critical thinking?",
-        type: "MULTIPLE_CHOICE",
+        type: QuestionType.MULTIPLE_CHOICE,
         points: 1,
         position: 0,
         explanation: "Critical thinking aims to make reasoned judgments that are logical and well-thought out.",
@@ -112,10 +111,9 @@ async function main() {
           { text: "To avoid making decisions", isCorrect: false, position: 3 },
         ],
       },
-      // Question 2 - Multiple Choice
       {
         question: "Which of the following is an example of a logical fallacy?",
-        type: "MULTIPLE_CHOICE",
+        type: QuestionType.MULTIPLE_CHOICE,
         points: 1,
         position: 1,
         explanation: "Ad hominem is a fallacy where you attack the person instead of addressing their argument.",
@@ -126,10 +124,9 @@ async function main() {
           { text: "Asking clarifying questions", isCorrect: false, position: 3 },
         ],
       },
-      // Question 3 - True/False
       {
         question: "Critical thinking requires questioning assumptions and beliefs.",
-        type: "TRUE_FALSE",
+        type: QuestionType.TRUE_FALSE,
         points: 1,
         position: 2,
         explanation: "True - Questioning assumptions is a fundamental part of critical thinking.",
@@ -138,10 +135,9 @@ async function main() {
           { text: "False", isCorrect: false, position: 1 },
         ],
       },
-      // Question 4 - Multiple Select
       {
         question: "Which of the following are components of critical thinking? (Select all that apply)",
-        type: "MULTIPLE_SELECT",
+        type: QuestionType.MULTIPLE_SELECT,
         points: 2,
         position: 3,
         explanation: "All three - analysis, evaluation, and inference - are key components of critical thinking.",
@@ -152,10 +148,9 @@ async function main() {
           { text: "Inference", isCorrect: true, position: 3 },
         ],
       },
-      // Question 5 - Multiple Choice
       {
         question: "What does 'cognitive bias' refer to?",
-        type: "MULTIPLE_CHOICE",
+        type: QuestionType.MULTIPLE_CHOICE,
         points: 1,
         position: 4,
         explanation: "Cognitive biases are systematic patterns of deviation from rational judgment.",
@@ -166,10 +161,9 @@ async function main() {
           { text: "Having strong opinions", isCorrect: false, position: 3 },
         ],
       },
-      // Question 6 - True/False
       {
         question: "Emotions should never play a role in critical thinking.",
-        type: "TRUE_FALSE",
+        type: QuestionType.TRUE_FALSE,
         points: 1,
         position: 5,
         explanation: "False - While we should be aware of emotional influences, emotions can provide valuable insights when properly understood.",
@@ -178,10 +172,9 @@ async function main() {
           { text: "False", isCorrect: true, position: 1 },
         ],
       },
-      // Question 7 - Multiple Choice
       {
         question: "Which question best demonstrates critical thinking?",
-        type: "MULTIPLE_CHOICE",
+        type: QuestionType.MULTIPLE_CHOICE,
         points: 1,
         position: 6,
         explanation: "Critical thinking involves examining evidence and reasoning, not just accepting claims at face value.",
@@ -192,10 +185,9 @@ async function main() {
           { text: "When did this happen?", isCorrect: false, position: 3 },
         ],
       },
-      // Question 8 - Multiple Select
       {
         question: "Which skills are essential for critical thinking? (Select all that apply)",
-        type: "MULTIPLE_SELECT",
+        type: QuestionType.MULTIPLE_SELECT,
         points: 2,
         position: 7,
         explanation: "All of these - interpretation, analysis, and problem-solving - are essential critical thinking skills.",
@@ -206,10 +198,9 @@ async function main() {
           { text: "Problem-solving", isCorrect: true, position: 3 },
         ],
       },
-      // Question 9 - Multiple Choice
       {
         question: "What is 'confirmation bias'?",
-        type: "MULTIPLE_CHOICE",
+        type: QuestionType.MULTIPLE_CHOICE,
         points: 1,
         position: 8,
         explanation: "Confirmation bias is the tendency to search for or interpret information in a way that confirms existing beliefs.",
@@ -220,10 +211,9 @@ async function main() {
           { text: "Double-checking facts", isCorrect: false, position: 3 },
         ],
       },
-      // Question 10 - True/False
       {
         question: "A good critical thinker is always skeptical of new information.",
-        type: "TRUE_FALSE",
+        type: QuestionType.TRUE_FALSE,
         points: 1,
         position: 9,
         explanation: "False - While healthy skepticism is important, being overly skeptical can prevent learning. Critical thinkers are open-minded but evaluate claims carefully.",
@@ -234,7 +224,6 @@ async function main() {
       },
     ];
 
-    // Create all questions with their options
     for (const questionData of questions) {
       await db.question.create({
         data: {

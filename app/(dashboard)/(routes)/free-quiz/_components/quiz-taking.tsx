@@ -37,6 +37,7 @@ export function QuizTaking({ quiz, userId, onComplete, onCancel }: QuizTakingPro
   const [timeRemaining, setTimeRemaining] = useState(quiz.timeLimit ? quiz.timeLimit * 60 : null);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const questions = useMemo(() => {
     if (quiz.shuffleQuestions) {
       return shuffleArray(quiz.questions);
@@ -48,6 +49,7 @@ export function QuizTaking({ quiz, userId, onComplete, onCancel }: QuizTakingPro
   const totalQuestions = questions.length;
   const progress = ((currentQuestionIndex + 1) / totalQuestions) * 100;
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     if (timeRemaining === null) return;
     if (timeRemaining <= 0) {
