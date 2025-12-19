@@ -52,7 +52,7 @@ export const NavbarRoutes = () => {
             )}
           </>
         )}
-        <UserButton afterSignOutUrl="/sign-in" />
+        <UserButton afterSignOutUrl="/" />
       </div>
     </>
   );

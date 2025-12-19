@@ -73,10 +73,7 @@ export default function LandingPage() {
         <div className="container mx-auto px-4 max-w-[1200px]">
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center gap-4">
-              <div className="w-8 h-8 flex items-center justify-center text-[#38e07b]">
-                <GraduationCap className="w-7 h-7" />
-              </div>
-              <div className="text-xl font-bold text-white">NUET Prep</div>
+              <div className="text-2xl font-black text-white tracking-tight">NUET Prep</div>
             </div>
 
             <div className="hidden md:flex items-center gap-8">
