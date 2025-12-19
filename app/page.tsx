@@ -73,79 +73,78 @@ export default function LandingPage() {
         <div className="container mx-auto px-4 max-w-[1200px]">
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center gap-3">
-              <div className="size-8 flex items-center justify-center text-[#38e07b]">
-                <span className="material-symbols-outlined text-3xl">school</span>
-              </div>
-              <div className="text-2xl font-black text-white tracking-tight">NUET Prep</div>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth="1.5"
+              stroke="currentColor"
+              className="w-8 h-8 text-[#38e07b]"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M4.26 10.147a60.438 60.438 0 0 0-.491 6.347A48.62 48.62 0 0 1 12 20.904a48.62 48.62 0 0 1 8.232-4.41 60.46 60.46 0 0 0-.491-6.347m-15.482 0a50.636 50.636 0 0 0-2.658-.813A59.906 59.906 0 0 1 12 3.493a59.903 59.903 0 0 1 10.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.717 50.717 0 0 1 12 13.489a50.702 50.702 0 0 1 7.74-3.342M6.75 15a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Zm0 0v-3.675A55.378 55.378 0 0 1 12 8.443m-7.007 11.55A5.981 5.981 0 0 0 6.75 15.75v-1.5"
+              />
+            </svg>
+            <div className="text-2xl font-black text-white tracking-tight whitespace-nowrap">NUET Prep</div>
             </div>
 
-            <div className="hidden md:flex items-center gap-8">
+            <div className="hidden lg:flex items-center gap-4 flex-shrink-0">
               <button
                 onClick={() => scrollToSection("about")}
-                className="text-white text-sm font-medium hover:text-[#38e07b] transition-colors"
+                className="text-white text-xs font-medium hover:text-[#38e07b] transition-colors whitespace-nowrap"
               >
                 О NUET
               </button>
               <button
                 onClick={() => scrollToSection("audience")}
-                className="text-white text-sm font-medium hover:text-[#38e07b] transition-colors"
+                className="text-white text-xs font-medium hover:text-[#38e07b] transition-colors whitespace-nowrap"
               >
                 Для кого
               </button>
               <button
                 onClick={() => scrollToSection("benefits")}
-                className="text-white text-sm font-medium hover:text-[#38e07b] transition-colors"
+                className="text-white text-xs font-medium hover:text-[#38e07b] transition-colors whitespace-nowrap"
               >
                 Преимущества
               </button>
               <button
                 onClick={() => scrollToSection("program")}
-                className="text-white text-sm font-medium hover:text-[#38e07b] transition-colors"
+                className="text-white text-xs font-medium hover:text-[#38e07b] transition-colors whitespace-nowrap"
               >
                 Программа
               </button>
               <button
-                onClick={() => scrollToSection("format")}
-                className="text-white text-sm font-medium hover:text-[#38e07b] transition-colors"
-              >
-                Формат
-              </button>
-              <button
                 onClick={() => scrollToSection("teachers")}
-                className="text-white text-sm font-medium hover:text-[#38e07b] transition-colors"
+                className="text-white text-xs font-medium hover:text-[#38e07b] transition-colors whitespace-nowrap"
               >
                 Преподаватели
               </button>
               <button
                 onClick={() => scrollToSection("reviews")}
-                className="text-white text-sm font-medium hover:text-[#38e07b] transition-colors"
+                className="text-white text-xs font-medium hover:text-[#38e07b] transition-colors whitespace-nowrap"
               >
                 Отзывы
-              </button>
-              <button
-                onClick={() => scrollToSection("trial")}
-                className="text-white text-sm font-medium hover:text-[#38e07b] transition-colors"
-              >
-                Пробный урок
               </button>
               <Button
                 size="sm"
                 variant="ghost"
-                className="text-white hover:text-[#38e07b] hover:bg-transparent font-medium rounded-full"
+                className="text-white hover:text-[#38e07b] hover:bg-transparent font-medium rounded-full text-xs px-3 h-8 whitespace-nowrap"
                 onClick={() => router.push("/sign-up")}
               >
                 Регистрация
               </Button>
               <Button
                 size="sm"
-                className="bg-[#38e07b] hover:bg-[#2bc768] text-[#111714] font-bold rounded-full"
+                className="bg-[#38e07b] hover:bg-[#2bc768] text-[#111714] font-bold rounded-full text-xs px-4 h-8 whitespace-nowrap"
                 onClick={() => router.push("/sign-in")}
               >
                 Войти
               </Button>
             </div>
 
-            <button className="md:hidden text-white" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
+            <button className="lg:hidden text-white" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
               {mobileMenuOpen ? <X /> : <Menu />}
             </button>
           </div>
