@@ -68,11 +68,14 @@ export default function LandingPage() {
   }
 
   return (
-    <div className="min-h-screen bg-[#f6f8f7]">
+    <div className="min-h-screen bg-[#f6f8f7] overflow-x-hidden">
       <nav className="sticky top-0 z-50 bg-[#111714] border-b border-[#29382f] shadow-sm">
         <div className="container mx-auto px-4 max-w-[1200px]">
           <div className="flex items-center justify-between h-16">
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-3">
+              <div className="size-8 flex items-center justify-center text-[#38e07b]">
+                <span className="material-symbols-outlined text-3xl">school</span>
+              </div>
               <div className="text-2xl font-black text-white tracking-tight">NUET Prep</div>
             </div>
 
@@ -114,11 +117,25 @@ export default function LandingPage() {
                 Преподаватели
               </button>
               <button
+                onClick={() => scrollToSection("reviews")}
+                className="text-white text-sm font-medium hover:text-[#38e07b] transition-colors"
+              >
+                Отзывы
+              </button>
+              <button
                 onClick={() => scrollToSection("trial")}
                 className="text-white text-sm font-medium hover:text-[#38e07b] transition-colors"
               >
                 Пробный урок
               </button>
+              <Button
+                size="sm"
+                variant="ghost"
+                className="text-white hover:text-[#38e07b] hover:bg-transparent font-medium rounded-full"
+                onClick={() => router.push("/sign-up")}
+              >
+                Регистрация
+              </Button>
               <Button
                 size="sm"
                 className="bg-[#38e07b] hover:bg-[#2bc768] text-[#111714] font-bold rounded-full"
@@ -172,11 +189,23 @@ export default function LandingPage() {
                 Преподаватели
               </button>
               <button
+                onClick={() => scrollToSection("reviews")}
+                className="block w-full text-left py-2 text-white hover:text-[#38e07b]"
+              >
+                Отзывы
+              </button>
+              <button
                 onClick={() => scrollToSection("trial")}
                 className="block w-full text-left py-2 text-white hover:text-[#38e07b]"
               >
                 Пробный урок
               </button>
+              <Button
+                className="w-full bg-white/10 hover:bg-white/20 text-white font-medium rounded-full mt-2 border border-white/20"
+                onClick={() => router.push("/sign-up")}
+              >
+                Регистрация
+              </Button>
               <Button
                 className="w-full bg-[#38e07b] hover:bg-[#2bc768] text-[#111714] font-bold rounded-full mt-2"
                 onClick={() => router.push("/sign-in")}
@@ -514,7 +543,7 @@ export default function LandingPage() {
 
             <div className="flex px-4 py-8 justify-center">
               <Button
-                className="group relative flex w-full md:w-auto min-w-[200px] h-12 px-8 bg-[#38e07b] text-[#111714] rounded-full font-bold hover:scale-105 transition-transform duration-300 shadow-[0_0_20px_rgba(56,224,123,0.3)]"
+                className="group relative flex w-full md:w-auto min-w-[200px] h-12 px-8 bg-[#38e07b] hover:bg-[#2bc768] text-[#111714] rounded-full font-bold hover:scale-105 transition-all duration-300 shadow-[0_0_20px_rgba(56,224,123,0.3)] hover:shadow-[0_0_25px_rgba(56,224,123,0.4)]"
                 onClick={() => scrollToSection("program")}
               >
                 <span>Посмотреть программу подготовки</span>
@@ -1067,35 +1096,41 @@ export default function LandingPage() {
             </div>
 
             <div className="lg:col-span-5 flex flex-col gap-6">
-              <div className="h-full min-h-[400px] flex flex-col rounded-lg bg-[#151f19] border-2 border-dashed border-[#29382f] relative overflow-hidden group">
-                <div className="absolute inset-0 opacity-10 bg-[repeating-linear-gradient(45deg,transparent,transparent_10px,rgba(56,224,123,0.03)_10px,rgba(56,224,123,0.03)_20px)]"></div>
-                <div className="flex-1 flex flex-col items-center justify-center p-8 text-center gap-6 relative z-10">
-                  <div className="w-20 h-20 rounded-full bg-[#1c2620] flex items-center justify-center mb-2 group-hover:scale-110 transition-transform duration-500">
-                    <TrendingUp className="w-10 h-10 text-[#3d5245] group-hover:text-[#38e07b] transition-colors" />
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-bold text-white mb-3">Реальные цифры</h3>
-                    <p className="text-[#9eb7a8] max-w-xs mx-auto text-sm leading-relaxed">
-                      Здесь скоро появятся статистика среднего балла наших студентов и количество поступивших на грант.
-                    </p>
-                  </div>
-                  <div className="w-full max-w-[240px] flex flex-col gap-3 opacity-30 mt-4">
-                    <div className="h-2 bg-[#3d5245] rounded-full w-full"></div>
-                    <div className="h-2 bg-[#3d5245] rounded-full w-3/4 mx-auto"></div>
-                    <div className="h-2 bg-[#3d5245] rounded-full w-5/6 mx-auto"></div>
-                  </div>
+              <div className="h-full flex flex-col rounded-lg bg-[#1c2620] border border-[#29382f] relative overflow-hidden group hover:border-[#38e07b]/30 transition-colors">
+                <div className="absolute top-0 right-0 p-8 opacity-5 group-hover:opacity-10 transition-opacity duration-500">
+                  <TrendingUp className="w-36 h-36 text-[#38e07b]" />
                 </div>
-                <div className="bg-[#1c2620] p-6 border-t border-[#29382f]">
-                  <div className="flex items-center gap-4 opacity-50 grayscale group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500">
-                    <div className="size-10 rounded-full bg-white/10 shrink-0 overflow-hidden">
-                      <div className="w-full h-full bg-gradient-to-tr from-gray-600 to-gray-400"></div>
+                <div className="flex-1 flex flex-col p-8 gap-8 relative z-10">
+                  <div className="flex items-center gap-3">
+                    <div className="w-12 h-12 rounded-full bg-[#38e07b]/10 flex items-center justify-center">
+                      <TrendingUp className="w-6 h-6 text-[#38e07b]" />
                     </div>
-                    <div className="flex flex-col gap-1">
-                      <div className="h-3 w-24 bg-white/20 rounded-full"></div>
-                      <div className="h-2 w-16 bg-white/10 rounded-full"></div>
+                    <h3 className="text-2xl font-bold text-white">Результаты за 2 года</h3>
+                  </div>
+                  
+                  <div className="flex flex-col gap-6">
+                    <div className="flex flex-col gap-2">
+                      <div className="flex items-baseline gap-2">
+                        <span className="text-5xl font-black text-[#38e07b]">217</span>
+                        <span className="text-xl text-white font-bold">человек</span>
+                      </div>
+                      <p className="text-[#9eb7a8] text-sm leading-relaxed">
+                        поступило в Назарбаев Университет за последние 2 года
+                      </p>
+                    </div>
+                    
+                    <div className="h-px bg-[#29382f]"></div>
+                    
+                    <div className="flex flex-col gap-2">
+                      <div className="flex items-baseline gap-2">
+                        <span className="text-5xl font-black text-white">155</span>
+                        <span className="text-xl text-[#9eb7a8] font-medium">баллов</span>
+                      </div>
+                      <p className="text-[#9eb7a8] text-sm leading-relaxed">
+                        средний балл НУЕТА наших студентов
+                      </p>
                     </div>
                   </div>
-                  <p className="text-xs text-[#5c7265] mt-3 text-center italic">Отзывы студентов загружаются...</p>
                 </div>
               </div>
 
@@ -1111,6 +1146,160 @@ export default function LandingPage() {
                   Начать сейчас
                 </Button>
               </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Reviews Section */}
+      <section id="reviews" className="py-20 bg-[#111714]">
+        <div className="container mx-auto px-4 lg:px-10 max-w-[1280px]">
+          <div className="flex flex-col gap-12">
+            <div className="flex flex-col items-center gap-4 text-center max-w-3xl mx-auto">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#38e07b]/10 border border-[#38e07b]/20">
+                <Quote className="w-4 h-4 text-[#38e07b]" />
+                <span className="text-[#38e07b] text-xs font-bold uppercase tracking-wide">Отзывы студентов</span>
+              </div>
+              <h2 className="text-white text-3xl md:text-5xl font-extrabold leading-tight tracking-tight">
+                Что говорят наши <span className="text-[#38e07b]">студенты</span>
+              </h2>
+              <p className="text-[#9eb7a8] text-lg font-normal leading-relaxed">
+                Реальные отзывы от студентов, которые поступили в Назарбаев Университет
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {/* Review 1 */}
+              <Card className="group border border-[#29382f] bg-[#1c2620] hover:border-[#38e07b]/50 transition-all duration-300 hover:shadow-lg hover:shadow-[#38e07b]/10">
+                <CardContent className="p-6 flex flex-col gap-4">
+                  <div className="flex items-center gap-1 mb-2">
+                    {[...Array(5)].map((_, i) => (
+                      <Star key={i} className="w-4 h-4 fill-[#38e07b] text-[#38e07b]" />
+                    ))}
+                  </div>
+                  <p className="text-[#9eb7a8] text-sm leading-relaxed">
+                    &quot;Курс помог мне систематизировать подготовку. Особенно полезными были пробные тесты в формате NUET. 
+                    Набрал 162 балла и поступил на грант в Foundation.&quot;
+                  </p>
+                  <div className="flex items-center gap-3 pt-4 border-t border-[#29382f]">
+                    <div className="size-10 rounded-full bg-gradient-to-br from-[#38e07b] to-[#2bc768] shrink-0"></div>
+                    <div className="flex flex-col">
+                      <span className="text-white font-bold text-sm">Айдар</span>
+                      <span className="text-[#9eb7a8] text-xs">Foundation, 2023</span>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Review 2 */}
+              <Card className="group border border-[#29382f] bg-[#1c2620] hover:border-[#38e07b]/50 transition-all duration-300 hover:shadow-lg hover:shadow-[#38e07b]/10">
+                <CardContent className="p-6 flex flex-col gap-4">
+                  <div className="flex items-center gap-1 mb-2">
+                    {[...Array(5)].map((_, i) => (
+                      <Star key={i} className="w-4 h-4 fill-[#38e07b] text-[#38e07b]" />
+                    ))}
+                  </div>
+                  <p className="text-[#9eb7a8] text-sm leading-relaxed">
+                    &quot;Преподаватели объясняют очень понятно, разбирают каждую ошибку. Математика стала моей сильной стороной. 
+                    Результат: 158 баллов, поступил на бакалавриат.&quot;
+                  </p>
+                  <div className="flex items-center gap-3 pt-4 border-t border-[#29382f]">
+                    <div className="size-10 rounded-full bg-gradient-to-br from-blue-500 to-blue-700 shrink-0"></div>
+                    <div className="flex flex-col">
+                      <span className="text-white font-bold text-sm">Данияр</span>
+                      <span className="text-[#9eb7a8] text-xs">Бакалавриат, 2023</span>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Review 3 */}
+              <Card className="group border border-[#29382f] bg-[#1c2620] hover:border-[#38e07b]/50 transition-all duration-300 hover:shadow-lg hover:shadow-[#38e07b]/10">
+                <CardContent className="p-6 flex flex-col gap-4">
+                  <div className="flex items-center gap-1 mb-2">
+                    {[...Array(5)].map((_, i) => (
+                      <Star key={i} className="w-4 h-4 fill-[#38e07b] text-[#38e07b]" />
+                    ))}
+                  </div>
+                  <p className="text-[#9eb7a8] text-sm leading-relaxed">
+                    &quot;Структурированный подход и постоянная практика помогли мне улучшить результат на 30+ баллов. 
+                    Критическое мышление было моей слабой стороной, но курс это исправил.&quot;
+                  </p>
+                  <div className="flex items-center gap-3 pt-4 border-t border-[#29382f]">
+                    <div className="size-10 rounded-full bg-gradient-to-br from-purple-500 to-purple-700 shrink-0"></div>
+                    <div className="flex flex-col">
+                      <span className="text-white font-bold text-sm">Амина</span>
+                      <span className="text-[#9eb7a8] text-xs">Foundation, 2024</span>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Review 4 */}
+              <Card className="group border border-[#29382f] bg-[#1c2620] hover:border-[#38e07b]/50 transition-all duration-300 hover:shadow-lg hover:shadow-[#38e07b]/10">
+                <CardContent className="p-6 flex flex-col gap-4">
+                  <div className="flex items-center gap-1 mb-2">
+                    {[...Array(5)].map((_, i) => (
+                      <Star key={i} className="w-4 h-4 fill-[#38e07b] text-[#38e07b]" />
+                    ))}
+                  </div>
+                  <p className="text-[#9eb7a8] text-sm leading-relaxed">
+                    &quot;Платформа очень удобная, все материалы в одном месте. Видеоуроки можно пересматривать, 
+                    а домашние задания помогают закрепить материал. Набрал 160 баллов!&quot;
+                  </p>
+                  <div className="flex items-center gap-3 pt-4 border-t border-[#29382f]">
+                    <div className="size-10 rounded-full bg-gradient-to-br from-amber-500 to-orange-600 shrink-0"></div>
+                    <div className="flex flex-col">
+                      <span className="text-white font-bold text-sm">Ерлан</span>
+                      <span className="text-[#9eb7a8] text-xs">Бакалавриат, 2024</span>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Review 5 */}
+              <Card className="group border border-[#29382f] bg-[#1c2620] hover:border-[#38e07b]/50 transition-all duration-300 hover:shadow-lg hover:shadow-[#38e07b]/10">
+                <CardContent className="p-6 flex flex-col gap-4">
+                  <div className="flex items-center gap-1 mb-2">
+                    {[...Array(5)].map((_, i) => (
+                      <Star key={i} className="w-4 h-4 fill-[#38e07b] text-[#38e07b]" />
+                    ))}
+                  </div>
+                  <p className="text-[#9eb7a8] text-sm leading-relaxed">
+                    &quot;Готовился самостоятельно, но не хватало системы. Этот курс дал мне четкий план и помог 
+                    сфокусироваться на важных темах. Результат превзошел ожидания - 155 баллов!&quot;
+                  </p>
+                  <div className="flex items-center gap-3 pt-4 border-t border-[#29382f]">
+                    <div className="size-10 rounded-full bg-gradient-to-br from-pink-500 to-rose-600 shrink-0"></div>
+                    <div className="flex flex-col">
+                      <span className="text-white font-bold text-sm">Асылбек</span>
+                      <span className="text-[#9eb7a8] text-xs">Foundation, 2023</span>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Review 6 */}
+              <Card className="group border border-[#29382f] bg-[#1c2620] hover:border-[#38e07b]/50 transition-all duration-300 hover:shadow-lg hover:shadow-[#38e07b]/10">
+                <CardContent className="p-6 flex flex-col gap-4">
+                  <div className="flex items-center gap-1 mb-2">
+                    {[...Array(5)].map((_, i) => (
+                      <Star key={i} className="w-4 h-4 fill-[#38e07b] text-[#38e07b]" />
+                    ))}
+                  </div>
+                  <p className="text-[#9eb7a8] text-sm leading-relaxed">
+                    &quot;Поддержка преподавателей - это то, что отличает этот курс. Всегда можно было задать вопрос 
+                    и получить развернутый ответ. Поступила на грант с баллом 157.&quot;
+                  </p>
+                  <div className="flex items-center gap-3 pt-4 border-t border-[#29382f]">
+                    <div className="size-10 rounded-full bg-gradient-to-br from-cyan-500 to-teal-600 shrink-0"></div>
+                    <div className="flex flex-col">
+                      <span className="text-white font-bold text-sm">Аружан</span>
+                      <span className="text-[#9eb7a8] text-xs">Бакалавриат, 2024</span>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
             </div>
           </div>
         </div>
@@ -1169,7 +1358,7 @@ export default function LandingPage() {
           </div>
           <div className="flex items-center justify-center gap-4 text-[#9eb7a8]">
             <GraduationCap className="w-5 h-5" />
-            <p className="text-sm">© 2024 NUET Prep. Все права защищены.</p>
+            <p className="text-sm">© 2025 NUET Prep. Все права защищены.</p>
           </div>
         </div>
       </footer>
