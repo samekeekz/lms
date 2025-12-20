@@ -98,12 +98,6 @@ export default function LandingPage() {
                 О NUET
               </button>
               <button
-                onClick={() => scrollToSection("audience")}
-                className="text-white text-xs font-medium hover:text-[#38e07b] transition-colors whitespace-nowrap"
-              >
-                Для кого
-              </button>
-              <button
                 onClick={() => scrollToSection("benefits")}
                 className="text-white text-xs font-medium hover:text-[#38e07b] transition-colors whitespace-nowrap"
               >
@@ -156,12 +150,6 @@ export default function LandingPage() {
                 className="block w-full text-left py-2 text-white hover:text-[#38e07b]"
               >
                 О NUET
-              </button>
-              <button
-                onClick={() => scrollToSection("audience")}
-                className="block w-full text-left py-2 text-white hover:text-[#38e07b]"
-              >
-                Для кого
               </button>
               <button
                 onClick={() => scrollToSection("benefits")}
@@ -270,25 +258,6 @@ export default function LandingPage() {
                 </div>
               </div>
 
-              <div className="flex items-center gap-4 border-t border-[#29382f] pt-6">
-                <div className="flex -space-x-3">
-                  <div className="h-10 w-10 overflow-hidden rounded-full border-2 border-[#111714] bg-[#1c2620]">
-                    <div className="w-full h-full bg-gradient-to-br from-[#38e07b] to-[#2bc768]"></div>
-                  </div>
-                  <div className="h-10 w-10 overflow-hidden rounded-full border-2 border-[#111714] bg-[#1c2620]">
-                    <div className="w-full h-full bg-gradient-to-br from-blue-500 to-blue-700"></div>
-                  </div>
-                  <div className="h-10 w-10 overflow-hidden rounded-full border-2 border-[#111714] bg-[#1c2620]">
-                    <div className="w-full h-full bg-gradient-to-br from-purple-500 to-purple-700"></div>
-                  </div>
-                  <div className="flex h-10 w-10 items-center justify-center rounded-full border-2 border-[#111714] bg-[#29382f] text-xs font-bold text-white">
-                    +1k
-                  </div>
-                </div>
-                <div className="text-sm text-slate-400">
-                  <span className="font-bold text-white">1,000+</span> студентов уже готовятся
-                </div>
-              </div>
             </div>
 
             <div className="relative hidden lg:block h-full min-h-[500px] w-full">
@@ -462,96 +431,6 @@ export default function LandingPage() {
         </div>
       </section>
 
-      <section id="audience" className="py-20 bg-[#111714]">
-        <div className="container mx-auto px-4 max-w-[960px]">
-          <div className="flex flex-col gap-8">
-            <div className="flex flex-col gap-2 px-4">
-              <h2 className="text-white text-3xl md:text-4xl font-bold leading-tight tracking-[-0.015em] text-center md:text-left">
-                Для кого этот курс
-              </h2>
-              <p className="text-[#9eb7a8] text-base md:text-lg font-normal leading-normal text-center md:text-left max-w-2xl">
-                Мы разработали программу, которая учитывает разные уровни подготовки и цели студентов.
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 px-4">
-              <Card className="group border border-[#3d5245] bg-[#1c2620] hover:border-[#38e07b]/50 transition-all hover:shadow-lg hover:shadow-[#38e07b]/5">
-                <CardContent className="p-6 flex flex-col gap-5">
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center justify-center size-12 rounded-full bg-[#3d5245] text-[#38e07b] group-hover:bg-[#38e07b] group-hover:text-[#1c2620] transition-colors">
-                      <GraduationCap className="w-6 h-6" />
-                    </div>
-                  </div>
-                  <div className="flex flex-col gap-2">
-                    <h3 className="text-white text-xl font-bold leading-tight">Абитуриентам</h3>
-                    <p className="text-[#9eb7a8] text-base font-normal leading-relaxed">
-                      Ты хочешь поступить в Назарбаев Университет на Foundation или бакалавриат и ищешь проверенный путь.
-                    </p>
-                  </div>
-                </CardContent>
-              </Card>
-
-              <Card className="group border border-[#3d5245] bg-[#1c2620] hover:border-[#38e07b]/50 transition-all hover:shadow-lg hover:shadow-[#38e07b]/5">
-                <CardContent className="p-6 flex flex-col gap-5">
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center justify-center size-12 rounded-full bg-[#3d5245] text-[#38e07b] group-hover:bg-[#38e07b] group-hover:text-[#1c2620] transition-colors">
-                      <Brain className="w-6 h-6" />
-                    </div>
-                  </div>
-                  <div className="flex flex-col gap-2">
-                    <h3 className="text-white text-xl font-bold leading-tight">Целеустремленным</h3>
-                    <p className="text-[#9eb7a8] text-base font-normal leading-relaxed">
-                      Хочешь подтянуть именно те темы по Математике и Критическому мышлению, которые спрашивают на NUET.
-                    </p>
-                  </div>
-                </CardContent>
-              </Card>
-
-              <Card className="group border border-[#3d5245] bg-[#1c2620] hover:border-[#38e07b]/50 transition-all hover:shadow-lg hover:shadow-[#38e07b]/5">
-                <CardContent className="p-6 flex flex-col gap-5">
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center justify-center size-12 rounded-full bg-[#3d5245] text-[#38e07b] group-hover:bg-[#38e07b] group-hover:text-[#1c2620] transition-colors">
-                      <BookOpen className="w-6 h-6" />
-                    </div>
-                  </div>
-                  <div className="flex flex-col gap-2">
-                    <h3 className="text-white text-xl font-bold leading-tight">Самоучкам</h3>
-                    <p className="text-[#9eb7a8] text-base font-normal leading-relaxed">
-                      Уже что-то решаешь, но не хватает структуры, пробных тестов и понятного плана действий до экзамена.
-                    </p>
-                  </div>
-                </CardContent>
-              </Card>
-
-              <Card className="group border border-[#3d5245] bg-[#1c2620] hover:border-[#38e07b]/50 transition-all hover:shadow-lg hover:shadow-[#38e07b]/5">
-                <CardContent className="p-6 flex flex-col gap-5">
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center justify-center size-12 rounded-full bg-[#3d5245] text-[#38e07b] group-hover:bg-[#38e07b] group-hover:text-[#1c2620] transition-colors">
-                      <Users className="w-6 h-6" />
-                    </div>
-                  </div>
-                  <div className="flex flex-col gap-2">
-                    <h3 className="text-white text-xl font-bold leading-tight">Родителям</h3>
-                    <p className="text-[#9eb7a8] text-base font-normal leading-relaxed">
-                      Ты родитель и хочешь, чтобы ребёнок готовился по системе, а не просто смотрел случайные видео с YouTube.
-                    </p>
-                  </div>
-                </CardContent>
-              </Card>
-            </div>
-
-            <div className="flex px-4 py-8 justify-center">
-              <Button
-                className="group relative flex w-full md:w-auto min-w-[200px] h-12 px-8 bg-[#38e07b] hover:bg-[#2bc768] text-[#111714] rounded-full font-bold hover:scale-105 transition-all duration-300 shadow-[0_0_20px_rgba(56,224,123,0.3)] hover:shadow-[0_0_25px_rgba(56,224,123,0.4)]"
-                onClick={() => scrollToSection("program")}
-              >
-                <span>Посмотреть программу подготовки</span>
-                <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
-              </Button>
-            </div>
-          </div>
-        </div>
-      </section>
 
       <section id="benefits" className="relative py-16 px-4 md:px-10 lg:px-20 bg-[#111714] overflow-hidden">
         <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none z-0">
@@ -920,32 +799,40 @@ export default function LandingPage() {
 
                 <div className="flex flex-col flex-1">
                   <div className="text-center md:text-left mb-4">
-                    <h3 className="text-2xl font-bold text-white mb-1">Салим</h3>
+                    <h3 className="text-2xl font-bold text-white mb-1">Salim Mussin</h3>
                     <p className="text-[#38e07b] font-bold text-sm tracking-wide uppercase">
-                      Студент Назарбаев Университета
+                      Math tutor
                     </p>
                   </div>
 
                   <div className="space-y-3 mb-6">
                     <div className="flex items-start gap-3">
                       <div className="mt-1 min-w-5 size-5 rounded-full bg-[#38e07b]/20 flex items-center justify-center text-[#38e07b]">
-                        <GraduationCap className="w-3.5 h-3.5" />
+                        <TrendingUp className="w-3.5 h-3.5" />
                       </div>
-                      <span className="text-gray-300 text-sm">Major: Economics (Undeclared)</span>
+                      <span className="text-gray-300 text-sm">
+                        NUET MATH: 120/120 (overall: 217)
+                      </span>
                     </div>
                     <div className="flex items-start gap-3">
                       <div className="mt-1 min-w-5 size-5 rounded-full bg-[#38e07b]/20 flex items-center justify-center text-[#38e07b]">
                         <TrendingUp className="w-3.5 h-3.5" />
                       </div>
                       <span className="text-gray-300 text-sm">
-                        NUET: 217 (Математика 120, Критическое мышление 97)
+                        SAT MATH 800/800
                       </span>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <div className="mt-1 min-w-5 size-5 rounded-full bg-[#38e07b]/20 flex items-center justify-center text-[#38e07b]">
+                        <GraduationCap className="w-3.5 h-3.5" />
+                      </div>
+                      <span className="text-gray-300 text-sm">Major: Economics</span>
                     </div>
                     <div className="flex items-start gap-3">
                       <div className="mt-1 min-w-5 size-5 rounded-full bg-[#38e07b]/20 flex items-center justify-center text-[#38e07b]">
                         <School className="w-3.5 h-3.5" />
                       </div>
-                      <span className="text-gray-300 text-sm">Выпускник РФМШ Алматы</span>
+                      <span className="text-gray-300 text-sm">2+ years of tutoring</span>
                     </div>
                   </div>
 
@@ -980,9 +867,9 @@ export default function LandingPage() {
 
                 <div className="flex flex-col flex-1">
                   <div className="text-center md:text-left mb-4">
-                    <h3 className="text-2xl font-bold text-white mb-1">Арсен</h3>
+                    <h3 className="text-2xl font-bold text-white mb-1">Sanzhar Kyrgyzbayev</h3>
                     <p className="text-[#38e07b] font-bold text-sm tracking-wide uppercase">
-                      Студент Назарбаев Университета
+                      Critical Thinking Tutor
                     </p>
                   </div>
 
@@ -991,21 +878,19 @@ export default function LandingPage() {
                       <div className="mt-1 min-w-5 size-5 rounded-full bg-[#38e07b]/20 flex items-center justify-center text-[#38e07b]">
                         <GraduationCap className="w-3.5 h-3.5" />
                       </div>
-                      <span className="text-gray-300 text-sm">Major: Computer Science</span>
-                    </div>
-                    <div className="flex items-start gap-3">
-                      <div className="mt-1 min-w-5 size-5 rounded-full bg-[#38e07b]/20 flex items-center justify-center text-[#38e07b]">
-                        <TrendingUp className="w-3.5 h-3.5" />
-                      </div>
-                      <span className="text-gray-300 text-sm">
-                        NUET: 224 (Математика 126, Критическое мышление 98)
-                      </span>
+                      <span className="text-gray-300 text-sm">Major: PSIR</span>
                     </div>
                     <div className="flex items-start gap-3">
                       <div className="mt-1 min-w-5 size-5 rounded-full bg-[#38e07b]/20 flex items-center justify-center text-[#38e07b]">
                         <School className="w-3.5 h-3.5" />
                       </div>
-                      <span className="text-gray-300 text-sm">Выпускник НИШ Астана</span>
+                      <span className="text-gray-300 text-sm">3+ years of tutoring</span>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <div className="mt-1 min-w-5 size-5 rounded-full bg-[#38e07b]/20 flex items-center justify-center text-[#38e07b]">
+                        <Users className="w-3.5 h-3.5" />
+                      </div>
+                      <span className="text-gray-300 text-sm">helped over 150 students to get into NU</span>
                     </div>
                   </div>
 
@@ -1110,11 +995,11 @@ export default function LandingPage() {
                   <div className="flex flex-col gap-6">
                     <div className="flex flex-col gap-2">
                       <div className="flex items-baseline gap-2">
-                        <span className="text-5xl font-black text-[#38e07b]">217</span>
-                        <span className="text-xl text-white font-bold">человек</span>
+                        <span className="text-5xl font-black text-[#38e07b]">155</span>
+                        <span className="text-xl text-white font-bold">баллов</span>
                       </div>
                       <p className="text-[#9eb7a8] text-sm leading-relaxed">
-                        поступило в Назарбаев Университет за последние 2 года
+                        средний балл NUET наших учеников
                       </p>
                     </div>
                     
@@ -1122,11 +1007,11 @@ export default function LandingPage() {
                     
                     <div className="flex flex-col gap-2">
                       <div className="flex items-baseline gap-2">
-                        <span className="text-5xl font-black text-white">155</span>
-                        <span className="text-xl text-[#9eb7a8] font-medium">баллов</span>
+                        <span className="text-5xl font-black text-white">217</span>
+                        <span className="text-xl text-[#9eb7a8] font-medium">учеников</span>
                       </div>
                       <p className="text-[#9eb7a8] text-sm leading-relaxed">
-                        средний балл НУЕТА наших студентов
+                        наших учеников поступили в НУ за последние 2 года
                       </p>
                     </div>
                   </div>
