@@ -270,7 +270,7 @@ export default function LandingPage() {
                   Подготовка к NUET до нужного балла и <span className="text-[#38e07b]">гранта</span> в Nazarbayev University
                 </h1> */}
                  <h1 className="font-black text-4xl sm:text-5xl lg:text-6xl leading-[1.1] tracking-tight text-white">
-                  Онлайн-марафон NUET марафон где мы закрепим <span className="text-[#38e07b]">все важные</span> темы
+                  Онлайн-марафон <span className="text-[#38e07b]">NUET</span> где мы закрепим <span className="text-[#38e07b]">все важные</span> темы
                 </h1>
                 <p className="text-lg text-slate-400 leading-relaxed max-w-xl">
                   6-недельный онлайн марафон по подготовке к NUET. Видеоуроки на собственной платформе, домашние задания в формате экзамена и преподаватели с высокими баллами и 3+ годами опыта  </p>
@@ -410,7 +410,7 @@ export default function LandingPage() {
         <div className="container mx-auto px-4 max-w-[1200px]">
           <div className="max-w-2xl mx-auto text-center">
             <h2 className="text-3xl md:text-5xl font-black mb-4 text-[#111714]">
-                Mock NUET из задач 2020-2021
+                Mock тест из задач 2020-2021
               </h2>
             <p className="text-[#63756c] mb-8 text-lg">
               Пройди пробный тест в формате NUET и узнай свой текущий уровень перед началом обучения.
@@ -479,39 +479,35 @@ export default function LandingPage() {
                 <ul className="flex flex-col gap-4 flex-1">
                   <li className="flex items-start gap-3">
                     <CheckCircle2 className="text-[#38e07b] w-5 h-5 mt-0.5 shrink-0" />
-                    <span className="text-[#d0e0d8] text-base leading-snug">Числа и выражения</span>
+                    <span className="text-[#d0e0d8] text-base leading-snug">Bearings (азимуты)</span>
                   </li>
                   <li className="flex items-start gap-3">
                     <CheckCircle2 className="text-[#38e07b] w-5 h-5 mt-0.5 shrink-0" />
-                    <span className="text-[#d0e0d8] text-base leading-snug">Алгебра</span>
+                    <span className="text-[#d0e0d8] text-base leading-snug">Треугольники</span>
                   </li>
                   <li className="flex items-start gap-3">
                     <CheckCircle2 className="text-[#38e07b] w-5 h-5 mt-0.5 shrink-0" />
-                    <span className="text-[#d0e0d8] text-base leading-snug">Системы уравнений</span>
+                    <span className="text-[#d0e0d8] text-base leading-snug">Векторы</span>
                   </li>
                   <li className="flex items-start gap-3">
                     <CheckCircle2 className="text-[#38e07b] w-5 h-5 mt-0.5 shrink-0" />
-                    <span className="text-[#d0e0d8] text-base leading-snug">Функции и графики</span>
+                    <span className="text-[#d0e0d8] text-base leading-snug">Круги (Circle theorems)</span>
                   </li>
                   <li className="flex items-start gap-3">
                     <CheckCircle2 className="text-[#38e07b] w-5 h-5 mt-0.5 shrink-0" />
-                    <span className="text-[#d0e0d8] text-base leading-snug">Геометрия</span>
+                    <span className="text-[#d0e0d8] text-base leading-snug">Relations (Отношения и пропорции)</span>
                   </li>
                   <li className="flex items-start gap-3">
                     <CheckCircle2 className="text-[#38e07b] w-5 h-5 mt-0.5 shrink-0" />
-                    <span className="text-[#d0e0d8] text-base leading-snug">Площади и объёмы фигур</span>
+                    <span className="text-[#d0e0d8] text-base leading-snug">Графики и системы уравнений</span>
                   </li>
                   <li className="flex items-start gap-3">
                     <CheckCircle2 className="text-[#38e07b] w-5 h-5 mt-0.5 shrink-0" />
-                    <span className="text-[#d0e0d8] text-base leading-snug">Элементы тригонометрии</span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <CheckCircle2 className="text-[#38e07b] w-5 h-5 mt-0.5 shrink-0" />
-                    <span className="text-[#d0e0d8] text-base leading-snug">Вероятность и элементы статистики</span>
+                    <span className="text-[#d0e0d8] text-base leading-snug">Повтор по геометрии (NUET)</span>
                   </li>
                   <li className="flex items-start gap-3 bg-white/5 p-3 rounded-lg border border-white/5 mt-2">
                     <Star className="text-[#38e07b] w-5 h-5 mt-0.5 shrink-0" />
-                    <span className="text-white font-medium text-base leading-snug">Сложные задачи уровня NUET</span>
+                    <span className="text-white font-medium text-base leading-snug">Разбор тем по запросу</span>
                   </li>
                 </ul>
               </CardContent>
@@ -532,27 +528,31 @@ export default function LandingPage() {
                 <ul className="flex flex-col gap-4 flex-1">
                   <li className="flex items-start gap-3">
                     <CheckCircle2 className="text-[#38e07b] w-5 h-5 mt-0.5 shrink-0" />
-                    <span className="text-[#d0e0d8] text-base leading-snug">Анализ текстов и аргументов</span>
+                    <span className="text-[#d0e0d8] text-base leading-snug">Разбор логических и текстовых задач</span>
                   </li>
                   <li className="flex items-start gap-3">
                     <CheckCircle2 className="text-[#38e07b] w-5 h-5 mt-0.5 shrink-0" />
-                    <span className="text-[#d0e0d8] text-base leading-snug">Логические задачи и последовательности</span>
+                    <span className="text-[#d0e0d8] text-base leading-snug">Быстрое нахождение ответов</span>
                   </li>
                   <li className="flex items-start gap-3">
                     <CheckCircle2 className="text-[#38e07b] w-5 h-5 mt-0.5 shrink-0" />
-                    <span className="text-[#d0e0d8] text-base leading-snug">Таблицы, графики, диаграммы</span>
+                    <span className="text-[#d0e0d8] text-base leading-snug">Полный разбор текстов</span>
                   </li>
                   <li className="flex items-start gap-3">
                     <CheckCircle2 className="text-[#38e07b] w-5 h-5 mt-0.5 shrink-0" />
-                    <span className="text-[#d0e0d8] text-base leading-snug">Работа с данными</span>
+                    <span className="text-[#d0e0d8] text-base leading-snug">3Д фигуры</span>
                   </li>
                   <li className="flex items-start gap-3">
                     <CheckCircle2 className="text-[#38e07b] w-5 h-5 mt-0.5 shrink-0" />
-                    <span className="text-[#d0e0d8] text-base leading-snug">Задачи с лишней или скрытой информацией</span>
+                    <span className="text-[#d0e0d8] text-base leading-snug">Нахождение скрытых аргументов</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <CheckCircle2 className="text-[#38e07b] w-5 h-5 mt-0.5 shrink-0" />
+                    <span className="text-[#d0e0d8] text-base leading-snug">Тайм-менеджмент под задачи</span>
                   </li>
                   <li className="flex items-start gap-3 bg-white/5 p-3 rounded-lg border border-white/5 mt-2">
-                    <Timer className="text-[#38e07b] w-5 h-5 mt-0.5 shrink-0" />
-                    <span className="text-white font-medium text-base leading-snug">Стратегии работы с тестом и тайм-менеджмент</span>
+                    <Brain className="text-[#38e07b] w-5 h-5 mt-0.5 shrink-0" />
+                    <span className="text-white font-medium text-base leading-snug">Пространственное мышление</span>
                   </li>
                 </ul>
               </CardContent>
