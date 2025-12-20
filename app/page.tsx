@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
+import { Badge } from "@/components/ui/badge"
 import axios from "axios"
 import toast from "react-hot-toast"
 import {
@@ -290,7 +291,7 @@ export default function LandingPage() {
                   <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#38e07b]/20 text-[#38e07b]">
                     <Timer className="w-4 h-4" />
                   </div>
-                  <span className="text-base text-slate-300">Формат NUET: 60 вопросов / 120 минут</span>
+                  <span className="text-base text-slate-300">Формат Обучения: видеоуроки + 2 вебинара в неделю, Домашние задания, еженедельные мок тесты</span>
                 </div>
               </div>
 
@@ -319,16 +320,15 @@ export default function LandingPage() {
                   <div className="w-3 h-3 rounded-full bg-yellow-500/50"></div>
                   <div className="w-3 h-3 rounded-full bg-green-500/50"></div>
                 </div>
-                <div className="w-full h-full bg-transparent relative">
-                  <div className="relative w-full h-full">
-                    <Image
-                      src="/course_screenshot.png"
-                      alt="Интерактивная платформа - Видеоуроки и практика в одном месте"
-                      fill
-                      className="object-contain"
-                      priority
-                    />
-                  </div>
+                <div className="absolute top-12 left-0 right-0 bottom-0 bg-transparent">
+                  <Image
+                    src="/course_screenshot.png"
+                    alt="Интерактивная платформа - Видеоуроки и практика в одном месте"
+                    fill
+                    className="object-contain"
+                    style={{ objectPosition: 'top center' }}
+                    priority
+                  />
                 </div>
               </div>
               <div className="mt-6 p-6 rounded-xl bg-[#1c2620]/90 backdrop-blur border border-[#3d5245]">
@@ -408,7 +408,7 @@ export default function LandingPage() {
         <div className="container mx-auto px-4 max-w-[1200px]">
           <div className="max-w-2xl mx-auto text-center">
             <h2 className="text-3xl md:text-5xl font-black mb-4 text-[#111714]">
-              пройти бесплатный NUET мок тест на платформе
+                Mock NUET из задач NUET 2020-2021
             </h2>
             <p className="text-[#63756c] mb-8 text-lg">
               Пройди пробный тест в формате NUET и узнай свой текущий уровень перед началом обучения.
@@ -867,7 +867,7 @@ export default function LandingPage() {
                   </div>
                   <div>
                     <h4 className="text-lg font-bold text-white mb-1">Уверенность</h4>
-                    <p className="text-[#9eb7a8]">Ты придешь на NUET с ощущением <span className="text-white font-medium">&quot;я готов&quot;</span>, а не &quot;надеюсь, повезёт&quot;.</p>
+                    <p className="text-[#9eb7a8]">У нас огромная база материалов и мы успели собрать для вас похожие на реальный НУЕТ тесты и хоумворки</p>
                   </div>
                 </div>
               </div>
@@ -1083,6 +1083,120 @@ export default function LandingPage() {
         </div>
       </section>
 
+      {/* Pricing Section */}
+      <section id="pricing" className="py-20 bg-[#111714] relative">
+        <div className="container mx-auto px-4 max-w-[1200px]">
+          <div className="text-center mb-16">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#38e07b]/10 border border-[#38e07b]/20 mb-4">
+              <span className="text-[#38e07b] text-xs font-bold uppercase tracking-wide">Цены</span>
+            </div>
+            <h2 className="text-white text-3xl md:text-5xl font-black mb-6 leading-tight">
+              Выбери свой план подготовки
+            </h2>
+            <p className="text-[#9eb7a8] text-lg max-w-[600px] mx-auto">
+              Гибкие варианты обучения с максимальной выгодой
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-[900px] mx-auto">
+            {/* 1 Subject Plan */}
+            <Card className="border border-[#3d5245] bg-[#1c2620] hover:border-[#38e07b]/50 transition-all duration-300 relative">
+              <CardContent className="p-8">
+                <div className="text-center mb-6">
+                  <h3 className="text-2xl font-bold text-white mb-2">1 предмет</h3>
+                  <div className="flex items-baseline justify-center gap-2 mb-4">
+                    <span className="text-4xl font-black text-[#38e07b]">23 000</span>
+                    <span className="text-xl text-[#9eb7a8]">₸</span>
+                  </div>
+                  <div className="flex items-center justify-center gap-2">
+                    <span className="text-sm text-[#9eb7a8] line-through">32 000 ₸</span>
+                    <Badge className="bg-red-500/20 text-red-400 border-red-500/30">
+                      -30%
+                    </Badge>
+                  </div>
+                </div>
+                <ul className="space-y-3 mb-8">
+                  <li className="flex items-start gap-3">
+                    <CheckCircle2 className="text-[#38e07b] w-5 h-5 mt-0.5 shrink-0" />
+                    <span className="text-[#d0e0d8] text-sm">Видеоуроки по выбранному предмету</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <CheckCircle2 className="text-[#38e07b] w-5 h-5 mt-0.5 shrink-0" />
+                    <span className="text-[#d0e0d8] text-sm">2 вебинара в неделю</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <CheckCircle2 className="text-[#38e07b] w-5 h-5 mt-0.5 shrink-0" />
+                    <span className="text-[#d0e0d8] text-sm">Домашние задания</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <CheckCircle2 className="text-[#38e07b] w-5 h-5 mt-0.5 shrink-0" />
+                    <span className="text-[#d0e0d8] text-sm">Еженедельные мок тесты</span>
+                  </li>
+                </ul>
+                <Button
+                  asChild
+                  className="w-full bg-[#38e07b] hover:bg-[#2bc768] text-[#111714] font-bold h-12 rounded-full"
+                >
+                  <a href="#lead-form">Выбрать план</a>
+                </Button>
+              </CardContent>
+            </Card>
+
+            {/* 2 Subjects Plan */}
+            <Card className="border-2 border-[#38e07b] bg-[#1c2620] hover:border-[#38e07b] transition-all duration-300 relative">
+              <div className="absolute -top-4 left-1/2 -translate-x-1/2">
+                <Badge className="bg-[#38e07b] text-[#111714] font-bold px-4 py-1">
+                  Популярный
+                </Badge>
+              </div>
+              <CardContent className="p-8 pt-12">
+                <div className="text-center mb-6">
+                  <h3 className="text-2xl font-bold text-white mb-2">2 предмета</h3>
+                  <div className="flex items-baseline justify-center gap-2 mb-4">
+                    <span className="text-4xl font-black text-[#38e07b]">35 900</span>
+                    <span className="text-xl text-[#9eb7a8]">₸</span>
+                  </div>
+                  <div className="flex items-center justify-center gap-2">
+                    <span className="text-sm text-[#9eb7a8] line-through">64 000 ₸</span>
+                    <Badge className="bg-red-500/20 text-red-400 border-red-500/30">
+                      -44%
+                    </Badge>
+                  </div>
+                </div>
+                <ul className="space-y-3 mb-8">
+                  <li className="flex items-start gap-3">
+                    <CheckCircle2 className="text-[#38e07b] w-5 h-5 mt-0.5 shrink-0" />
+                    <span className="text-[#d0e0d8] text-sm">Видеоуроки по обоим предметам</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <CheckCircle2 className="text-[#38e07b] w-5 h-5 mt-0.5 shrink-0" />
+                    <span className="text-[#d0e0d8] text-sm">2 вебинара в неделю по каждому предмету</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <CheckCircle2 className="text-[#38e07b] w-5 h-5 mt-0.5 shrink-0" />
+                    <span className="text-[#d0e0d8] text-sm">Домашние задания</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <CheckCircle2 className="text-[#38e07b] w-5 h-5 mt-0.5 shrink-0" />
+                    <span className="text-[#d0e0d8] text-sm">Еженедельные мок тесты</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <CheckCircle2 className="text-[#38e07b] w-5 h-5 mt-0.5 shrink-0" />
+                    <span className="text-[#d0e0d8] text-sm font-semibold">Максимальная экономия</span>
+                  </li>
+                </ul>
+                <Button
+                  asChild
+                  className="w-full bg-[#38e07b] hover:bg-[#2bc768] text-[#111714] font-bold h-12 rounded-full"
+                >
+                  <a href="#lead-form">Выбрать план</a>
+                </Button>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </section>
+
       <section id="lead-form" className="py-20 bg-[#111714] relative">
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           <div className="absolute top-20 right-[-10%] w-[500px] h-[500px] rounded-full bg-[#38e07b]/5 blur-[100px]"></div>
@@ -1097,7 +1211,7 @@ export default function LandingPage() {
                   <span className="text-[#38e07b] text-xs font-bold uppercase tracking-wide">Бесплатный доступ</span>
                 </div>
                 <h2 className="text-white tracking-tight text-4xl sm:text-5xl font-black leading-[1.1]">
-                  Попробуй подготовку к <span className="text-[#38e07b]">NUET</span> бесплатно
+                  Сдай Mock test из реальных задач прошлого NUET и получи пробный доступ к платформе бесплатно
                 </h2>
                 <p className="text-gray-300 text-lg font-normal leading-relaxed max-w-[600px]">
                   Получи доступ к пробному мини-курсу на нашей платформе и оцени формат обучения перед покупкой полного курса.

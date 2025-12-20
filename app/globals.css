@@ -87,7 +87,7 @@ body,
   font-size: 16px !important;
 }
 
-/* Custom scrollbar styles */
+/* Custom scrollbar styles
 ::-webkit-scrollbar {
   width: 10px;
   height: 10px;
@@ -105,7 +105,7 @@ body,
 
 ::-webkit-scrollbar-thumb:hover {
   background: hsl(var(--muted-foreground) / 0.5);
-}
+} */
 
 /* Smooth transitions for interactive elements */
 button,
