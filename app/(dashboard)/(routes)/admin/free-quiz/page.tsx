@@ -1,13 +1,13 @@
 import { auth } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 import { db } from "@/lib/db";
-import { isTeacher } from "@/lib/teacher";
+import { isAdmin } from "@/lib/admin";
 import { FreeQuizAdmin } from "./_components/free-quiz-admin";
 
 export default async function AdminFreeQuizPage() {
   const { userId } = auth();
 
-  if (!userId || !isTeacher(userId)) {
+  if (!userId || !isAdmin(userId)) {
     return redirect("/");
   }
   

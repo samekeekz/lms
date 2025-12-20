@@ -3,8 +3,13 @@
 import { useState, useEffect } from "react"
 import { useAuth } from "@clerk/nextjs"
 import { useRouter } from "next/navigation"
+import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
+import axios from "axios"
+import toast from "react-hot-toast"
 import {
   BookOpen,
   Users,
@@ -30,12 +35,25 @@ import {
   Quote,
   Star,
   Award,
+  User,
+  Phone,
+  MessageSquare,
+  Mail,
+  Lock,
 } from "lucide-react"
 
 export default function LandingPage() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const { isSignedIn, isLoaded } = useAuth()
   const router = useRouter()
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [formData, setFormData] = useState({
+    name: "",
+    phoneNumber: "",
+    telegramNickname: "",
+    email: "",
+    grade: "",
+  })
 
   useEffect(() => {
     if (isLoaded && isSignedIn) {
@@ -48,6 +66,33 @@ export default function LandingPage() {
     if (element) {
       element.scrollIntoView({ behavior: "smooth" })
       setMobileMenuOpen(false)
+    }
+  }
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setIsSubmitting(true)
+
+    try {
+      await axios.post("/api/leads", {
+        name: formData.name,
+        phoneNumber: formData.phoneNumber,
+        telegramNickname: formData.telegramNickname || null,
+        email: formData.email || null,
+        grade: formData.grade || null,
+      })
+      toast.success("Спасибо! Мы свяжемся с вами в ближайшее время.")
+      setFormData({
+        name: "",
+        phoneNumber: "",
+        telegramNickname: "",
+        email: "",
+        grade: "",
+      })
+    } catch (error) {
+      toast.error("Что-то пошло не так. Попробуйте еще раз.")
+    } finally {
+      setIsSubmitting(false)
     }
   }
 
@@ -204,13 +249,19 @@ export default function LandingPage() {
         </div>
       </nav>
 
-      <section className="py-12 lg:py-20 bg-[#111714]">
+      <section className="py-12 lg:py-20 bg-[#111714] relative">
         <div className="container mx-auto px-4 max-w-7xl">
           <div className="grid gap-12 lg:grid-cols-2 lg:gap-8 items-center">
             <div className="flex flex-col gap-8 text-left">
-              <div className="inline-flex w-fit items-center gap-2 rounded-full border border-[#29382f] bg-[#1c2620] px-3 py-1">
-                <span className="flex h-2 w-2 rounded-full bg-[#38e07b] animate-pulse"></span>
-                <span className="text-xs font-medium uppercase tracking-wide text-[#38e07b]">Набор открыт</span>
+              <div className="flex items-center gap-3 flex-wrap">
+                <div className="inline-flex w-fit items-center gap-2 rounded-full border border-[#38e07b]/30 bg-[#38e07b]/10 px-3 py-1">
+                  <span className="flex h-2 w-2 rounded-full bg-[#38e07b] animate-pulse"></span>
+                  <span className="text-xs font-medium uppercase tracking-wide text-[#38e07b]">Набор открыт</span>
+                </div>
+                <div className="inline-flex w-fit items-center gap-2 rounded-full border border-red-500/30 bg-red-500/10 px-3 py-1">
+                  <span className="flex h-2 w-2 rounded-full bg-red-500 animate-pulse"></span>
+                  <span className="text-xs font-medium uppercase tracking-wide text-red-500">подготовься за 2 месяца</span>
+                </div>
               </div>
 
               <div className="space-y-4">
@@ -260,45 +311,36 @@ export default function LandingPage() {
 
             </div>
 
-            <div className="relative hidden lg:block h-full min-h-[500px] w-full">
+            <div className="relative hidden lg:block w-full">
               <div className="absolute inset-0 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3/4 h-3/4 rounded-full bg-[#38e07b]/20 blur-[120px]"></div>
-              <div className="relative h-full w-full overflow-hidden rounded-2xl border border-[#29382f] bg-[#1c2620] shadow-2xl">
-                <div className="absolute top-0 w-full h-12 bg-[#151c18] border-b border-[#29382f] flex items-center px-4 gap-2">
+              <div className="relative w-full overflow-hidden rounded-2xl border border-[#29382f] bg-[#1c2620] shadow-2xl aspect-video">
+                <div className="absolute top-0 w-full h-12 bg-[#151c18] border-b border-[#29382f] flex items-center px-4 gap-2 z-10">
                   <div className="w-3 h-3 rounded-full bg-red-500/50"></div>
                   <div className="w-3 h-3 rounded-full bg-yellow-500/50"></div>
                   <div className="w-3 h-3 rounded-full bg-green-500/50"></div>
                 </div>
-                <div className="w-full h-full pt-12 bg-[#0a0f0c] flex items-center justify-center">
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#111714] via-[#111714]/40 to-transparent"></div>
-                  <div className="relative z-10 p-8 text-center">
-                    <div className="w-20 h-20 mx-auto mb-4 rounded-2xl bg-[#38e07b]/10 flex items-center justify-center">
-                      <Play className="w-10 h-10 text-[#38e07b]" />
-                    </div>
-                    <p className="text-white font-bold text-lg mb-2">Интерактивная платформа</p>
-                    <p className="text-slate-400 text-sm">Видеоуроки и практика в одном месте</p>
-                  </div>
-                  <div className="absolute bottom-10 left-8 right-8 p-6 rounded-xl bg-[#1c2620]/90 backdrop-blur border border-[#3d5245]">
-                    <div className="flex items-center justify-between mb-4">
-                      <div className="flex items-center gap-2">
-                        <div className="p-1.5 rounded bg-[#38e07b]/20 text-[#38e07b]">
-                          <Play className="w-4 h-4" />
-                        </div>
-                        <span className="text-sm font-bold text-white">Урок 4: Функции</span>
-                      </div>
-                      <span className="text-xs text-[#38e07b] font-bold">Прогресс 85%</span>
-                    </div>
-                    <div className="w-full bg-[#111714] rounded-full h-2">
-                      <div className="bg-[#38e07b] h-2 rounded-full transition-all" style={{ width: "85%" }}></div>
-                    </div>
-                  </div>
-                  <div className="absolute top-20 right-8 p-3 rounded-lg bg-[#38e07b] text-[#111714] shadow-lg flex items-center gap-2 animate-bounce" style={{ animationDuration: "3s" }}>
-                    <CheckCircle2 className="w-5 h-5" />
-                    <div>
-                      <p className="text-xs font-bold leading-none">Результат</p>
-                      <p className="text-sm font-black leading-none">145/150</p>
-                    </div>
+                <div className="w-full h-full bg-transparent relative">
+                  <div className="relative w-full h-full">
+                    <Image
+                      src="/course_screenshot.png"
+                      alt="Интерактивная платформа - Видеоуроки и практика в одном месте"
+                      fill
+                      className="object-contain"
+                      priority
+                    />
                   </div>
                 </div>
+              </div>
+              <div className="mt-6 p-6 rounded-xl bg-[#1c2620]/90 backdrop-blur border border-[#3d5245]">
+                <div className="flex items-center justify-between mb-4">
+                  <div className="flex items-center gap-2">
+                    <div className="p-1.5 rounded bg-[#38e07b]/20 text-[#38e07b]">
+                      <Play className="w-4 h-4" />
+                    </div>
+                    <span className="text-sm font-bold text-white">Интерактивная платформа</span>
+                  </div>
+                </div>
+                <p className="text-xs text-[#9eb7a8]">Видеоуроки и практика в одном месте</p>
               </div>
             </div>
           </div>
@@ -650,22 +692,6 @@ export default function LandingPage() {
               </CardContent>
             </Card>
           </div>
-
-          <div className="flex justify-center mb-8">
-            <div className="inline-flex items-center gap-2 rounded-full border border-[#3d5245] bg-[#1c2620]/50 px-4 py-2">
-              <Lightbulb className="w-5 h-5 text-[#9eb7a8]" />
-              <p className="text-[#9eb7a8] text-sm font-normal leading-normal">
-                Программа может адаптироваться под уровень группы.
-              </p>
-            </div>
-          </div>
-
-          <div className="flex px-4 py-3 justify-center">
-            <Button className="group flex min-w-[240px] h-14 px-8 bg-[#38e07b] hover:bg-[#2bc768] transition-all duration-300 text-[#111714] gap-3 rounded-full font-bold tracking-wide shadow-[0_0_20px_rgba(56,224,123,0.3)] hover:shadow-[0_0_30px_rgba(56,224,123,0.5)]">
-              <Download className="text-[#111714] w-6 h-6 group-hover:scale-110 transition-transform" />
-              <span>Скачать подробную программу (PDF)</span>
-            </Button>
-          </div>
         </div>
       </section>
 
@@ -736,11 +762,11 @@ export default function LandingPage() {
             <Card className="group border border-[#3d5245] bg-[#1a2c23] hover:border-[#38e07b] transition-all duration-300 hover:shadow-lg hover:shadow-[#38e07b]/5 hover:-translate-y-1">
               <CardContent className="p-8 flex flex-col">
                 <div className="flex items-center justify-center w-14 h-14 rounded-full bg-[#38e07b]/10 text-[#38e07b] mb-6 group-hover:bg-[#38e07b] group-hover:text-[#122017] transition-colors duration-300">
-                  <BarChart3 className="w-8 h-8" />
+                  <Calendar className="w-8 h-8" />
                 </div>
-                <h3 className="text-white text-xl font-bold leading-tight mb-3">Личный кабинет с прогрессом</h3>
+                <h3 className="text-white text-xl font-bold leading-tight mb-3">2 онлайн урока в неделю по каждому предмету</h3>
                 <p className="text-[#9eb7a8] text-sm leading-relaxed">
-                  Отслеживайте свои баллы, визуализируйте улучшения и автоматически определяйте слабые области.
+                  Регулярные занятия по математике и критическому мышлению для систематической подготовки.
                 </p>
               </CardContent>
             </Card>
@@ -784,11 +810,12 @@ export default function LandingPage() {
             <Card className="group relative border border-[#29382f] bg-[#1a2c23] hover:border-[#38e07b]/50 transition-all duration-300 hover:shadow-[0_0_30px_-10px_rgba(56,224,123,0.15)]">
               <CardContent className="p-6 flex flex-col md:flex-row gap-6">
                 <div className="flex flex-col items-center md:items-start min-w-[140px]">
-                  <div className="w-32 h-32 md:w-36 md:h-36 rounded-full overflow-hidden border-4 border-[#23332a] mb-4 bg-gray-200">
-                    <img
-                      src="/teacher_1.jpg"
+                  <div className="w-32 h-32 md:w-36 md:h-36 rounded-full overflow-hidden border-4 border-[#23332a] mb-4 bg-gray-200 relative">
+                    <Image
+                      src="/teacher_2.JPG"
                       alt="Портрет преподавателя Салима"
-                      className="w-full h-full object-cover"
+                      fill
+                      className="object-cover"
                     />
                   </div>
                   <div className="flex items-center gap-1 px-3 py-1 rounded-full bg-[#38e07b]/10 border border-[#38e07b]/20">
@@ -852,11 +879,12 @@ export default function LandingPage() {
             <Card className="group relative border border-[#29382f] bg-[#1a2c23] hover:border-[#38e07b]/50 transition-all duration-300 hover:shadow-[0_0_30px_-10px_rgba(56,224,123,0.15)]">
               <CardContent className="p-6 flex flex-col md:flex-row gap-6">
                 <div className="flex flex-col items-center md:items-start min-w-[140px]">
-                  <div className="w-32 h-32 md:w-36 md:h-36 rounded-full overflow-hidden border-4 border-[#23332a] mb-4 bg-gray-200">
-                    <img
-                      src="/teacher_2.JPG"
+                  <div className="w-32 h-32 md:w-36 md:h-36 rounded-full overflow-hidden border-4 border-[#23332a] mb-4 bg-gray-200 relative">
+                    <Image
+                      src="/teacher_1.jpg"
                       alt="Портрет преподавателя Арсена"
-                      className="w-full h-full object-cover"
+                      fill
+                      className="object-cover"
                     />
                   </div>
                   <div className="flex items-center gap-1 px-3 py-1 rounded-full bg-[#38e07b]/10 border border-[#38e07b]/20">
@@ -1011,7 +1039,7 @@ export default function LandingPage() {
                         <span className="text-xl text-[#9eb7a8] font-medium">учеников</span>
                       </div>
                       <p className="text-[#9eb7a8] text-sm leading-relaxed">
-                        наших учеников поступили в НУ за последние 2 года
+                        поступили в НУ за последние 2 года
                       </p>
                     </div>
                   </div>
@@ -1193,7 +1221,7 @@ export default function LandingPage() {
         <div className="container mx-auto px-4 max-w-[1200px]">
           <div className="max-w-2xl mx-auto text-center">
             <h2 className="text-3xl md:text-5xl font-black mb-4 text-[#111714]">
-              Попробуйте бесплатный NUET-тест
+              пройти бесплатный NUET мок тест на платформе
             </h2>
             <p className="text-[#63756c] mb-8 text-lg">
               Пройди пробный тест в формате NUET и узнай свой текущий уровень перед началом обучения.
@@ -1223,6 +1251,115 @@ export default function LandingPage() {
                 </div>
               </CardContent>
             </Card>
+          </div>
+        </div>
+      </section>
+
+      {/* Lead Form Section */}
+      <section className="py-20 bg-[#111714] relative">
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <div className="absolute top-20 right-[-10%] w-[500px] h-[500px] rounded-full bg-[#38e07b]/5 blur-[100px]"></div>
+          <div className="absolute bottom-0 left-[-10%] w-[600px] h-[600px] rounded-full bg-[#38e07b]/5 blur-[120px]"></div>
+        </div>
+        <div className="container mx-auto px-4 max-w-[1200px] relative z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+            {/* Left Column: Content */}
+            <div className="flex flex-col gap-8">
+              <div className="flex flex-col gap-6">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#38e07b]/10 border border-[#38e07b]/20 w-fit">
+                  <CheckCircle2 className="w-4 h-4 text-[#38e07b]" />
+                  <span className="text-[#38e07b] text-xs font-bold uppercase tracking-wide">Бесплатный доступ</span>
+                </div>
+                <h2 className="text-white tracking-tight text-4xl sm:text-5xl font-black leading-[1.1]">
+                  Попробуй подготовку к <span className="text-[#38e07b]">NUET</span> бесплатно
+                </h2>
+                <p className="text-gray-300 text-lg font-normal leading-relaxed max-w-[600px]">
+                  Получи доступ к пробному мини-курсу на нашей платформе и оцени формат обучения перед покупкой полного курса.
+                </p>
+              </div>
+            </div>
+
+            {/* Right Column: Form */}
+            <div className="relative w-full max-w-[480px] mx-auto lg:ml-auto">
+              <div className="relative bg-[#1c2620]/90 backdrop-blur-sm rounded-2xl p-6 sm:p-8 shadow-2xl border border-[#3d5245]/50">
+                <div className="mb-8">
+                  <h3 className="text-2xl font-bold text-white mb-2">Заполни форму</h3>
+                  <p className="text-[#9eb7a8] text-sm">Введите свои данные, чтобы начать обучение прямо сейчас.</p>
+                </div>
+                <form onSubmit={handleSubmit} className="flex flex-col gap-5">
+                  {/* Name Field */}
+                  <div className="space-y-2">
+                    <Label htmlFor="name" className="text-white text-sm font-medium pl-2">Имя</Label>
+                    <div className="relative">
+                      <Input
+                        id="name"
+                        type="text"
+                        placeholder="Как к вам обращаться?"
+                        value={formData.name}
+                        onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                        required
+                        className="w-full h-12 rounded-full bg-[#111714] border border-[#3d5245] text-white px-5 pl-12 placeholder:text-[#9eb7a8] focus:ring-2 focus:ring-[#38e07b] focus:border-transparent"
+                      />
+                      <User className="absolute left-4 top-1/2 -translate-y-1/2 text-[#9eb7a8] w-5 h-5 pointer-events-none" />
+                    </div>
+                  </div>
+
+                  {/* Phone Field */}
+                  <div className="space-y-2">
+                    <Label htmlFor="phone" className="text-white text-sm font-medium pl-2">Телефон / WhatsApp</Label>
+                    <div className="relative">
+                      <Input
+                        id="phone"
+                        type="tel"
+                        placeholder="+7 (___) ___-__-__"
+                        value={formData.phoneNumber}
+                        onChange={(e) => setFormData({ ...formData, phoneNumber: e.target.value })}
+                        required
+                        className="w-full h-12 rounded-full bg-[#111714] border border-[#3d5245] text-white px-5 pl-12 placeholder:text-[#9eb7a8] focus:ring-2 focus:ring-[#38e07b] focus:border-transparent"
+                      />
+                      <Phone className="absolute left-4 top-1/2 -translate-y-1/2 text-[#9eb7a8] w-5 h-5 pointer-events-none" />
+                    </div>
+                  </div>
+
+                  {/* Telegram Field */}
+                  <div className="space-y-2">
+                    <Label htmlFor="telegram" className="text-white text-sm font-medium pl-2">Telegram никнейм</Label>
+                    <div className="relative">
+                      <Input
+                        id="telegram"
+                        type="text"
+                        placeholder="@username"
+                        value={formData.telegramNickname}
+                        onChange={(e) => setFormData({ ...formData, telegramNickname: e.target.value })}
+                        className="w-full h-12 rounded-full bg-[#111714] border border-[#3d5245] text-white px-5 pl-12 placeholder:text-[#9eb7a8] focus:ring-2 focus:ring-[#38e07b] focus:border-transparent"
+                      />
+                      <MessageSquare className="absolute left-4 top-1/2 -translate-y-1/2 text-[#9eb7a8] w-5 h-5 pointer-events-none" />
+                    </div>
+                  </div>
+
+                  {/* Submit Button */}
+                  <Button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="mt-4 w-full h-14 bg-[#38e07b] hover:bg-[#2fc468] text-[#111714] font-bold text-base rounded-full shadow-[0_0_20px_rgba(56,224,123,0.3)] hover:shadow-[0_0_30px_rgba(56,224,123,0.5)] transition-all transform active:scale-[0.98] flex items-center justify-center gap-2"
+                  >
+                    <span>Получить доступ к пробному курсу</span>
+                    <ArrowRight className="w-5 h-5" />
+                  </Button>
+
+                  {/* Microtext */}
+                  <div className="text-center mt-2 px-2">
+                    <p className="text-xs text-[#9eb7a8] leading-relaxed flex items-start justify-center gap-1.5 opacity-80">
+                      <Lock className="w-[14px] h-[14px] mt-0.5 shrink-0" />
+                      <span>Никакого спама. Только материалы по NUET и важные напоминания до экзамена.</span>
+                    </p>
+                  </div>
+                </form>
+              </div>
+              {/* Decorative elements */}
+              <div className="absolute -top-6 -right-6 w-24 h-24 border-2 border-[#38e07b]/20 rounded-full z-0 opacity-50"></div>
+              <div className="absolute -bottom-4 -left-4 w-16 h-16 bg-[#38e07b]/10 rounded-full z-0 blur-xl"></div>
+            </div>
           </div>
         </div>
       </section>

@@ -128,14 +128,14 @@ model StripeCustomer {
 
 // Quiz Model - One quiz per chapter
 model Quiz {
-  id          String   @id @default(uuid())
-  title       String
-  description String?  @db.Text
-  passingScore Int     @default(70)
-  timeLimit   Int?
-  maxAttempts Int?
-  isPublished Boolean  @default(false)
-  shuffleQuestions Boolean @default(false)
+  id                 String  @id @default(uuid())
+  title              String
+  description        String? @db.Text
+  passingScore       Int     @default(70)
+  timeLimit          Int?
+  maxAttempts        Int?
+  isPublished        Boolean @default(false)
+  shuffleQuestions   Boolean @default(false)
   showCorrectAnswers Boolean @default(true)
 
   chapterId String  @unique
@@ -160,7 +160,7 @@ model Question {
   explanation String?      @db.Text
 
   quizId String
-  quiz   Quiz @relation(fields: [quizId], references: [id], onDelete: Cascade)
+  quiz   Quiz   @relation(fields: [quizId], references: [id], onDelete: Cascade)
 
   options QuestionOption[]
   answers UserAnswer[]
@@ -207,7 +207,7 @@ model QuizAttempt {
   timeSpent   Int?
 
   quizId String
-  quiz   Quiz @relation(fields: [quizId], references: [id], onDelete: Cascade)
+  quiz   Quiz   @relation(fields: [quizId], references: [id], onDelete: Cascade)
 
   answers UserAnswer[]
 
@@ -243,18 +243,18 @@ model UserAnswer {
 
 // Free Trial Access - Track users who have been granted free trial access
 model FreeTrialAccess {
-  id        String   @id @default(uuid())
-  userId    String   @unique
-  email     String?
-  
+  id     String  @id @default(uuid())
+  userId String  @unique
+  email  String?
+
   // Which free course/quiz they have access to
-  courseId  String?
-  
+  courseId String?
+
   // Track if they've used their free quiz attempt
   hasUsedFreeTrial Boolean @default(false)
-  
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
   expiresAt DateTime?
 
   @@index([userId])
@@ -266,20 +266,20 @@ model FreeTrialAccess {
 
 // Free Quiz - Standalone quiz for new users
 model FreeQuiz {
-  id               String   @id @default(uuid())
-  title            String
-  description      String?  @db.Text
-  passingScore     Int      @default(70)
-  timeLimit        Int?     // in minutes
-  isPublished      Boolean  @default(false)
-  shuffleQuestions Boolean  @default(false)
+  id                 String  @id @default(uuid())
+  title              String
+  description        String? @db.Text
+  passingScore       Int     @default(70)
+  timeLimit          Int? // in minutes
+  isPublished        Boolean @default(false)
+  shuffleQuestions   Boolean @default(false)
   showCorrectAnswers Boolean @default(true)
-  
+
   // Only one free quiz can be active at a time
-  isActive         Boolean  @default(false)
-  
-  questions        FreeQuizQuestion[]
-  attempts         FreeQuizAttempt[]
+  isActive Boolean @default(false)
+
+  questions FreeQuizQuestion[]
+  attempts  FreeQuizAttempt[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -293,6 +293,7 @@ model FreeQuizQuestion {
   points      Int          @default(1)
   position    Int
   explanation String?      @db.Text
+  imageUrl    String?      @db.Text
 
   quizId String
   quiz   FreeQuiz @relation(fields: [quizId], references: [id], onDelete: Cascade)
@@ -331,7 +332,7 @@ model FreeQuizAttempt {
   isCompleted Boolean   @default(false)
   startedAt   DateTime  @default(now())
   completedAt DateTime?
-  timeSpent   Int?      // in seconds
+  timeSpent   Int? // in seconds
 
   quizId String
   quiz   FreeQuiz @relation(fields: [quizId], references: [id], onDelete: Cascade)
@@ -366,4 +367,20 @@ model FreeQuizAnswer {
   @@index([questionId])
   @@index([attemptId])
   @@index([userId])
+}
+
+// Lead Model - Store user contact information from landing page
+model Lead {
+  id               String  @id @default(uuid())
+  name             String
+  phoneNumber      String
+  telegramNickname String? @db.Text
+  email            String? @db.Text
+  grade            String? @db.Text
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([phoneNumber])
+  @@index([createdAt])
 }

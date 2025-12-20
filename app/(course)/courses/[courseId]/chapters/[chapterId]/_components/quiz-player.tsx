@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
@@ -38,7 +38,55 @@ export const QuizPlayer = ({
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [result, setResult] = useState<any>(null);
   const [showReview, setShowReview] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const router = useRouter();
+
+  // Check for existing completed attempts on mount
+  useEffect(() => {
+    const checkExistingAttempts = async () => {
+      try {
+        const response = await axios.get(
+          `/api/courses/${courseId}/chapters/${chapterId}/quiz/my-attempts`
+        );
+        const attempts = response.data;
+        
+        // Find the most recent completed attempt
+        const completedAttempt = attempts.find((a: any) => a.isCompleted);
+        
+        if (completedAttempt) {
+          // Format the result for display
+          const formattedResult = {
+            ...completedAttempt,
+            answers: completedAttempt.answers || [],
+            score: completedAttempt.score || 0,
+            isPassed: completedAttempt.isPassed || false,
+          };
+          setResult(formattedResult);
+          setShowResults(true);
+        } else {
+          // Check for incomplete attempt
+          const incompleteAttempt = attempts.find((a: any) => !a.isCompleted);
+          if (incompleteAttempt) {
+            setAttempt(incompleteAttempt);
+            // Calculate remaining time if time limit exists
+            if (quiz.timeLimit && incompleteAttempt.startedAt) {
+              const elapsed = Math.floor(
+                (new Date().getTime() - new Date(incompleteAttempt.startedAt).getTime()) / 1000
+              );
+              const remaining = quiz.timeLimit * 60 - elapsed;
+              setTimeRemaining(remaining > 0 ? remaining : 0);
+            }
+          }
+        }
+      } catch (error) {
+        console.error("Error loading attempts:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    checkExistingAttempts();
+  }, [courseId, chapterId, quiz.timeLimit]);
 
   // Initialize answers and marks
   useEffect(() => {
@@ -53,6 +101,11 @@ export const QuizPlayer = ({
         `/api/courses/${courseId}/chapters/${chapterId}/quiz/attempt`
       );
       setAttempt(response.data);
+      setShowResults(false);
+      setResult(null);
+      setCurrentQuestion(0);
+      setAnswers({});
+      setMarkedForReview(new Array(quiz.questions.length).fill(false));
 
       if (quiz.timeLimit) {
         setTimeRemaining(quiz.timeLimit * 60);
@@ -62,14 +115,60 @@ export const QuizPlayer = ({
     }
   };
 
+  const handleSubmit = useCallback(async () => {
+    if (!attempt || isSubmitting) return;
+    
+    try {
+      setIsSubmitting(true);
+
+      const formattedAnswers = quiz.questions.map((q: any) => ({
+        questionId: q.id,
+        selectedOptions: Array.isArray(answers[q.id])
+          ? answers[q.id]
+          : answers[q.id]
+          ? [answers[q.id]]
+          : [],
+        textAnswer: typeof answers[q.id] === "string" ? answers[q.id] : null,
+      }));
+
+      const response = await axios.post(
+        `/api/courses/${courseId}/chapters/${chapterId}/quiz/attempt/${attempt.id}/submit`,
+        { answers: formattedAnswers }
+      );
+
+      // Format the result properly
+      const formattedResult = {
+        ...response.data,
+        answers: response.data.answers || [],
+        score: response.data.score || 0,
+        isPassed: response.data.isPassed || false,
+      };
+      
+      setResult(formattedResult);
+      setShowResults(true);
+      setAttempt(null); // Clear attempt to prevent re-submission
+      toast.success("Quiz submitted successfully!");
+      
+      // Refresh to update any server-side state
+      setTimeout(() => {
+        router.refresh();
+      }, 500);
+    } catch (error: any) {
+      console.error("Submit error:", error);
+      toast.error(error.response?.data || "Failed to submit quiz");
+    } finally {
+      setIsSubmitting(false);
+    }
+  }, [attempt, isSubmitting, quiz.questions, answers, courseId, chapterId, router]);
+
   // Timer countdown
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
-    if (timeRemaining === null || timeRemaining <= 0 || result || showReview) return;
+    if (timeRemaining === null || timeRemaining <= 0 || result || showReview || !attempt) return;
 
     const timer = setInterval(() => {
       setTimeRemaining((prev) => {
         if (prev === null || prev <= 1) {
+          // Auto-submit when time runs out
           handleSubmit();
           return 0;
         }
@@ -78,7 +177,7 @@ export const QuizPlayer = ({
     }, 1000);
 
     return () => clearInterval(timer);
-  }, [timeRemaining, result, showReview]);
+  }, [timeRemaining, result, showReview, attempt, handleSubmit]);
 
   const formatTime = (seconds: number) => {
     const hours = Math.floor(seconds / 3600);
@@ -111,35 +210,6 @@ export const QuizPlayer = ({
   const handlePrevious = () => {
     if (currentQuestion > 0) {
       setCurrentQuestion(currentQuestion - 1);
-    }
-  };
-
-  const handleSubmit = async () => {
-    try {
-      setIsSubmitting(true);
-
-      const formattedAnswers = quiz.questions.map((q: any) => ({
-        questionId: q.id,
-        selectedOptions: Array.isArray(answers[q.id])
-          ? answers[q.id]
-          : answers[q.id]
-          ? [answers[q.id]]
-          : [],
-        textAnswer: typeof answers[q.id] === "string" ? answers[q.id] : null,
-      }));
-
-      const response = await axios.post(
-        `/api/courses/${courseId}/chapters/${chapterId}/quiz/attempt/${attempt.id}/submit`,
-        { answers: formattedAnswers }
-      );
-
-      setResult(response.data);
-      setShowResults(true);
-      toast.success("Quiz submitted successfully!");
-    } catch (error) {
-      toast.error("Failed to submit quiz");
-    } finally {
-      setIsSubmitting(false);
     }
   };
 
@@ -383,9 +453,33 @@ export const QuizPlayer = ({
               )}
 
               <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
-                <Button size="lg" onClick={() => router.refresh()}>
+                <Button 
+                  size="lg" 
+                  variant="outline"
+                  onClick={() => {
+                    setShowResults(false);
+                    setResult(null);
+                    router.refresh();
+                  }}
+                >
                   Back to Chapter
                 </Button>
+                {quiz.maxAttempts && (() => {
+                  // Check if user can retake
+                  const canRetake = true; // This would need to be calculated based on attempt count
+                  return canRetake ? (
+                    <Button 
+                      size="lg"
+                      onClick={() => {
+                        setShowResults(false);
+                        setResult(null);
+                        startQuiz();
+                      }}
+                    >
+                      Retake Quiz
+                    </Button>
+                  ) : null;
+                })()}
               </div>
             </div>
           </div>
@@ -394,8 +488,20 @@ export const QuizPlayer = ({
     );
   }
 
+  // LOADING SCREEN
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-slate-50 py-8 px-4 flex items-center justify-center">
+        <div className="text-center">
+          <Brain className="size-12 text-sky-700 mx-auto mb-4 animate-pulse" />
+          <p className="text-slate-600">Loading quiz...</p>
+        </div>
+      </div>
+    );
+  }
+
   // START SCREEN
-  if (!attempt) {
+  if (!attempt && !showResults) {
     return (
       <div className="min-h-screen bg-slate-50 py-8 px-4">
         <div className="container mx-auto max-w-2xl">

@@ -11,6 +11,15 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "Подготовка к NUET | Онлайн-курс для поступления в Nazarbayev University",
   description: "Комплексная подготовка к NUET по Математике и Критическому мышлению. Опытные преподаватели, пробные тесты и персональная поддержка для поступления в Назарбаев Университет.",
+  icons: {
+    icon: [
+      {
+        url: "/icon.svg",
+        type: "image/svg+xml",
+      },
+    ],
+    apple: "/icon.svg",
+  },
 };
 
 export default function RootLayout({

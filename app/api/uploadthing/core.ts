@@ -1,12 +1,21 @@
 import { createUploadthing, type FileRouter } from "uploadthing/next";
 import { auth } from "@clerk/nextjs/server";
 import { isTeacher } from "@/lib/teacher";
+import { isAdmin } from "@/lib/admin";
 
 const f = createUploadthing();
 
 const handleAuth = () => {
   const { userId } = auth();
   const isAuthorized = isTeacher(userId);
+
+  if (!userId || !isAuthorized) throw new Error("Unauthorized");
+  return { userId };
+};
+
+const handleAdminAuth = () => {
+  const { userId } = auth();
+  const isAuthorized = isAdmin(userId) || isTeacher(userId);
 
   if (!userId || !isAuthorized) throw new Error("Unauthorized");
   return { userId };
@@ -22,6 +31,9 @@ export const ourFileRouter = {
     .onUploadComplete(() => {}),
   chapterVideo: f({ video: { maxFileSize: "1GB", maxFileCount: 1 } })
     .middleware(() => handleAuth())
+    .onUploadComplete(() => {}),
+  quizQuestionImage: f({ image: { maxFileSize: "16MB", maxFileCount: 1 } })
+    .middleware(() => handleAdminAuth())
     .onUploadComplete(() => {}),
 } satisfies FileRouter;
 

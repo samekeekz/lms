@@ -8,6 +8,7 @@ import { Clock, ChevronLeft, ChevronRight, Flag, AlertCircle } from "lucide-reac
 import { cn } from "@/lib/utils";
 import axios from "axios";
 import toast from "react-hot-toast";
+import Image from "next/image";
 
 type QuizWithQuestions = FreeQuiz & {
   questions: (FreeQuizQuestion & {
@@ -185,12 +186,22 @@ export function QuizTaking({ quiz, userId, onComplete, onCancel }: QuizTakingPro
           <span className="flex items-center justify-center w-8 h-8 rounded-full bg-primary text-primary-foreground text-sm font-bold shrink-0">
             {currentQuestionIndex + 1}
           </span>
-          <div>
+          <div className="flex-1">
             <p className="text-lg font-medium">{currentQuestion.question}</p>
             {currentQuestion.type === "MULTIPLE_SELECT" && (
               <p className="text-sm text-muted-foreground mt-1">
                 Выберите все правильные ответы
               </p>
+            )}
+            {currentQuestion.imageUrl && (
+              <div className="mt-4 relative w-full max-w-2xl h-64 border rounded-lg overflow-hidden bg-muted">
+                <Image
+                  src={currentQuestion.imageUrl}
+                  alt="Question image"
+                  fill
+                  className="object-contain"
+                />
+              </div>
             )}
           </div>
         </div>

@@ -53,25 +53,29 @@ const CourseIdPage = async ({ params }: { params: { courseId: string } }) => {
   }
 
   const requiredFields = [
-    course.title,
-    course.description,
-    course.imageUrl,
-    course.price,
-    course.categoryId,
-    course.chapters.some((chapter) => chapter.isPublished),
+    { name: "Title", value: course.title },
+    { name: "Description", value: course.description },
+    { name: "Image", value: course.imageUrl },
+    { name: "Price", value: course.price },
+    { name: "Category", value: course.categoryId },
+    { name: "Published Chapters", value: course.chapters.some((chapter) => chapter.isPublished) },
   ];
 
   const totalFields = requiredFields.length;
-  const completedFields = requiredFields.filter(Boolean).length;
+  const completedFields = requiredFields.filter((f) => f.value).length;
+  const missingFields = requiredFields.filter((f) => !f.value).map((f) => f.name);
 
   const completionText = `(${completedFields}/${totalFields})`;
+  const missingText = missingFields.length > 0 
+    ? ` - Missing: ${missingFields.join(", ")}`
+    : "";
 
   const categoryOptions = categories.map((category) => ({
     label: category.name,
     value: category.id,
   }));
 
-  const isComplete = requiredFields.every(Boolean);
+  const isComplete = requiredFields.every((f) => f.value);
 
   return (
     <>
@@ -84,6 +88,9 @@ const CourseIdPage = async ({ params }: { params: { courseId: string } }) => {
             <h1 className="text-2xl font-medium">Course setup</h1>
             <span className="text-sm text-slate-700">
               Complete all fields {completionText}
+              {missingText && (
+                <span className="text-red-600 font-medium">{missingText}</span>
+              )}
             </span>
           </div>
           {/* add actions  */}

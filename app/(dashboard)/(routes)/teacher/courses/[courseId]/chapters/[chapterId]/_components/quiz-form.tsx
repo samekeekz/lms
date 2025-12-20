@@ -50,8 +50,8 @@ export const QuizForm = ({ initialData, courseId, chapterId }: QuizFormProps) =>
       title: "",
       description: "",
       passingScore: 70,
-      timeLimit: null,
-      maxAttempts: null,
+      timeLimit: 30,
+      maxAttempts: 3,
       shuffleQuestions: false,
       showCorrectAnswers: true,
     },
@@ -61,15 +61,22 @@ export const QuizForm = ({ initialData, courseId, chapterId }: QuizFormProps) =>
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
+      // Ensure default values are set for new quizzes
+      const submitValues = {
+        ...values,
+        timeLimit: values.timeLimit ?? (initialData ? undefined : 30),
+        maxAttempts: values.maxAttempts ?? (initialData ? undefined : 3),
+      };
+
       if (initialData) {
         await axios.patch(
           `/api/courses/${courseId}/chapters/${chapterId}/quiz`,
-          values
+          submitValues
         );
       } else {
         await axios.post(
           `/api/courses/${courseId}/chapters/${chapterId}/quiz`,
-          values
+          submitValues
         );
       }
       toast.success("Quiz updated");
@@ -217,11 +224,15 @@ export const QuizForm = ({ initialData, courseId, chapterId }: QuizFormProps) =>
                         disabled={isSubmitting}
                         placeholder="30"
                         {...field}
-                        value={field.value || ""}
+                        value={field.value ?? 30}
+                        onChange={(e) => {
+                          const value = e.target.value === "" ? undefined : Number(e.target.value);
+                          field.onChange(value);
+                        }}
                       />
                     </FormControl>
                     <FormDescription>
-                      Leave empty for no limit
+                      Default: 30 minutes. Leave empty for no limit
                     </FormDescription>
                     <FormMessage />
                   </FormItem>
@@ -241,11 +252,15 @@ export const QuizForm = ({ initialData, courseId, chapterId }: QuizFormProps) =>
                       disabled={isSubmitting}
                       placeholder="3"
                       {...field}
-                      value={field.value || ""}
+                      value={field.value ?? 3}
+                      onChange={(e) => {
+                        const value = e.target.value === "" ? undefined : Number(e.target.value);
+                        field.onChange(value);
+                      }}
                     />
                   </FormControl>
                   <FormDescription>
-                    Leave empty for unlimited attempts
+                    Default: 3 attempts. Leave empty for unlimited attempts
                   </FormDescription>
                   <FormMessage />
                 </FormItem>

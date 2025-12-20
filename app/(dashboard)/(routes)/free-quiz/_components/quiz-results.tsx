@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { CheckCircle2, XCircle, RotateCcw, ArrowRight, Trophy, Target } from "lucide-react";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
+import Image from "next/image";
 
 type QuizWithQuestions = FreeQuiz & {
   questions: (FreeQuizQuestion & {
@@ -140,6 +141,16 @@ export function QuizResults({ quiz, result, onRetry }: QuizResultsProps) {
                     </span>
                   </div>
                   <p className="font-medium">{qr.question.question}</p>
+                  {qr.question.imageUrl && (
+                    <div className="mt-3 relative w-full max-w-2xl h-48 border rounded-lg overflow-hidden bg-muted">
+                      <Image
+                        src={qr.question.imageUrl}
+                        alt="Question image"
+                        fill
+                        className="object-contain"
+                      />
+                    </div>
+                  )}
                 </div>
               </div>
 

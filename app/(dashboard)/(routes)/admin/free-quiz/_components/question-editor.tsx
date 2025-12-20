@@ -13,10 +13,13 @@ import {
   Check,
   X,
   Save,
+  Image as ImageIcon,
 } from "lucide-react";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { cn } from "@/lib/utils";
+import { FileUpload } from "@/components/file-upload";
+import Image from "next/image";
 
 type QuizWithQuestions = FreeQuiz & {
   questions: (FreeQuizQuestion & {
@@ -36,6 +39,7 @@ interface EditableQuestion {
   points: number;
   position: number;
   explanation: string;
+  imageUrl?: string | null;
   options: {
     id?: string;
     text: string;
@@ -55,6 +59,7 @@ export function QuestionEditor({ quiz, onBack }: QuestionEditorProps) {
       points: q.points,
       position: q.position,
       explanation: q.explanation || "",
+      imageUrl: q.imageUrl || null,
       options: q.options.map((o) => ({
         id: o.id,
         text: o.text,
@@ -80,6 +85,7 @@ export function QuestionEditor({ quiz, onBack }: QuestionEditorProps) {
       points: 1,
       position: questions.length,
       explanation: "",
+      imageUrl: null,
       options: [
         { text: "", isCorrect: true, position: 0 },
         { text: "", isCorrect: false, position: 1 },
@@ -194,6 +200,7 @@ export function QuestionEditor({ quiz, onBack }: QuestionEditorProps) {
           points: q.points,
           position: index,
           explanation: q.explanation,
+          imageUrl: q.imageUrl || null,
           options: q.options.map((o, oIndex) => ({
             id: o.id,
             text: o.text,
@@ -361,6 +368,51 @@ export function QuestionEditor({ quiz, onBack }: QuestionEditorProps) {
                 onChange={(e) => updateQuestion(qIndex, { question: e.target.value })}
                 placeholder="Введите текст вопроса"
               />
+            </div>
+
+            <div className="mb-4">
+              <Label>Изображение (опционально)</Label>
+              {question.imageUrl ? (
+                <div className="mt-2 space-y-2">
+                  <div className="relative w-full max-w-md h-48 border rounded-lg overflow-hidden">
+                    <Image
+                      src={question.imageUrl}
+                      alt="Question image"
+                      fill
+                      className="object-contain"
+                    />
+                  </div>
+                  <div className="flex gap-2">
+                    <FileUpload
+                      endpoint="quizQuestionImage"
+                      onChange={(url) => {
+                        if (url) {
+                          updateQuestion(qIndex, { imageUrl: url });
+                        }
+                      }}
+                    />
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() => updateQuestion(qIndex, { imageUrl: null })}
+                    >
+                      <X className="w-4 h-4 mr-2" />
+                      Удалить изображение
+                    </Button>
+                  </div>
+                </div>
+              ) : (
+                <div className="mt-2">
+                  <FileUpload
+                    endpoint="quizQuestionImage"
+                    onChange={(url) => {
+                      if (url) {
+                        updateQuestion(qIndex, { imageUrl: url });
+                      }
+                    }}
+                  />
+                </div>
+              )}
             </div>
 
             <div className="space-y-2 mb-4">

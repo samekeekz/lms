@@ -1,7 +1,7 @@
 import { auth } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
-import { isTeacher } from "@/lib/teacher";
+import { isAdmin } from "@/lib/admin";
 
 // PUT - Replace all questions for a quiz
 export async function PUT(
@@ -11,7 +11,7 @@ export async function PUT(
   try {
     const { userId } = auth();
 
-    if (!userId || !isTeacher(userId)) {
+    if (!userId || !isAdmin(userId)) {
       return new NextResponse("Unauthorized", { status: 401 });
     }
 
@@ -41,6 +41,7 @@ export async function PUT(
           points: question.points || 1,
           position: question.position,
           explanation: question.explanation || null,
+          imageUrl: question.imageUrl || null,
           options: {
             create: question.options.map((option: any) => ({
               text: option.text,
