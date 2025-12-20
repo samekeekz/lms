@@ -256,22 +256,24 @@ export default function LandingPage() {
             <div className="flex flex-col gap-8 text-left">
               <div className="flex items-center gap-3 flex-wrap">
                 <div className="inline-flex w-fit items-center gap-2 rounded-full border border-[#38e07b]/30 bg-[#38e07b]/10 px-3 py-1">
-                  <span className="flex h-2 w-2 rounded-full bg-[#38e07b] animate-pulse"></span>
-                  <span className="text-xs font-medium uppercase tracking-wide text-[#38e07b]">Набор открыт</span>
+                <span className="flex h-2 w-2 rounded-full bg-[#38e07b] animate-pulse"></span>
+                <span className="text-xs font-medium uppercase tracking-wide text-[#38e07b]">Набор открыт</span>
                 </div>
                 <div className="inline-flex w-fit items-center gap-2 rounded-full border border-red-500/30 bg-red-500/10 px-3 py-1">
                   <span className="flex h-2 w-2 rounded-full bg-red-500 animate-pulse"></span>
-                  <span className="text-xs font-medium uppercase tracking-wide text-red-500">подготовься за 2 месяца</span>
+                  <span className="text-xs font-medium uppercase tracking-wide text-red-500">подготовься за 6 недель</span>
                 </div>
               </div>
 
               <div className="space-y-4">
-                <h1 className="font-black text-4xl sm:text-5xl lg:text-6xl leading-[1.1] tracking-tight text-white">
+                {/* <h1 className="font-black text-4xl sm:text-5xl lg:text-6xl leading-[1.1] tracking-tight text-white">
                   Подготовка к NUET до нужного балла и <span className="text-[#38e07b]">гранта</span> в Nazarbayev University
+                </h1> */}
+                 <h1 className="font-black text-4xl sm:text-5xl lg:text-6xl leading-[1.1] tracking-tight text-white">
+                  Онлайн-марафон NUET марафон где мы закрепим <span className="text-[#38e07b]">все важные</span> темы
                 </h1>
                 <p className="text-lg text-slate-400 leading-relaxed max-w-xl">
-                  Онлайн-курс по Математике и Критическому мышлению для NUET. Видеоуроки на собственной платформе, домашние задания в формате экзамена и преподаватели с высокими баллами и 3+ годами опыта.
-                </p>
+                  6-недельный онлайн марафон по подготовке к NUET. Видеоуроки на собственной платформе, домашние задания в формате экзамена и преподаватели с высокими баллами и 3+ годами опыта  </p>
               </div>
 
               <div className="flex flex-col gap-3">
@@ -279,7 +281,7 @@ export default function LandingPage() {
                   <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#38e07b]/20 text-[#38e07b]">
                     <GraduationCap className="w-4 h-4" />
                   </div>
-                  <span className="text-base text-slate-300">Подготовка к NU Foundation и бакалавриату</span>
+                  <span className="text-base text-slate-300">Повторим все самое важное и закрепим каждую &quot;непонятную&quot; тему</span>
                 </div>
                 <div className="flex items-center gap-3">
                   <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#38e07b]/20 text-[#38e07b]">
@@ -329,17 +331,17 @@ export default function LandingPage() {
                     style={{ objectPosition: 'top center' }}
                     priority
                   />
-                </div>
-              </div>
-              <div className="mt-6 p-6 rounded-xl bg-[#1c2620]/90 backdrop-blur border border-[#3d5245]">
-                <div className="flex items-center justify-between mb-4">
-                  <div className="flex items-center gap-2">
-                    <div className="p-1.5 rounded bg-[#38e07b]/20 text-[#38e07b]">
-                      <Play className="w-4 h-4" />
                     </div>
-                    <span className="text-sm font-bold text-white">Интерактивная платформа</span>
                   </div>
-                </div>
+              <div className="mt-6 p-6 rounded-xl bg-[#1c2620]/90 backdrop-blur border border-[#3d5245]">
+                    <div className="flex items-center justify-between mb-4">
+                      <div className="flex items-center gap-2">
+                        <div className="p-1.5 rounded bg-[#38e07b]/20 text-[#38e07b]">
+                          <Play className="w-4 h-4" />
+                        </div>
+                    <span className="text-sm font-bold text-white">Интерактивная платформа</span>
+                      </div>
+                    </div>
                 <p className="text-xs text-[#9eb7a8]">Видеоуроки и практика в одном месте</p>
               </div>
             </div>
@@ -408,8 +410,8 @@ export default function LandingPage() {
         <div className="container mx-auto px-4 max-w-[1200px]">
           <div className="max-w-2xl mx-auto text-center">
             <h2 className="text-3xl md:text-5xl font-black mb-4 text-[#111714]">
-                Mock NUET из задач NUET 2020-2021
-            </h2>
+                Mock NUET из задач 2020-2021
+              </h2>
             <p className="text-[#63756c] mb-8 text-lg">
               Пройди пробный тест в формате NUET и узнай свой текущий уровень перед началом обучения.
             </p>
@@ -420,7 +422,7 @@ export default function LandingPage() {
                   экзамена и нашей платформой.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-3 mt-2">
-                  <Button
+              <Button
                     asChild
                     type="button"
                     className="bg-[#38e07b] hover:bg-[#2bc768] text-[#111714] font-bold px-8 h-12 rounded-full"
@@ -434,8 +436,8 @@ export default function LandingPage() {
                     onClick={() => router.push("/sign-up")}
                   >
                     Зарегистрироваться
-                  </Button>
-                </div>
+              </Button>
+            </div>
               </CardContent>
             </Card>
           </div>
@@ -604,7 +606,7 @@ export default function LandingPage() {
                 <div className="flex items-center justify-center w-14 h-14 rounded-full bg-[#38e07b]/10 text-[#38e07b] mb-6 group-hover:bg-[#38e07b] group-hover:text-[#122017] transition-colors duration-300">
                   <Timer className="w-8 h-8" />
                 </div>
-                <h3 className="text-white text-xl font-bold leading-tight mb-3">Пробные NUET-тесты</h3>
+                <h3 className="text-white text-xl font-bold leading-tight mb-3">Пробные Mock-тесты</h3>
                 <p className="text-[#9eb7a8] text-sm leading-relaxed">
                   Полноформатные симуляции с реальным таймером для развития выносливости и навыков управления временем.
                 </p>
@@ -782,7 +784,7 @@ export default function LandingPage() {
                       <div className="mt-1 min-w-5 size-5 rounded-full bg-[#38e07b]/20 flex items-center justify-center text-[#38e07b]">
                         <Users className="w-3.5 h-3.5" />
                       </div>
-                      <span className="text-gray-300 text-sm">helped over 150 students to get into NU</span>
+                      <span className="text-gray-300 text-sm">helped over 110 students to get into NU</span>
                     </div>
                   </div>
 
@@ -805,8 +807,8 @@ export default function LandingPage() {
               className="inline-flex items-center gap-2 bg-[#38e07b] hover:bg-[#2bc466] text-[#111714] font-bold py-4 px-8 rounded-full transition-colors duration-200"
             >
               <a href="#lead-form">
-                <span>Записаться на пробный урок</span>
-                <ArrowRight className="w-5 h-5" />
+              <span>Записаться на пробный урок</span>
+              <ArrowRight className="w-5 h-5" />
               </a>
             </Button>
             <p className="mt-4 text-xs text-[#9eb7a8] uppercase tracking-widest font-medium">Бесплатная консультация</p>
@@ -846,8 +848,8 @@ export default function LandingPage() {
                     <BookOpen className="w-5 h-5" />
                   </div>
                   <div>
-                    <h4 className="text-lg font-bold text-white mb-1">Структура экзамена</h4>
-                    <p className="text-[#9eb7a8]">Ты будешь понимать структуру экзамена от и до, без сюрпризов в день теста.</p>
+                    <h4 className="text-lg font-bold text-white mb-1">Фундамент</h4>
+                    <p className="text-[#9eb7a8]">ты повторишь все важные темы из экзамена и закрепишь их перед самим экзаменом</p>
                   </div>
                 </div>
 
@@ -856,8 +858,8 @@ export default function LandingPage() {
                     <BarChart3 className="w-5 h-5" />
                   </div>
                   <div>
-                    <h4 className="text-lg font-bold text-white mb-1">Стратегия баллов</h4>
-                    <p className="text-[#9eb7a8]">Ты будешь знать, какие темы дают больше всего баллов и на чем сфокусироваться.</p>
+                    <h4 className="text-lg font-bold text-white mb-1">Формат</h4>
+                    <p className="text-[#9eb7a8]">за 6 недель ты привыкнешь к формату и улучшишь свои навыки решения задач</p>
                   </div>
                 </div>
 
@@ -867,7 +869,7 @@ export default function LandingPage() {
                   </div>
                   <div>
                     <h4 className="text-lg font-bold text-white mb-1">Уверенность</h4>
-                    <p className="text-[#9eb7a8]">У нас огромная база материалов и мы успели собрать для вас похожие на реальный НУЕТ тесты и хоумворки</p>
+                    <p className="text-[#9eb7a8]">У нас огромная база материалов и мы успели собрать для вас похожие на реальный NUET тесты и хоумворки</p>
                   </div>
                 </div>
               </div>
@@ -877,12 +879,12 @@ export default function LandingPage() {
               <div className="h-full flex flex-col rounded-lg bg-[#1c2620] border border-[#29382f] relative overflow-hidden group hover:border-[#38e07b]/30 transition-colors">
                 <div className="absolute top-0 right-0 p-8 opacity-5 group-hover:opacity-10 transition-opacity duration-500">
                   <TrendingUp className="w-36 h-36 text-[#38e07b]" />
-                </div>
+                  </div>
                 <div className="flex-1 flex flex-col p-8 gap-8 relative z-10">
                   <div className="flex items-center gap-3">
                     <div className="w-12 h-12 rounded-full bg-[#38e07b]/10 flex items-center justify-center">
                       <TrendingUp className="w-6 h-6 text-[#38e07b]" />
-                    </div>
+                  </div>
                     <h3 className="text-2xl font-bold text-white">Результаты за 2 года</h3>
                   </div>
                   
@@ -891,7 +893,7 @@ export default function LandingPage() {
                       <div className="flex items-baseline gap-2">
                         <span className="text-5xl font-black text-[#38e07b]">155</span>
                         <span className="text-xl text-white font-bold">баллов</span>
-                      </div>
+                </div>
                       <p className="text-[#9eb7a8] text-sm leading-relaxed">
                         средний балл NUET наших учеников
                       </p>
@@ -903,11 +905,11 @@ export default function LandingPage() {
                       <div className="flex items-baseline gap-2">
                         <span className="text-5xl font-black text-white">217</span>
                         <span className="text-xl text-[#9eb7a8] font-medium">учеников</span>
-                      </div>
+                    </div>
                       <p className="text-[#9eb7a8] text-sm leading-relaxed">
                         поступили в НУ за последние 2 года
                       </p>
-                    </div>
+                  </div>
                   </div>
                 </div>
               </div>
@@ -915,7 +917,7 @@ export default function LandingPage() {
               <div className="bg-[#38e07b] rounded-lg p-8 flex flex-col sm:flex-row items-center justify-between gap-6 shadow-lg shadow-[#38e07b]/20">
                 <div className="flex flex-col gap-1 text-center sm:text-left">
                   <span className="text-[#111714] font-bold text-lg leading-tight">Готов начать подготовку?</span>
-                  <span className="text-[#111714]/80 text-sm font-medium">Присоединяйся к курсу сегодня.</span>
+                  <span className="text-[#111714]/80 text-sm font-medium">Сдай бесплатный mock уже сегодня</span>
                 </div>
                 <Button
                   asChild
@@ -940,7 +942,7 @@ export default function LandingPage() {
               </div>
               <h2 className="text-white text-3xl md:text-5xl font-extrabold leading-tight tracking-tight">
                 Что говорят наши <span className="text-[#38e07b]">студенты</span>
-              </h2>
+            </h2>
               <p className="text-[#9eb7a8] text-lg font-normal leading-relaxed">
                 Реальные отзывы от студентов, которые поступили в Назарбаев Университет
               </p>
@@ -956,7 +958,7 @@ export default function LandingPage() {
                     ))}
                   </div>
                   <p className="text-[#9eb7a8] text-sm leading-relaxed">
-                    &quot;Курс помог мне систематизировать подготовку. Особенно полезными были пробные тесты в формате NUET. 
+                    &quot;Курс помог мне систематизировать подготовку. Особенно полезными были пробные Mock тесты в формате NUET. 
                     Набрал 162 балла и поступил на грант в Foundation.&quot;
                   </p>
                   <div className="flex items-center gap-3 pt-4 border-t border-[#29382f]">
@@ -979,7 +981,7 @@ export default function LandingPage() {
                   </div>
                   <p className="text-[#9eb7a8] text-sm leading-relaxed">
                     &quot;Преподаватели объясняют очень понятно, разбирают каждую ошибку. Математика стала моей сильной стороной. 
-                    Результат: 158 баллов, поступил на бакалавриат.&quot;
+                    Результат: 158 баллов, поступил на Фаунд.&quot;
                   </p>
                   <div className="flex items-center gap-3 pt-4 border-t border-[#29382f]">
                     <div className="size-10 rounded-full bg-gradient-to-br from-blue-500 to-blue-700 shrink-0"></div>
@@ -1093,9 +1095,13 @@ export default function LandingPage() {
             <h2 className="text-white text-3xl md:text-5xl font-black mb-6 leading-tight">
               Выбери свой план подготовки
             </h2>
-            <p className="text-[#9eb7a8] text-lg max-w-[600px] mx-auto">
+            <p className="text-[#9eb7a8] text-lg max-w-[600px] mx-auto mb-4">
               Гибкие варианты обучения с максимальной выгодой
             </p>
+            <div className="flex items-center justify-center gap-2 text-[#38e07b]">
+              <Clock className="w-5 h-5" />
+              <span className="text-base font-semibold">Длительность: 6 недель</span>
+            </div>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-[900px] mx-auto">
@@ -1104,6 +1110,10 @@ export default function LandingPage() {
               <CardContent className="p-8">
                 <div className="text-center mb-6">
                   <h3 className="text-2xl font-bold text-white mb-2">1 предмет</h3>
+                  <div className="flex items-center justify-center gap-2 mb-3">
+                    <Clock className="w-4 h-4 text-[#9eb7a8]" />
+                    <span className="text-sm text-[#9eb7a8]">Длительность: 6 недель</span>
+                  </div>
                   <div className="flex items-baseline justify-center gap-2 mb-4">
                     <span className="text-4xl font-black text-[#38e07b]">23 000</span>
                     <span className="text-xl text-[#9eb7a8]">₸</span>
@@ -1133,12 +1143,12 @@ export default function LandingPage() {
                     <span className="text-[#d0e0d8] text-sm">Еженедельные мок тесты</span>
                   </li>
                 </ul>
-                <Button
+                  <Button
                   asChild
                   className="w-full bg-[#38e07b] hover:bg-[#2bc768] text-[#111714] font-bold h-12 rounded-full"
-                >
+                  >
                   <a href="#lead-form">Выбрать план</a>
-                </Button>
+                  </Button>
               </CardContent>
             </Card>
 
@@ -1152,6 +1162,10 @@ export default function LandingPage() {
               <CardContent className="p-8 pt-12">
                 <div className="text-center mb-6">
                   <h3 className="text-2xl font-bold text-white mb-2">2 предмета</h3>
+                  <div className="flex items-center justify-center gap-2 mb-3">
+                    <Clock className="w-4 h-4 text-[#9eb7a8]" />
+                    <span className="text-sm text-[#9eb7a8]">Длительность: 6 недель</span>
+                  </div>
                   <div className="flex items-baseline justify-center gap-2 mb-4">
                     <span className="text-4xl font-black text-[#38e07b]">35 900</span>
                     <span className="text-xl text-[#9eb7a8]">₸</span>
@@ -1185,12 +1199,12 @@ export default function LandingPage() {
                     <span className="text-[#d0e0d8] text-sm font-semibold">Максимальная экономия</span>
                   </li>
                 </ul>
-                <Button
+                  <Button
                   asChild
                   className="w-full bg-[#38e07b] hover:bg-[#2bc768] text-[#111714] font-bold h-12 rounded-full"
                 >
                   <a href="#lead-form">Выбрать план</a>
-                </Button>
+                  </Button>
               </CardContent>
             </Card>
           </div>
@@ -1211,7 +1225,7 @@ export default function LandingPage() {
                   <span className="text-[#38e07b] text-xs font-bold uppercase tracking-wide">Бесплатный доступ</span>
                 </div>
                 <h2 className="text-white tracking-tight text-4xl sm:text-5xl font-black leading-[1.1]">
-                  Сдай Mock test из реальных задач прошлого NUET и получи пробный доступ к платформе бесплатно
+                  Сдай Mock тест состоящих из задач прошлых лет NUET и получи пробный доступ к платформе
                 </h2>
                 <p className="text-gray-300 text-lg font-normal leading-relaxed max-w-[600px]">
                   Получи доступ к пробному мини-курсу на нашей платформе и оцени формат обучения перед покупкой полного курса.
@@ -1284,6 +1298,11 @@ export default function LandingPage() {
                     <span>Получить доступ к пробному курсу</span>
                     <ArrowRight className="w-5 h-5" />
                   </Button>
+
+                  {/* Consent Text */}
+                  <p className="text-center mt-3 text-xs text-[#9eb7a8] leading-relaxed opacity-75">
+                    Нажимая &quot;Отправить&quot;, вы соглашаетесь на обработку персональных данных.
+                  </p>
 
                   {/* Microtext */}
                   <div className="text-center mt-2 px-2">
