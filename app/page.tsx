@@ -61,13 +61,6 @@ export default function LandingPage() {
     }
   }, [isLoaded, isSignedIn, router])
 
-  const scrollToSection = (id: string) => {
-    const element = document.getElementById(id)
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" })
-      setMobileMenuOpen(false)
-    }
-  }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -136,36 +129,36 @@ export default function LandingPage() {
             </div>
 
             <div className="hidden lg:flex items-center gap-4 flex-shrink-0">
-              <button
-                onClick={() => scrollToSection("about")}
+              <a
+                href="#about"
                 className="text-white text-xs font-medium hover:text-[#38e07b] transition-colors whitespace-nowrap"
               >
                 О NUET
-              </button>
-              <button
-                onClick={() => scrollToSection("benefits")}
+              </a>
+              <a
+                href="#benefits"
                 className="text-white text-xs font-medium hover:text-[#38e07b] transition-colors whitespace-nowrap"
               >
                 Преимущества
-              </button>
-              <button
-                onClick={() => scrollToSection("program")}
+              </a>
+              <a
+                href="#program"
                 className="text-white text-xs font-medium hover:text-[#38e07b] transition-colors whitespace-nowrap"
               >
                 Программа
-              </button>
-              <button
-                onClick={() => scrollToSection("teachers")}
+              </a>
+              <a
+                href="#teachers"
                 className="text-white text-xs font-medium hover:text-[#38e07b] transition-colors whitespace-nowrap"
               >
                 Преподаватели
-              </button>
-              <button
-                onClick={() => scrollToSection("reviews")}
+              </a>
+              <a
+                href="#reviews"
                 className="text-white text-xs font-medium hover:text-[#38e07b] transition-colors whitespace-nowrap"
               >
                 Отзывы
-              </button>
+              </a>
               <Button
                 size="sm"
                 variant="ghost"
@@ -190,48 +183,55 @@ export default function LandingPage() {
 
           {mobileMenuOpen && (
             <div className="md:hidden py-4 space-y-3">
-              <button
-                onClick={() => scrollToSection("about")}
+              <a
+                href="#about"
                 className="block w-full text-left py-2 text-white hover:text-[#38e07b]"
+                onClick={() => setMobileMenuOpen(false)}
               >
                 О NUET
-              </button>
-              <button
-                onClick={() => scrollToSection("benefits")}
+              </a>
+              <a
+                href="#benefits"
                 className="block w-full text-left py-2 text-white hover:text-[#38e07b]"
+                onClick={() => setMobileMenuOpen(false)}
               >
                 Преимущества
-              </button>
-              <button
-                onClick={() => scrollToSection("program")}
+              </a>
+              <a
+                href="#program"
                 className="block w-full text-left py-2 text-white hover:text-[#38e07b]"
+                onClick={() => setMobileMenuOpen(false)}
               >
                 Программа
-              </button>
-              <button
-                onClick={() => scrollToSection("format")}
+              </a>
+              <a
+                href="#format"
                 className="block w-full text-left py-2 text-white hover:text-[#38e07b]"
+                onClick={() => setMobileMenuOpen(false)}
               >
                 Формат
-              </button>
-              <button
-                onClick={() => scrollToSection("teachers")}
+              </a>
+              <a
+                href="#teachers"
                 className="block w-full text-left py-2 text-white hover:text-[#38e07b]"
+                onClick={() => setMobileMenuOpen(false)}
               >
                 Преподаватели
-              </button>
-              <button
-                onClick={() => scrollToSection("reviews")}
+              </a>
+              <a
+                href="#reviews"
                 className="block w-full text-left py-2 text-white hover:text-[#38e07b]"
+                onClick={() => setMobileMenuOpen(false)}
               >
                 Отзывы
-              </button>
-              <button
-                onClick={() => scrollToSection("trial")}
+              </a>
+              <a
+                href="#trial"
                 className="block w-full text-left py-2 text-white hover:text-[#38e07b]"
+                onClick={() => setMobileMenuOpen(false)}
               >
                 Пробный урок
-              </button>
+              </a>
               <Button
                 className="w-full bg-white/10 hover:bg-white/20 text-white font-medium rounded-full mt-2 border border-white/20"
                 onClick={() => router.push("/sign-up")}
@@ -249,7 +249,7 @@ export default function LandingPage() {
         </div>
       </nav>
 
-      <section className="py-12 lg:py-20 bg-[#111714] relative">
+      <section id="hero" className="py-12 lg:py-20 bg-[#111714] relative">
         <div className="container mx-auto px-4 max-w-7xl">
           <div className="grid gap-12 lg:grid-cols-2 lg:gap-8 items-center">
             <div className="flex flex-col gap-8 text-left">
@@ -296,10 +296,10 @@ export default function LandingPage() {
 
               <div className="flex flex-col gap-3 pt-2 w-full max-w-xl">
                 <Button
+                  asChild
                   className="flex h-14 w-full items-center justify-center rounded-full bg-[#38e07b] px-8 text-base font-bold text-[#111714] shadow-[0_0_20px_rgba(56,224,123,0.3)] hover:bg-[#2bc768] hover:shadow-[0_0_25px_rgba(56,224,123,0.4)] transition-all hover:scale-[1.02] active:scale-[0.98]"
-                  onClick={() => scrollToSection("trial")}
                 >
-                  Получить доступ к пробному курсу
+                  <a href="#lead-form">Получить доступ к пробному курсу</a>
                 </Button>
                 <div className="flex items-center justify-center gap-2 text-center sm:justify-start">
                   <CheckCircle2 className="w-4 h-4 text-slate-500" />
@@ -400,75 +400,44 @@ export default function LandingPage() {
                 </CardContent>
               </Card>
             </div>
+          </div>
+        </div>
+      </section>
 
-            <div className="flex flex-col lg:flex-row gap-8 items-stretch mb-8">
-              <div className="flex-1 bg-[#1c2620] rounded-2xl border border-[#29382f] p-8 flex flex-col justify-center">
-                <h3 className="text-white text-2xl font-bold mb-6">Ключевые навыки для успеха</h3>
-                <div className="flex flex-wrap gap-3">
-                  <div className="flex items-center gap-3 bg-[#29382f]/50 rounded-full pl-3 pr-5 py-2 border border-transparent hover:border-[#38e07b]/30 transition-colors">
-                    <div className="bg-[#38e07b]/20 text-[#38e07b] p-1.5 rounded-full flex items-center justify-center">
-                      <CheckCircle2 className="w-4 h-4" />
-                    </div>
-                    <span className="text-white text-sm font-medium">Быстрый разбор условий</span>
-                  </div>
-                  <div className="flex items-center gap-3 bg-[#29382f]/50 rounded-full pl-3 pr-5 py-2 border border-transparent hover:border-[#38e07b]/30 transition-colors">
-                    <div className="bg-[#38e07b]/20 text-[#38e07b] p-1.5 rounded-full flex items-center justify-center">
-                      <BarChart3 className="w-4 h-4" />
-                    </div>
-                    <span className="text-white text-sm font-medium">Работа с таблицами и графиками</span>
-                  </div>
-                  <div className="flex items-center gap-3 bg-[#29382f]/50 rounded-full pl-3 pr-5 py-2 border border-transparent hover:border-[#38e07b]/30 transition-colors">
-                    <div className="bg-[#38e07b]/20 text-[#38e07b] p-1.5 rounded-full flex items-center justify-center">
-                      <FileText className="w-4 h-4" />
-                    </div>
-                    <span className="text-white text-sm font-medium">Анализ сложных текстов</span>
-                  </div>
-                  <div className="flex items-center gap-3 bg-[#29382f]/50 rounded-full pl-3 pr-5 py-2 border border-transparent hover:border-[#38e07b]/30 transition-colors">
-                    <div className="bg-[#38e07b]/20 text-[#38e07b] p-1.5 rounded-full flex items-center justify-center">
-                      <Clock className="w-4 h-4" />
-                    </div>
-                    <span className="text-white text-sm font-medium">Управление временем</span>
-                  </div>
-                </div>
-                <p className="text-[#9eb7a8] text-sm mt-6">
-                  Мы научим вас не просто &quot;решать задачи&quot;, а делать это максимально эффективно, чтобы уложиться в лимит времени.
+      <section id="trial" className="py-20 bg-[#38e07b]/5">
+        <div className="container mx-auto px-4 max-w-[1200px]">
+          <div className="max-w-2xl mx-auto text-center">
+            <h2 className="text-3xl md:text-5xl font-black mb-4 text-[#111714]">
+              пройти бесплатный NUET мок тест на платформе
+            </h2>
+            <p className="text-[#63756c] mb-8 text-lg">
+              Пройди пробный тест в формате NUET и узнай свой текущий уровень перед началом обучения.
+            </p>
+            <Card className="border border-[#e6e8e7]">
+              <CardContent className="p-8 flex flex-col items-center gap-4">
+                <p className="text-sm text-[#63756c] max-w-md">
+                  Тест бесплатный и доступен сразу после регистрации. Это отличный способ познакомиться с форматом
+                  экзамена и нашей платформой.
                 </p>
-              </div>
-
-              <div className="flex-1 min-h-[300px] lg:min-h-0 relative rounded-2xl overflow-hidden group bg-[#1c2620] border border-[#29382f] flex items-center justify-center">
-                <div className="absolute inset-0 bg-gradient-to-t from-[#111714] via-transparent to-transparent z-10 opacity-60"></div>
-                <Brain className="w-32 h-32 text-[#38e07b]/20" />
-                <div className="absolute bottom-6 left-6 z-20 max-w-[80%]">
-                  <div className="bg-[#38e07b]/90 text-[#111714] text-xs font-extrabold px-3 py-1 rounded-full w-fit mb-2">ВАЖНО ПОМНИТЬ</div>
-                  <p className="text-white text-lg font-bold leading-tight drop-shadow-lg">Подготовка — это 80% успеха на экзамене.</p>
-                </div>
-              </div>
-            </div>
-
-            <div className="relative overflow-hidden rounded-2xl bg-[#1c2620] border border-[#38e07b]/30 p-1">
-              <div className="absolute -right-20 -top-20 w-64 h-64 bg-[#38e07b]/5 rounded-full blur-3xl"></div>
-              <div className="absolute -left-20 -bottom-20 w-64 h-64 bg-[#38e07b]/5 rounded-full blur-3xl"></div>
-              <div className="relative flex flex-col md:flex-row items-center justify-between gap-6 bg-[#1c2620]/50 backdrop-blur-sm p-6 md:p-8 rounded-xl">
-                <div className="flex flex-col gap-2 flex-1">
-                  <div className="flex items-center gap-3 text-white mb-1">
-                    <Target className="w-6 h-6 text-[#38e07b]" />
-                    <h4 className="text-xl font-bold">Цена ошибки высока</h4>
-                  </div>
-                  <p className="text-[#9eb7a8] text-sm md:text-base leading-relaxed">
-                    Результаты экзамена будут доступны только через <span className="text-white font-bold">6 недель</span>. Помните: <span className="text-white font-bold">второй попытки сдать экзамен в ближайшее время не будет</span>. У вас есть только один шанс показать свой максимум.
-                  </p>
-                </div>
-                <div className="shrink-0 w-full md:w-auto">
+                <div className="flex flex-col sm:flex-row gap-3 mt-2">
                   <Button
-                    className="w-full md:w-auto bg-[#38e07b] hover:bg-[#32c96e] text-[#111714] font-bold rounded-full px-8 py-6 transition-all transform hover:scale-105 shadow-[0_0_15px_rgba(56,224,123,0.3)]"
-                    onClick={() => scrollToSection("trial")}
+                    asChild
+                    type="button"
+                    className="bg-[#38e07b] hover:bg-[#2bc768] text-[#111714] font-bold px-8 h-12 rounded-full"
                   >
-                    <span>Начать подготовку сейчас</span>
-                    <ArrowRight className="ml-2 w-5 h-5" />
+                    <a href="#lead-form">Пройти бесплатный NUET-тест</a>
+                  </Button>
+                  <Button
+                    type="button"
+                    variant="outline"
+                    className="border-[#111714] text-[#111714] hover:bg-[#111714] hover:text-white px-8 h-12 rounded-full"
+                    onClick={() => router.push("/sign-up")}
+                  >
+                    Зарегистрироваться
                   </Button>
                 </div>
-              </div>
-            </div>
+              </CardContent>
+            </Card>
           </div>
         </div>
       </section>
@@ -478,111 +447,6 @@ export default function LandingPage() {
         <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none z-0">
           <div className="absolute top-[-10%] right-[-5%] w-[500px] h-[500px] bg-[#38e07b]/5 rounded-full blur-[120px]"></div>
           <div className="absolute bottom-[-10%] left-[-5%] w-[400px] h-[400px] bg-[#38e07b]/5 rounded-full blur-[100px]"></div>
-        </div>
-
-        <div className="relative z-10 w-full max-w-[1120px] mx-auto flex flex-col gap-12">
-          <div className="flex flex-col items-center text-center gap-4">
-            <h2 className="text-white text-3xl md:text-4xl font-extrabold tracking-tight leading-tight">
-              Что даёт тебе этот курс
-            </h2>
-            <div className="h-1 w-20 bg-[#38e07b] rounded-full"></div>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <Card className="group border border-[#3d5245] bg-[#1c2620] hover:border-[#38e07b] transition-all duration-300 hover:-translate-y-1 shadow-sm">
-              <CardContent className="p-6 flex flex-col gap-4">
-                <div className="w-12 h-12 rounded-full bg-[#38e07b]/10 flex items-center justify-center text-[#38e07b] group-hover:bg-[#38e07b] group-hover:text-[#111714] transition-colors duration-300">
-                  <BookOpen className="w-7 h-7" />
-                </div>
-                <div className="flex flex-col gap-2">
-                  <h3 className="text-white text-lg font-bold leading-tight">Полное покрытие</h3>
-                  <p className="text-[#9eb7a8] text-sm font-medium leading-relaxed">
-                    Полное покрытие тем NUET по Математике и Критическому мышлению.
-                  </p>
-                </div>
-              </CardContent>
-            </Card>
-
-            <Card className="group border border-[#3d5245] bg-[#1c2620] hover:border-[#38e07b] transition-all duration-300 hover:-translate-y-1 shadow-sm">
-              <CardContent className="p-6 flex flex-col gap-4">
-                <div className="w-12 h-12 rounded-full bg-[#38e07b]/10 flex items-center justify-center text-[#38e07b] group-hover:bg-[#38e07b] group-hover:text-[#111714] transition-colors duration-300">
-                  <TrendingUp className="w-7 h-7" />
-                </div>
-                <div className="flex flex-col gap-2">
-                  <h3 className="text-white text-lg font-bold leading-tight">Системный план</h3>
-                  <p className="text-[#9eb7a8] text-sm font-medium leading-relaxed">
-                    Системный план подготовки до даты экзамена: от простого к сложному.
-                  </p>
-                </div>
-              </CardContent>
-            </Card>
-
-            <Card className="group border border-[#3d5245] bg-[#1c2620] hover:border-[#38e07b] transition-all duration-300 hover:-translate-y-1 shadow-sm">
-              <CardContent className="p-6 flex flex-col gap-4">
-                <div className="w-12 h-12 rounded-full bg-[#38e07b]/10 flex items-center justify-center text-[#38e07b] group-hover:bg-[#38e07b] group-hover:text-[#111714] transition-colors duration-300">
-                  <Timer className="w-7 h-7" />
-                </div>
-                <div className="flex flex-col gap-2">
-                  <h3 className="text-white text-lg font-bold leading-tight">Реальная практика</h3>
-                  <p className="text-[#9eb7a8] text-sm font-medium leading-relaxed">
-                    Практику в формате NUET: задания и пробные тесты с таймером.
-                  </p>
-                </div>
-              </CardContent>
-            </Card>
-
-            <Card className="group border border-[#3d5245] bg-[#1c2620] hover:border-[#38e07b] transition-all duration-300 hover:-translate-y-1 shadow-sm">
-              <CardContent className="p-6 flex flex-col gap-4">
-                <div className="w-12 h-12 rounded-full bg-[#38e07b]/10 flex items-center justify-center text-[#38e07b] group-hover:bg-[#38e07b] group-hover:text-[#111714] transition-colors duration-300">
-                  <Lightbulb className="w-7 h-7" />
-                </div>
-                <div className="flex flex-col gap-2">
-                  <h3 className="text-white text-lg font-bold leading-tight">Разбор ошибок</h3>
-                  <p className="text-[#9eb7a8] text-sm font-medium leading-relaxed">
-                    Разбор ошибок: ты понимаешь не только «какой ответ», но и «почему так».
-                  </p>
-                </div>
-              </CardContent>
-            </Card>
-
-            <Card className="group border border-[#3d5245] bg-[#1c2620] hover:border-[#38e07b] transition-all duration-300 hover:-translate-y-1 shadow-sm">
-              <CardContent className="p-6 flex flex-col gap-4">
-                <div className="w-12 h-12 rounded-full bg-[#38e07b]/10 flex items-center justify-center text-[#38e07b] group-hover:bg-[#38e07b] group-hover:text-[#111714] transition-colors duration-300">
-                  <HeadphonesIcon className="w-7 h-7" />
-                </div>
-                <div className="flex flex-col gap-2">
-                  <h3 className="text-white text-lg font-bold leading-tight">Поддержка</h3>
-                  <p className="text-[#9eb7a8] text-sm font-medium leading-relaxed">
-                    Поддержка преподавателей: можно задать вопрос по непонятной задаче.
-                  </p>
-                </div>
-              </CardContent>
-            </Card>
-
-            <Card className="group border border-[#3d5245] bg-[#1c2620] hover:border-[#38e07b] transition-all duration-300 hover:-translate-y-1 shadow-sm">
-              <CardContent className="p-6 flex flex-col gap-4">
-                <div className="w-12 h-12 rounded-full bg-[#38e07b]/10 flex items-center justify-center text-[#38e07b] group-hover:bg-[#38e07b] group-hover:text-[#111714] transition-colors duration-300">
-                  <BarChart3 className="w-7 h-7" />
-                </div>
-                <div className="flex flex-col gap-2">
-                  <h3 className="text-white text-lg font-bold leading-tight">Удобная платформа</h3>
-                  <p className="text-[#9eb7a8] text-sm font-medium leading-relaxed">
-                    Удобную платформу, где видно прогресс, сильные и слабые темы.
-                  </p>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
-
-          <div className="flex justify-center pt-8">
-            <Button
-              className="flex items-center justify-center gap-3 h-14 px-8 bg-[#38e07b] hover:bg-[#38e07b]/90 text-[#111714] rounded-full transition-transform active:scale-95 shadow-lg shadow-[#38e07b]/25 group"
-              onClick={() => scrollToSection("format")}
-            >
-              <Play className="w-6 h-6" />
-              <span className="text-base font-bold tracking-wide">Посмотреть, как это работает на платформе</span>
-            </Button>
-          </div>
         </div>
       </section>
 
@@ -937,11 +801,13 @@ export default function LandingPage() {
 
           <div className="mt-16 text-center">
             <Button
+              asChild
               className="inline-flex items-center gap-2 bg-[#38e07b] hover:bg-[#2bc466] text-[#111714] font-bold py-4 px-8 rounded-full transition-colors duration-200"
-              onClick={() => scrollToSection("trial")}
             >
-              <span>Записаться на пробный урок</span>
-              <ArrowRight className="w-5 h-5" />
+              <a href="#lead-form">
+                <span>Записаться на пробный урок</span>
+                <ArrowRight className="w-5 h-5" />
+              </a>
             </Button>
             <p className="mt-4 text-xs text-[#9eb7a8] uppercase tracking-widest font-medium">Бесплатная консультация</p>
           </div>
@@ -949,7 +815,7 @@ export default function LandingPage() {
       </section>
 
       {/* Results & Goals Section */}
-      <section className="relative py-20 px-4 sm:px-6 lg:px-8 bg-[#122017] overflow-hidden">
+      <section id="results" className="relative py-20 px-4 sm:px-6 lg:px-8 bg-[#122017] overflow-hidden">
         <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-[#38e07b]/5 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/2 pointer-events-none"></div>
 
         <div className="max-w-6xl mx-auto flex flex-col gap-12 relative z-10">
@@ -1052,10 +918,10 @@ export default function LandingPage() {
                   <span className="text-[#111714]/80 text-sm font-medium">Присоединяйся к курсу сегодня.</span>
                 </div>
                 <Button
+                  asChild
                   className="bg-[#111714] hover:bg-black text-white font-bold py-3 px-6 rounded-full transition-colors whitespace-nowrap shadow-md"
-                  onClick={() => scrollToSection("trial")}
                 >
-                  Начать сейчас
+                  <a href="#lead-form">Начать сейчас</a>
                 </Button>
               </div>
             </div>
@@ -1217,53 +1083,13 @@ export default function LandingPage() {
         </div>
       </section>
 
-      <section id="trial" className="py-20 bg-[#38e07b]/5">
-        <div className="container mx-auto px-4 max-w-[1200px]">
-          <div className="max-w-2xl mx-auto text-center">
-            <h2 className="text-3xl md:text-5xl font-black mb-4 text-[#111714]">
-              пройти бесплатный NUET мок тест на платформе
-            </h2>
-            <p className="text-[#63756c] mb-8 text-lg">
-              Пройди пробный тест в формате NUET и узнай свой текущий уровень перед началом обучения.
-            </p>
-            <Card className="border border-[#e6e8e7]">
-              <CardContent className="p-8 flex flex-col items-center gap-4">
-                <p className="text-sm text-[#63756c] max-w-md">
-                  Тест бесплатный и доступен сразу после регистрации. Это отличный способ познакомиться с форматом
-                  экзамена и нашей платформой.
-                </p>
-                <div className="flex flex-col sm:flex-row gap-3 mt-2">
-                  <Button
-                    type="button"
-                    className="bg-[#38e07b] hover:bg-[#2bc768] text-[#111714] font-bold px-8 h-12 rounded-full"
-                    onClick={() => router.push("/free-quiz")}
-                  >
-                    Пройти бесплатный NUET-тест
-                  </Button>
-                  <Button
-                    type="button"
-                    variant="outline"
-                    className="border-[#111714] text-[#111714] hover:bg-[#111714] hover:text-white px-8 h-12 rounded-full"
-                    onClick={() => router.push("/sign-up")}
-                  >
-                    Зарегистрироваться
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
-      </section>
-
-      {/* Lead Form Section */}
-      <section className="py-20 bg-[#111714] relative">
+      <section id="lead-form" className="py-20 bg-[#111714] relative">
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           <div className="absolute top-20 right-[-10%] w-[500px] h-[500px] rounded-full bg-[#38e07b]/5 blur-[100px]"></div>
           <div className="absolute bottom-0 left-[-10%] w-[600px] h-[600px] rounded-full bg-[#38e07b]/5 blur-[120px]"></div>
         </div>
         <div className="container mx-auto px-4 max-w-[1200px] relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-            {/* Left Column: Content */}
             <div className="flex flex-col gap-8">
               <div className="flex flex-col gap-6">
                 <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#38e07b]/10 border border-[#38e07b]/20 w-fit">
@@ -1279,7 +1105,6 @@ export default function LandingPage() {
               </div>
             </div>
 
-            {/* Right Column: Form */}
             <div className="relative w-full max-w-[480px] mx-auto lg:ml-auto">
               <div className="relative bg-[#1c2620]/90 backdrop-blur-sm rounded-2xl p-6 sm:p-8 shadow-2xl border border-[#3d5245]/50">
                 <div className="mb-8">
@@ -1287,7 +1112,6 @@ export default function LandingPage() {
                   <p className="text-[#9eb7a8] text-sm">Введите свои данные, чтобы начать обучение прямо сейчас.</p>
                 </div>
                 <form onSubmit={handleSubmit} className="flex flex-col gap-5">
-                  {/* Name Field */}
                   <div className="space-y-2">
                     <Label htmlFor="name" className="text-white text-sm font-medium pl-2">Имя</Label>
                     <div className="relative">
