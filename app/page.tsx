@@ -266,7 +266,7 @@ export default function LandingPage() {
         </div>
       </nav>
 
-      <section id="hero" className="py-12 lg:py-20 bg-[#111714] relative">
+      <section id="hero" className="py-6 lg:py-12 bg-[#111714] relative">
         <div className="container mx-auto px-4 max-w-7xl">
           <div className="grid gap-12 lg:grid-cols-2 lg:gap-8 items-center">
             <div className="flex flex-col gap-8 text-left">
@@ -277,7 +277,7 @@ export default function LandingPage() {
                 </div>
                 <div className="inline-flex w-fit items-center gap-2 rounded-full border border-red-500/30 bg-red-500/10 px-3 py-1">
                   <span className="flex h-2 w-2 rounded-full bg-red-500 animate-pulse"></span>
-                  <span className="text-xs font-medium uppercase tracking-wide text-red-500">подготовься за 6 недель</span>
+                  <span className="text-xs font-medium uppercase tracking-wide text-red-500">подготовься за 4 недели</span>
                 </div>
               </div>
 
@@ -287,7 +287,7 @@ export default function LandingPage() {
                   Онлайн-марафон <span className="text-[#38e07b]">NUET</span> где мы закрепим <span className="text-[#38e07b]">все важные</span> темы
                 </h1>
                 <p className="text-lg text-slate-400 leading-relaxed max-w-xl">
-                  6-недельный онлайн марафон по подготовке к NUET. Видеоуроки на собственной платформе, домашние задания в формате экзамена и преподаватели с высокими баллами и 3+ годами опыта  </p>
+                  4-недельный онлайн марафон по подготовке к NUET. Видеоуроки на собственной платформе, домашние задания в формате экзамена и преподаватели с высокими баллами и 3+ годами опыта  </p>
               </div>
 
               <div className="flex flex-col gap-3">
@@ -316,14 +316,8 @@ export default function LandingPage() {
                   asChild
                   className="flex h-14 w-full items-center justify-center rounded-full bg-[#38e07b] px-8 text-base font-bold text-[#111714] shadow-[0_0_20px_rgba(56,224,123,0.3)] hover:bg-[#2bc768] hover:shadow-[0_0_25px_rgba(56,224,123,0.4)] transition-all hover:scale-[1.02] active:scale-[0.98]"
                 >
-                  <a href="#lead-form">Получить доступ к пробному курсу</a>
+                  <a href="#lead-form">Получить доступ к платформе</a>
                 </Button>
-                <div className="flex items-center justify-center gap-2 text-center sm:justify-start">
-                  <CheckCircle2 className="w-4 h-4 text-slate-500" />
-                  <p className="text-xs text-slate-500 font-medium">
-                    Бесплатный доступ к урокам и заданиям в формате NUET на нашей платформе
-                  </p>
-                </div>
               </div>
 
             </div>
@@ -364,16 +358,16 @@ export default function LandingPage() {
       </section>
 
       {/* Reviews Section */}
-      <section id="reviews" className="py-8 sm:py-12 md:py-16 bg-[#111714]">
+      <section id="reviews" className="py-6 md:py-12 bg-[#111714]">
         <div className="container mx-auto px-2 sm:px-4 lg:px-10 max-w-[1280px]">
           <div className="flex flex-col gap-6 md:gap-8">
             <div className="flex flex-col items-center gap-4 text-center max-w-3xl mx-auto px-2">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#38e07b]/10 border border-[#38e07b]/20">
                 <Award className="w-4 h-4 text-[#38e07b]" />
-                <span className="text-[#38e07b] text-xs font-bold uppercase tracking-wide">Результаты студентов</span>
+                <span className="text-[#38e07b] text-xs font-bold uppercase tracking-wide">Кейсы студентов</span>
               </div>
               <h2 className="text-white text-2xl sm:text-3xl md:text-5xl font-extrabold leading-tight tracking-tight">
-               Результаты наших студентов
+               Результаты наших студентов после прохождения нашего марафона
             </h2>
               <p className="text-[#9eb7a8] text-base md:text-lg font-normal leading-relaxed">
                 Посмотрите на реальные результаты студентов, которые прошли наш курс подготовки
@@ -485,14 +479,14 @@ export default function LandingPage() {
         </div>
       </section>
 
-      <section id="program" className="py-8 sm:py-12 md:py-16 bg-[#111714]">
+      <section id="program" className="py-6 md:py-12 bg-[#111714]">
         <div className="container mx-auto px-4 sm:px-8 max-w-[1200px]">
           <div className="flex flex-col gap-4 text-center mb-10 sm:mb-12">
             <h1 className="text-white tracking-tight text-4xl sm:text-5xl font-black leading-[1.1]">
-              Программа подготовки к <span className="text-[#38e07b]">NUET</span>
+              Программа Марафона 
             </h1>
             <p className="text-[#9eb7a8] text-lg sm:text-xl font-normal leading-relaxed max-w-[800px] mx-auto">
-              Закрываем ключевые темы по Математике и Критическому мышлению, которые проверяет NUET
+              за 4 недели мы пройдем все важные темы и закрепим их на практике
             </p>
           </div>
 
@@ -538,10 +532,6 @@ export default function LandingPage() {
                     <CheckCircle2 className="text-[#38e07b] w-5 h-5 mt-0.5 shrink-0" />
                     <span className="text-[#d0e0d8] text-base leading-snug">Повтор по геометрии (NUET)</span>
                   </li>
-                  <li className="flex items-start gap-3 bg-white/5 p-3 rounded-lg border border-white/5 mt-2">
-                    <Star className="text-[#38e07b] w-5 h-5 mt-0.5 shrink-0" />
-                    <span className="text-white font-medium text-base leading-snug">Разбор тем по запросу</span>
-                  </li>
                 </ul>
               </CardContent>
             </Card>
@@ -583,10 +573,6 @@ export default function LandingPage() {
                     <CheckCircle2 className="text-[#38e07b] w-5 h-5 mt-0.5 shrink-0" />
                     <span className="text-[#d0e0d8] text-base leading-snug">Тайм-менеджмент под задачи</span>
                   </li>
-                  <li className="flex items-start gap-3 bg-white/5 p-3 rounded-lg border border-white/5 mt-2">
-                    <Brain className="text-[#38e07b] w-5 h-5 mt-0.5 shrink-0" />
-                    <span className="text-white font-medium text-base leading-snug">Пространственное мышление</span>
-                  </li>
                 </ul>
               </CardContent>
             </Card>
@@ -595,17 +581,17 @@ export default function LandingPage() {
       </section>
 
       {/* Learning Format Section */}
-      <section id="format" className="py-8 sm:py-12 md:py-16 bg-[#111714]">
+      <section id="format" className="py-6 md:py-12 bg-[#111714]">
         <div className="container mx-auto px-4 md:px-8 lg:px-20 max-w-[1200px]">
           <div className="text-center mb-10 sm:mb-12">
             <div className="inline-flex items-center justify-center rounded-full bg-[#38e07b]/10 px-4 py-1.5 mb-4">
               <span className="text-[#38e07b] text-sm font-bold uppercase tracking-wider">Как это работает</span>
             </div>
             <h2 className="text-white text-3xl md:text-5xl font-black mb-6 leading-tight tracking-[-0.02em]">
-              Как проходит обучение
+              Про формат Обучения
             </h2>
             <p className="text-[#9eb7a8] text-lg font-normal leading-relaxed max-w-[600px] mx-auto">
-              Всё обучение проходит онлайн на нашей образовательной платформе
+              Видеоуроки на платформе, Office hours и очень много практики!
             </p>
           </div>
 
@@ -615,7 +601,7 @@ export default function LandingPage() {
                 <div className="flex items-center justify-center w-14 h-14 rounded-full bg-[#38e07b]/10 text-[#38e07b] mb-6 group-hover:bg-[#38e07b] group-hover:text-[#122017] transition-colors duration-300">
                   <Play className="w-8 h-8" />
                 </div>
-                <h3 className="text-white text-xl font-bold leading-tight mb-3">Видеоуроки по темам NUET</h3>
+                <h3 className="text-white text-xl font-bold leading-tight mb-3">Видеоуроки по темам NUET на образовательной платформе</h3>
                 <p className="text-[#9eb7a8] text-sm leading-relaxed">
                   Подробные видео-разборы тем по математике и критическому мышлению, упрощающие сложные концепции.
                 </p>
@@ -629,7 +615,7 @@ export default function LandingPage() {
                 </div>
                 <h3 className="text-white text-xl font-bold leading-tight mb-3">Домашние задания</h3>
                 <p className="text-[#9eb7a8] text-sm leading-relaxed">
-                  Практические задачи после каждого модуля для закрепления материала и обеспечения усвоения.
+                  Практические домашние задания после каждого видеоурока под видеоуроками на платформе
                 </p>
               </CardContent>
             </Card>
@@ -641,7 +627,7 @@ export default function LandingPage() {
                 </div>
                 <h3 className="text-white text-xl font-bold leading-tight mb-3">Пробные тесты</h3>
                 <p className="text-[#9eb7a8] text-sm leading-relaxed">
-                  Полноформатные симуляции с реальным таймером для развития выносливости и навыков управления временем.
+                  Мок тесты после каждой недели с обратной связью от преподавателей
                 </p>
               </CardContent>
             </Card>
@@ -651,9 +637,9 @@ export default function LandingPage() {
                 <div className="flex items-center justify-center w-14 h-14 rounded-full bg-[#38e07b]/10 text-[#38e07b] mb-6 group-hover:bg-[#38e07b] group-hover:text-[#122017] transition-colors duration-300">
                   <HeadphonesIcon className="w-8 h-8" />
                 </div>
-                <h3 className="text-white text-xl font-bold leading-tight mb-3">Поддержка преподавателей</h3>
+                <h3 className="text-white text-xl font-bold leading-tight mb-3">Office Hours</h3>
                 <p className="text-[#9eb7a8] text-sm leading-relaxed">
-                  Прямой доступ к экспертам-преподавателям для вопросов и подробных объяснений сложных концепций.
+                  Индивидуальные консультации, разбор задач и ответы на вопросы.
                 </p>
               </CardContent>
             </Card>
@@ -693,7 +679,7 @@ export default function LandingPage() {
       </section>
 
       {/* Teachers Section */}
-      <section id="teachers" className="py-8 sm:py-12 md:py-16 bg-[#111714]">
+      <section id="teachers" className="py-6 md:py-12 bg-[#111714]">
         <div className="container mx-auto px-4 sm:px-10">
           <div className="max-w-[800px] flex flex-col items-center text-center mb-10 sm:mb-12 mx-auto">
             <h1 className="text-3xl md:text-5xl font-black leading-tight tracking-tight mb-6 text-white">
@@ -819,17 +805,16 @@ export default function LandingPage() {
               className="inline-flex items-center gap-2 bg-[#38e07b] hover:bg-[#2bc466] text-[#111714] font-bold py-4 px-8 rounded-full transition-colors duration-200"
             >
               <a href="#lead-form">
-              <span>Записаться на пробный урок</span>
+              <span>Получить доступ к платформе</span>
               <ArrowRight className="w-5 h-5" />
               </a>
             </Button>
-            <p className="mt-4 text-xs text-[#9eb7a8] uppercase tracking-widest font-medium">Бесплатная консультация</p>
           </div>
         </div>
       </section>
 
       {/* Results & Goals Section */}
-      <section id="results" className="relative py-8 sm:py-12 md:py-16 px-4 sm:px-6 lg:px-8 bg-[#122017] overflow-hidden">
+      <section id="results" className="relative py-6 md:py-12 px-4 sm:px-6 lg:px-8 bg-[#122017] overflow-hidden">
         <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-[#38e07b]/5 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/2 pointer-events-none"></div>
 
         <div className="max-w-6xl mx-auto flex flex-col gap-8 md:gap-10 relative z-10">
@@ -849,7 +834,7 @@ export default function LandingPage() {
                   </div>
                   <h3 className="text-2xl font-bold text-white mb-6 relative z-10">Наша миссия</h3>
                   <p className="text-lg md:text-xl text-gray-200 leading-relaxed font-medium relative z-10">
-                    Наша цель — не просто «пройти программу», а помочь тебе набрать <span className="text-[#38e07b] font-bold">конкурентный балл</span> на NUET и повысить шансы на <span className="text-white underline decoration-[#38e07b]/50 underline-offset-4 decoration-2">грант в Назарбаев Университет</span>.
+                   Наша цель сделать вашу подготовку максимально эффективной за месяц до самого экзамена и помочь вам закрепить ваши знания чтобы на самом экзамене у вас не было слабых сторон.
                   </p>
                 </CardContent>
               </Card>
@@ -871,7 +856,7 @@ export default function LandingPage() {
                   </div>
                   <div>
                     <h4 className="text-lg font-bold text-white mb-1">Формат</h4>
-                    <p className="text-[#9eb7a8]">за 6 недель ты привыкнешь к формату и улучшишь свои навыки решения задач</p>
+                    <p className="text-[#9eb7a8]">за 4 недели ты привыкнешь к формату и улучшишь свои навыки решения задач</p>
                   </div>
                 </div>
 
@@ -881,7 +866,7 @@ export default function LandingPage() {
                   </div>
                   <div>
                     <h4 className="text-lg font-bold text-white mb-1">Уверенность</h4>
-                    <p className="text-[#9eb7a8]">У нас огромная база материалов и мы успели собрать для вас похожие на реальный NUET тесты и хоумворки</p>
+                    <p className="text-[#9eb7a8]">У нас проверенная база материалов с задачами из прошлых годов экзамена, что помогает нашим ученикам набирать хорошие баллы на реальном экзамене</p>
                   </div>
                 </div>
               </div>
@@ -929,7 +914,7 @@ export default function LandingPage() {
               <div className="bg-[#38e07b] rounded-lg p-8 flex flex-col sm:flex-row items-center justify-between gap-6 shadow-lg shadow-[#38e07b]/20">
                 <div className="flex flex-col gap-1 text-center sm:text-left">
                   <span className="text-[#111714] font-bold text-lg leading-tight">Готов начать подготовку?</span>
-                  <span className="text-[#111714]/80 text-sm font-medium">Сдай бесплатный пробный тест уже сегодня</span>
+                  <span className="text-[#111714]/80 text-sm font-medium">Получи пробный доступ на платформу уже сегодня</span>
                 </div>
                 <Button
                   asChild
@@ -944,7 +929,7 @@ export default function LandingPage() {
       </section>
 
       {/* Pricing Section */}
-      <section id="pricing" className="py-8 sm:py-12 md:py-16 bg-[#111714] relative">
+      <section id="pricing" className="py-6 md:py-12 bg-[#111714] relative">
         <div className="container mx-auto px-4 max-w-[1200px]">
           <div className="text-center mb-10 sm:mb-12">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#38e07b]/10 border border-[#38e07b]/20 mb-4">
@@ -958,7 +943,7 @@ export default function LandingPage() {
             </p>
             <div className="flex items-center justify-center gap-2 text-[#38e07b]">
               <Clock className="w-5 h-5" />
-              <span className="text-base font-semibold">Длительность: 6 недель</span>
+              <span className="text-base font-semibold">Длительность: 4 недели</span>
             </div>
           </div>
 
@@ -970,7 +955,7 @@ export default function LandingPage() {
                   <h3 className="text-2xl font-bold text-white mb-2">1 предмет</h3>
                   <div className="flex items-center justify-center gap-2 mb-3">
                     <Clock className="w-4 h-4 text-[#9eb7a8]" />
-                    <span className="text-sm text-[#9eb7a8]">Длительность: 6 недель</span>
+                    <span className="text-sm text-[#9eb7a8]">Длительность: 4 недели</span>
                   </div>
                   <div className="flex items-baseline justify-center gap-2 mb-4">
                     <span className="text-4xl font-black text-[#38e07b]">23 000</span>
@@ -1022,7 +1007,7 @@ export default function LandingPage() {
                   <h3 className="text-2xl font-bold text-white mb-2">2 предмета</h3>
                   <div className="flex items-center justify-center gap-2 mb-3">
                     <Clock className="w-4 h-4 text-[#9eb7a8]" />
-                    <span className="text-sm text-[#9eb7a8]">Длительность: 6 недель</span>
+                    <span className="text-sm text-[#9eb7a8]">Длительность: 4 недели</span>
                   </div>
                   <div className="flex items-baseline justify-center gap-2 mb-4">
                     <span className="text-4xl font-black text-[#38e07b]">35 900</span>
@@ -1069,7 +1054,7 @@ export default function LandingPage() {
         </div>
       </section>
 
-      <section id="lead-form" className="py-8 sm:py-12 md:py-16 bg-[#111714] relative">
+      <section id="lead-form" className="py-6 md:py-12 bg-[#111714] relative">
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           <div className="absolute top-20 right-[-10%] w-[500px] h-[500px] rounded-full bg-[#38e07b]/5 blur-[100px]"></div>
           <div className="absolute bottom-0 left-[-10%] w-[600px] h-[600px] rounded-full bg-[#38e07b]/5 blur-[120px]"></div>
@@ -1086,7 +1071,7 @@ export default function LandingPage() {
                   Сдай пробный тест состоящий из задач прошлых лет NUET и получи пробный доступ к платформе
                 </h2>
                 <p className="text-gray-300 text-lg font-normal leading-relaxed max-w-[600px]">
-                  Получи доступ к пробному мини-курсу на нашей платформе и оцени формат обучения перед покупкой полного курса.
+                  Получи доступ к платформе и оцени формат обучения перед покупкой полного курса.
                 </p>
               </div>
             </div>
@@ -1153,8 +1138,8 @@ export default function LandingPage() {
                     disabled={isSubmitting}
                     className="mt-4 w-full h-14 bg-[#38e07b] hover:bg-[#2fc468] text-[#111714] font-bold text-base rounded-full shadow-[0_0_20px_rgba(56,224,123,0.3)] hover:shadow-[0_0_30px_rgba(56,224,123,0.5)] transition-all transform active:scale-[0.98] flex items-center justify-center gap-2"
                   >
-                    <span>Получить доступ к пробному курсу</span>
-                    <ArrowRight className="w-5 h-5" />
+                    <span>Получить доступ к платформе</span>
+                    <ArrowRight className="w-5 h-5" />  
                   </Button>
 
                   {/* Consent Text */}
