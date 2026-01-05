@@ -58,8 +58,14 @@ export const SidebarRoutes = () => {
 
   const isTeacherPage = pathname?.includes("/teacher");
   const isAdminPage = pathname?.includes("/admin");
+  const isSearchPage = pathname === "/search";
 
-  const routes = isAdminPage ? adminRoutes : isTeacherPage ? teacherRoutes : guestRoutes;
+  let routes = isAdminPage ? adminRoutes : isTeacherPage ? teacherRoutes : guestRoutes;
+  
+  // Remove "Free Quiz" from sidebar when on search page
+  if (isSearchPage && !isAdminPage && !isTeacherPage) {
+    routes = routes.filter((route) => route.label !== "Free Quiz");
+  }
 
   return (
     <div className="flex flex-col w-full">

@@ -41,6 +41,8 @@ import {
   MessageSquare,
   Mail,
   Lock,
+  ChevronLeft,
+  ChevronRight,
 } from "lucide-react"
 
 export default function LandingPage() {
@@ -48,6 +50,8 @@ export default function LandingPage() {
   const { isSignedIn, isLoaded } = useAuth()
   const router = useRouter()
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const [currentSlide, setCurrentSlide] = useState(0)
+  const [isPaused, setIsPaused] = useState(false)
   const [formData, setFormData] = useState({
     name: "",
     phoneNumber: "",
@@ -61,6 +65,17 @@ export default function LandingPage() {
       router.push("/dashboard")
     }
   }, [isLoaded, isSignedIn, router])
+
+  // Auto-play slider
+  useEffect(() => {
+    if (isPaused) return
+
+    const interval = setInterval(() => {
+      setCurrentSlide((prev) => (prev === 12 ? 0 : prev + 1))
+    }, 5000) // Change slide every 5 seconds
+
+    return () => clearInterval(interval)
+  }, [isPaused])
 
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -177,9 +192,19 @@ export default function LandingPage() {
               </Button>
             </div>
 
-            <button className="lg:hidden text-white" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
-              {mobileMenuOpen ? <X /> : <Menu />}
-            </button>
+            {/* Mobile: Sign-in button and hamburger menu */}
+            <div className="lg:hidden flex items-center gap-2">
+              <Button
+                size="sm"
+                className="bg-[#38e07b] hover:bg-[#2bc768] text-[#111714] font-bold rounded-full text-xs px-3 h-8 whitespace-nowrap"
+                onClick={() => router.push("/sign-in")}
+              >
+                Войти
+              </Button>
+              <button className="text-white" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
+                {mobileMenuOpen ? <X /> : <Menu />}
+              </button>
+            </div>
           </div>
 
           {mobileMenuOpen && (
@@ -266,9 +291,7 @@ export default function LandingPage() {
               </div>
 
               <div className="space-y-4">
-                {/* <h1 className="font-black text-4xl sm:text-5xl lg:text-6xl leading-[1.1] tracking-tight text-white">
-                  Подготовка к NUET до нужного балла и <span className="text-[#38e07b]">гранта</span> в Nazarbayev University
-                </h1> */}
+
                  <h1 className="font-black text-4xl sm:text-5xl lg:text-6xl leading-[1.1] tracking-tight text-white">
                   Онлайн-марафон <span className="text-[#38e07b]">NUET</span> где мы закрепим <span className="text-[#38e07b]">все важные</span> темы
                 </h1>
@@ -346,109 +369,6 @@ export default function LandingPage() {
               </div>
             </div>
           </div>
-        </div>
-      </section>
-
-      <section id="about" className="py-20 bg-[#111714]">
-        <div className="container mx-auto px-4 lg:px-10 max-w-[1280px]">
-          <div className="flex flex-col gap-10">
-            <div className="flex flex-col items-start gap-4">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#38e07b]/10 border border-[#38e07b]/20">
-                <BookOpen className="w-4 h-4 text-[#38e07b]" />
-                <span className="text-[#38e07b] text-xs font-bold uppercase tracking-wide">Об экзамене</span>
-              </div>
-              <h2 className="text-white text-3xl md:text-5xl font-extrabold leading-tight tracking-tight max-w-[900px]">
-                Что такое <span className="text-[#38e07b]">NUET</span> и почему к нему важно готовиться правильно?
-              </h2>
-              <p className="text-[#9eb7a8] text-lg font-normal leading-relaxed max-w-[720px] mt-2">
-                Nazarbayev University Entrance Test (NUET) — это не просто проверка знаний школьной программы. Это тест на способность мыслить аналитически в условиях жесткого ограничения времени.
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-              <Card className="group border border-[#29382f] bg-[#1c2620] hover:border-[#38e07b]/50 transition-colors">
-                <CardContent className="p-6 flex flex-col gap-4">
-                  <div className="w-12 h-12 rounded-full bg-[#29382f] flex items-center justify-center group-hover:bg-[#38e07b] group-hover:text-[#111714] transition-colors text-white">
-                    <Calculator className="w-6 h-6" />
-                  </div>
-                  <div>
-                    <h3 className="text-white text-xl font-bold mb-2">Математика & Критическое мышление</h3>
-                    <p className="text-[#9eb7a8] text-sm">Экзамен проверяет не память, а ваше умение решать нестандартные задачи и находить логические связи.</p>
-                  </div>
-                </CardContent>
-              </Card>
-
-              <Card className="group border border-[#29382f] bg-[#1c2620] hover:border-[#38e07b]/50 transition-colors">
-                <CardContent className="p-6 flex flex-col gap-4">
-                  <div className="w-12 h-12 rounded-full bg-[#29382f] flex items-center justify-center group-hover:bg-[#38e07b] group-hover:text-[#111714] transition-colors text-white">
-                    <FileText className="w-6 h-6" />
-                  </div>
-                  <div>
-                    <h3 className="text-white text-xl font-bold mb-2">60 Вопросов</h3>
-                    <p className="text-[#9eb7a8] text-sm">Интенсивный темп тестирования требует мгновенной концентрации и переключения между темами.</p>
-                  </div>
-                </CardContent>
-              </Card>
-
-              <Card className="group border border-[#29382f] bg-[#1c2620] hover:border-[#38e07b]/50 transition-colors">
-                <CardContent className="p-6 flex flex-col gap-4">
-                  <div className="w-12 h-12 rounded-full bg-[#29382f] flex items-center justify-center group-hover:bg-[#38e07b] group-hover:text-[#111714] transition-colors text-white">
-                    <Timer className="w-6 h-6" />
-                  </div>
-                  <div>
-                    <h3 className="text-white text-xl font-bold mb-2">120 Минут</h3>
-                    <p className="text-[#9eb7a8] text-sm">В среднем 2 минуты на вопрос. Это жесткий тайминг, где каждая секунда на счету.</p>
-                  </div>
-                </CardContent>
-              </Card>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section id="trial" className="py-20 bg-[#38e07b]/5">
-        <div className="container mx-auto px-4 max-w-[1200px]">
-          <div className="max-w-2xl mx-auto text-center">
-            <h2 className="text-3xl md:text-5xl font-black mb-4 text-[#111714]">
-                Mock тест из задач 2020-2021
-              </h2>
-            <p className="text-[#63756c] mb-8 text-lg">
-              Пройди пробный тест в формате NUET и узнай свой текущий уровень перед началом обучения.
-            </p>
-            <Card className="border border-[#e6e8e7]">
-              <CardContent className="p-8 flex flex-col items-center gap-4">
-                <p className="text-sm text-[#63756c] max-w-md">
-                  Тест бесплатный и доступен сразу после регистрации. Это отличный способ познакомиться с форматом
-                  экзамена и нашей платформой.
-                </p>
-                <div className="flex flex-col sm:flex-row gap-3 mt-2">
-              <Button
-                    asChild
-                    type="button"
-                    className="bg-[#38e07b] hover:bg-[#2bc768] text-[#111714] font-bold px-8 h-12 rounded-full"
-                  >
-                    <a href="#lead-form">Пройти бесплатный NUET-тест</a>
-                  </Button>
-                  <Button
-                    type="button"
-                    variant="outline"
-                    className="border-[#111714] text-[#111714] hover:bg-[#111714] hover:text-white px-8 h-12 rounded-full"
-                    onClick={() => router.push("/sign-up")}
-                  >
-                    Зарегистрироваться
-              </Button>
-            </div>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
-      </section>
-
-
-      <section id="benefits" className="relative py-16 px-4 md:px-10 lg:px-20 bg-[#111714] overflow-hidden">
-        <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none z-0">
-          <div className="absolute top-[-10%] right-[-5%] w-[500px] h-[500px] bg-[#38e07b]/5 rounded-full blur-[120px]"></div>
-          <div className="absolute bottom-[-10%] left-[-5%] w-[400px] h-[400px] bg-[#38e07b]/5 rounded-full blur-[100px]"></div>
         </div>
       </section>
 
@@ -728,15 +648,6 @@ export default function LandingPage() {
                       <span className="text-gray-300 text-sm">2+ years of tutoring</span>
                     </div>
                   </div>
-
-                  <div className="mt-auto relative p-4 rounded-xl bg-[#122017] border border-[#29382f]">
-                    <span className="absolute -top-3 left-4 bg-[#122017] px-2 text-[#38e07b]">
-                      <Quote className="w-6 h-6" />
-                    </span>
-                    <p className="text-[#9eb7a8] text-sm italic leading-relaxed pt-2">
-                      &quot;NUET — это не только знания, но и правильная стратегия. Я помогу вам разработать индивидуальный подход к каждому разделу экзамена.&quot;
-                    </p>
-                  </div>
                 </div>
               </CardContent>
             </Card>
@@ -786,15 +697,6 @@ export default function LandingPage() {
                       </div>
                       <span className="text-gray-300 text-sm">helped over 110 students to get into NU</span>
                     </div>
-                  </div>
-
-                  <div className="mt-auto relative p-4 rounded-xl bg-[#122017] border border-[#29382f]">
-                    <span className="absolute -top-3 left-4 bg-[#122017] px-2 text-[#38e07b]">
-                      <Quote className="w-6 h-6" />
-                    </span>
-                    <p className="text-[#9eb7a8] text-sm italic leading-relaxed pt-2">
-                      &quot;Каждая задача имеет оптимальное решение. Моя цель — научить вас находить его быстро и уверенно на экзамене.&quot;
-                    </p>
                   </div>
                 </div>
               </CardContent>
@@ -932,154 +834,122 @@ export default function LandingPage() {
       </section>
 
       {/* Reviews Section */}
-      <section id="reviews" className="py-20 bg-[#111714]">
-        <div className="container mx-auto px-4 lg:px-10 max-w-[1280px]">
-          <div className="flex flex-col gap-12">
-            <div className="flex flex-col items-center gap-4 text-center max-w-3xl mx-auto">
+      <section id="reviews" className="py-12 md:py-20 bg-[#111714]">
+        <div className="container mx-auto px-2 sm:px-4 lg:px-10 max-w-[1280px]">
+          <div className="flex flex-col gap-8 md:gap-12">
+            <div className="flex flex-col items-center gap-4 text-center max-w-3xl mx-auto px-2">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#38e07b]/10 border border-[#38e07b]/20">
-                <Quote className="w-4 h-4 text-[#38e07b]" />
-                <span className="text-[#38e07b] text-xs font-bold uppercase tracking-wide">Отзывы студентов</span>
+                <Award className="w-4 h-4 text-[#38e07b]" />
+                <span className="text-[#38e07b] text-xs font-bold uppercase tracking-wide">Результаты студентов</span>
               </div>
-              <h2 className="text-white text-3xl md:text-5xl font-extrabold leading-tight tracking-tight">
-                Что говорят наши <span className="text-[#38e07b]">студенты</span>
+              <h2 className="text-white text-2xl sm:text-3xl md:text-5xl font-extrabold leading-tight tracking-tight">
+                Реальные <span className="text-[#38e07b]">баллы NUET</span> наших студентов
             </h2>
-              <p className="text-[#9eb7a8] text-lg font-normal leading-relaxed">
-                Реальные отзывы от студентов, которые поступили в Назарбаев Университет
+              <p className="text-[#9eb7a8] text-base md:text-lg font-normal leading-relaxed">
+                Посмотрите на реальные результаты студентов, которые прошли наш курс подготовки
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {/* Review 1 */}
-              <Card className="group border border-[#29382f] bg-[#1c2620] hover:border-[#38e07b]/50 transition-all duration-300 hover:shadow-lg hover:shadow-[#38e07b]/10">
-                <CardContent className="p-6 flex flex-col gap-4">
-                  <div className="flex items-center gap-1 mb-2">
-                    {[...Array(5)].map((_, i) => (
-                      <Star key={i} className="w-4 h-4 fill-[#38e07b] text-[#38e07b]" />
-                    ))}
-                  </div>
-                  <p className="text-[#9eb7a8] text-sm leading-relaxed">
-                    &quot;Курс помог мне систематизировать подготовку. Особенно полезными были пробные Mock тесты в формате NUET. 
-                    Набрал 162 балла и поступил на грант в Foundation.&quot;
-                  </p>
-                  <div className="flex items-center gap-3 pt-4 border-t border-[#29382f]">
-                    <div className="size-10 rounded-full bg-gradient-to-br from-[#38e07b] to-[#2bc768] shrink-0"></div>
-                    <div className="flex flex-col">
-                      <span className="text-white font-bold text-sm">Айдар</span>
-                      <span className="text-[#9eb7a8] text-xs">Foundation, 2023</span>
+            {/* Image Slider */}
+            <div 
+              className="relative w-full max-w-4xl mx-auto"
+              onMouseEnter={() => setIsPaused(true)}
+              onMouseLeave={() => setIsPaused(false)}
+            >
+              <div className="relative overflow-hidden rounded-lg md:rounded-xl bg-[#1c2620] border border-[#29382f] shadow-2xl">
+                {/* Main Image Container - Taller on mobile */}
+                <div className="relative w-full aspect-[3/4] sm:aspect-[4/3] md:aspect-[4/3]">
+                  {[
+                    "/2026-01-05 21.00.02.jpg",
+                    "/2026-01-05 20.59.58.jpg",
+                    "/2026-01-05 20.59.55.jpg",
+                    "/2026-01-05 20.59.52.jpg",
+                    "/2026-01-05 20.59.48.jpg",
+                    "/2026-01-05 20.59.46.jpg",
+                    "/2026-01-05 20.59.44.jpg",
+                    "/2026-01-05 20.59.41.jpg",
+                    "/2026-01-05 20.59.39.jpg",
+                    "/2026-01-05 20.59.36.jpg",
+                    "/2026-01-05 20.59.33.jpg",
+                    "/2026-01-05 20.59.30.jpg",
+                    "/2026-01-05 20.59.26.jpg",
+                  ].map((image, index) => (
+                    <div
+                      key={index}
+                      className={`absolute inset-0 transition-opacity duration-500 ${
+                        index === currentSlide ? "opacity-100 z-10" : "opacity-0 z-0"
+                      }`}
+                    >
+                      <Image
+                        src={image}
+                        alt={`NUET Score Result ${index + 1}`}
+                        fill
+                        className="object-contain sm:object-contain"
+                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 90vw, 1200px"
+                        priority={index === 0}
+                      />
                     </div>
-                  </div>
-                </CardContent>
-              </Card>
+                  ))}
+                </div>
 
-              {/* Review 2 */}
-              <Card className="group border border-[#29382f] bg-[#1c2620] hover:border-[#38e07b]/50 transition-all duration-300 hover:shadow-lg hover:shadow-[#38e07b]/10">
-                <CardContent className="p-6 flex flex-col gap-4">
-                  <div className="flex items-center gap-1 mb-2">
-                    {[...Array(5)].map((_, i) => (
-                      <Star key={i} className="w-4 h-4 fill-[#38e07b] text-[#38e07b]" />
-                    ))}
-                  </div>
-                  <p className="text-[#9eb7a8] text-sm leading-relaxed">
-                    &quot;Преподаватели объясняют очень понятно, разбирают каждую ошибку. Математика стала моей сильной стороной. 
-                    Результат: 158 баллов, поступил на Фаунд.&quot;
-                  </p>
-                  <div className="flex items-center gap-3 pt-4 border-t border-[#29382f]">
-                    <div className="size-10 rounded-full bg-gradient-to-br from-blue-500 to-blue-700 shrink-0"></div>
-                    <div className="flex flex-col">
-                      <span className="text-white font-bold text-sm">Данияр</span>
-                      <span className="text-[#9eb7a8] text-xs">Бакалавриат, 2023</span>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
+                {/* Navigation Buttons - Smaller on mobile */}
+                <button
+                  onClick={() => {
+                    setCurrentSlide((prev) => (prev === 0 ? 12 : prev - 1))
+                    setIsPaused(true)
+                    setTimeout(() => setIsPaused(false), 3000) // Resume after 3 seconds
+                  }}
+                  className="absolute left-1 sm:left-2 md:left-4 top-1/2 -translate-y-1/2 z-20 bg-[#1c2620]/90 hover:bg-[#1c2620] border border-[#29382f] rounded-full p-1.5 sm:p-2 md:p-3 text-white transition-all hover:border-[#38e07b]/50 hover:scale-110 shadow-lg"
+                  aria-label="Previous image"
+                >
+                  <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6" />
+                </button>
+                <button
+                  onClick={() => {
+                    setCurrentSlide((prev) => (prev === 12 ? 0 : prev + 1))
+                    setIsPaused(true)
+                    setTimeout(() => setIsPaused(false), 3000) // Resume after 3 seconds
+                  }}
+                  className="absolute right-1 sm:right-2 md:right-4 top-1/2 -translate-y-1/2 z-20 bg-[#1c2620]/90 hover:bg-[#1c2620] border border-[#29382f] rounded-full p-1.5 sm:p-2 md:p-3 text-white transition-all hover:border-[#38e07b]/50 hover:scale-110 shadow-lg"
+                  aria-label="Next image"
+                >
+                  <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6" />
+                </button>
 
-              {/* Review 3 */}
-              <Card className="group border border-[#29382f] bg-[#1c2620] hover:border-[#38e07b]/50 transition-all duration-300 hover:shadow-lg hover:shadow-[#38e07b]/10">
-                <CardContent className="p-6 flex flex-col gap-4">
-                  <div className="flex items-center gap-1 mb-2">
-                    {[...Array(5)].map((_, i) => (
-                      <Star key={i} className="w-4 h-4 fill-[#38e07b] text-[#38e07b]" />
-                    ))}
-                  </div>
-                  <p className="text-[#9eb7a8] text-sm leading-relaxed">
-                    &quot;Структурированный подход и постоянная практика помогли мне улучшить результат на 30+ баллов. 
-                    Критическое мышление было моей слабой стороной, но курс это исправил.&quot;
-                  </p>
-                  <div className="flex items-center gap-3 pt-4 border-t border-[#29382f]">
-                    <div className="size-10 rounded-full bg-gradient-to-br from-purple-500 to-purple-700 shrink-0"></div>
-                    <div className="flex flex-col">
-                      <span className="text-white font-bold text-sm">Амина</span>
-                      <span className="text-[#9eb7a8] text-xs">Foundation, 2024</span>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
+                {/* Dots Indicator - Smaller on mobile */}
+                <div className="absolute bottom-2 sm:bottom-3 md:bottom-4 left-1/2 -translate-x-1/2 z-20 flex gap-1.5 sm:gap-2 px-2">
+                  {Array.from({ length: 13 }).map((_, index) => (
+                    <button
+                      key={index}
+                      onClick={() => {
+                        setCurrentSlide(index)
+                        setIsPaused(true)
+                        setTimeout(() => setIsPaused(false), 3000) // Resume after 3 seconds
+                      }}
+                      className={`h-1.5 sm:h-2 rounded-full transition-all ${
+                        index === currentSlide
+                          ? "w-6 sm:w-8 bg-[#38e07b]"
+                          : "w-1.5 sm:w-2 bg-[#9eb7a8]/40 hover:bg-[#9eb7a8]/60"
+                      }`}
+                      aria-label={`Go to slide ${index + 1}`}
+                    />
+                  ))}
+                </div>
 
-              {/* Review 4 */}
-              <Card className="group border border-[#29382f] bg-[#1c2620] hover:border-[#38e07b]/50 transition-all duration-300 hover:shadow-lg hover:shadow-[#38e07b]/10">
-                <CardContent className="p-6 flex flex-col gap-4">
-                  <div className="flex items-center gap-1 mb-2">
-                    {[...Array(5)].map((_, i) => (
-                      <Star key={i} className="w-4 h-4 fill-[#38e07b] text-[#38e07b]" />
-                    ))}
-                  </div>
-                  <p className="text-[#9eb7a8] text-sm leading-relaxed">
-                    &quot;Платформа очень удобная, все материалы в одном месте. Видеоуроки можно пересматривать, 
-                    а домашние задания помогают закрепить материал. Набрал 160 баллов!&quot;
-                  </p>
-                  <div className="flex items-center gap-3 pt-4 border-t border-[#29382f]">
-                    <div className="size-10 rounded-full bg-gradient-to-br from-amber-500 to-orange-600 shrink-0"></div>
-                    <div className="flex flex-col">
-                      <span className="text-white font-bold text-sm">Ерлан</span>
-                      <span className="text-[#9eb7a8] text-xs">Бакалавриат, 2024</span>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
+                {/* Slide Counter - Smaller on mobile */}
+                <div className="absolute top-2 sm:top-3 md:top-4 right-2 sm:right-3 md:right-4 z-20 bg-[#1c2620]/90 border border-[#29382f] rounded-full px-2 sm:px-3 md:px-4 py-1 sm:py-1.5 md:py-2">
+                  <span className="text-white text-xs sm:text-sm font-medium">
+                    {currentSlide + 1} / 13
+                  </span>
+                </div>
+              </div>
 
-              {/* Review 5 */}
-              <Card className="group border border-[#29382f] bg-[#1c2620] hover:border-[#38e07b]/50 transition-all duration-300 hover:shadow-lg hover:shadow-[#38e07b]/10">
-                <CardContent className="p-6 flex flex-col gap-4">
-                  <div className="flex items-center gap-1 mb-2">
-                    {[...Array(5)].map((_, i) => (
-                      <Star key={i} className="w-4 h-4 fill-[#38e07b] text-[#38e07b]" />
-                    ))}
-                  </div>
-                  <p className="text-[#9eb7a8] text-sm leading-relaxed">
-                    &quot;Готовился самостоятельно, но не хватало системы. Этот курс дал мне четкий план и помог 
-                    сфокусироваться на важных темах. Результат превзошел ожидания - 155 баллов!&quot;
-                  </p>
-                  <div className="flex items-center gap-3 pt-4 border-t border-[#29382f]">
-                    <div className="size-10 rounded-full bg-gradient-to-br from-pink-500 to-rose-600 shrink-0"></div>
-                    <div className="flex flex-col">
-                      <span className="text-white font-bold text-sm">Асылбек</span>
-                      <span className="text-[#9eb7a8] text-xs">Foundation, 2023</span>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-
-              {/* Review 6 */}
-              <Card className="group border border-[#29382f] bg-[#1c2620] hover:border-[#38e07b]/50 transition-all duration-300 hover:shadow-lg hover:shadow-[#38e07b]/10">
-                <CardContent className="p-6 flex flex-col gap-4">
-                  <div className="flex items-center gap-1 mb-2">
-                    {[...Array(5)].map((_, i) => (
-                      <Star key={i} className="w-4 h-4 fill-[#38e07b] text-[#38e07b]" />
-                    ))}
-                  </div>
-                  <p className="text-[#9eb7a8] text-sm leading-relaxed">
-                    &quot;Поддержка преподавателей - это то, что отличает этот курс. Всегда можно было задать вопрос 
-                    и получить развернутый ответ. Поступила на грант с баллом 157.&quot;
-                  </p>
-                  <div className="flex items-center gap-3 pt-4 border-t border-[#29382f]">
-                    <div className="size-10 rounded-full bg-gradient-to-br from-cyan-500 to-teal-600 shrink-0"></div>
-                    <div className="flex flex-col">
-                      <span className="text-white font-bold text-sm">Аружан</span>
-                      <span className="text-[#9eb7a8] text-xs">Бакалавриат, 2024</span>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
+              {/* Auto-play indicator */}
+              <div className="mt-4 sm:mt-6 text-center px-2">
+                <p className="text-[#9eb7a8] text-xs sm:text-sm">
+                  Используйте стрелки для навигации или кликните на точки внизу
+                </p>
+              </div>
             </div>
           </div>
         </div>

@@ -74,3 +74,47 @@ export const getCourses = async ({
     return [];
   }
 };
+
+// Public version that doesn't require userId
+export const getPublicCourses = async ({
+  title,
+  categoryId,
+}: {
+  title?: string;
+  categoryId?: string;
+}): Promise<CourseWithProgressWithCategory[]> => {
+  try {
+    const courses = await db.course.findMany({
+      where: {
+        isPublished: true,
+        title: {
+          contains: title,
+        },
+        categoryId,
+      },
+      include: {
+        category: true,
+        chapters: {
+          where: {
+            isPublished: true,
+          },
+          select: {
+            id: true,
+          },
+        },
+      },
+      orderBy: {
+        createdAt: "desc",
+      },
+    });
+
+    // For public users, progress is always null
+    return courses.map((course) => ({
+      ...course,
+      progress: null,
+    }));
+  } catch (error) {
+    console.log("Get public courses", error);
+    return [];
+  }
+};
