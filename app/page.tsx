@@ -192,19 +192,10 @@ export default function LandingPage() {
               </Button>
             </div>
 
-            {/* Mobile: Sign-in button and hamburger menu */}
-            <div className="lg:hidden flex items-center gap-2">
-              <Button
-                size="sm"
-                className="bg-[#38e07b] hover:bg-[#2bc768] text-[#111714] font-bold rounded-full text-xs px-3 h-8 whitespace-nowrap"
-                onClick={() => router.push("/sign-in")}
-              >
-                Войти
-              </Button>
-              <button className="text-white" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
-                {mobileMenuOpen ? <X /> : <Menu />}
-              </button>
-            </div>
+            {/* Mobile: Hamburger menu */}
+            <button className="lg:hidden text-white" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
+              {mobileMenuOpen ? <X /> : <Menu />}
+            </button>
           </div>
 
           {mobileMenuOpen && (
@@ -372,9 +363,131 @@ export default function LandingPage() {
         </div>
       </section>
 
-      <section id="program" className="py-10 sm:py-20 bg-[#111714]">
+      {/* Reviews Section */}
+      <section id="reviews" className="py-8 sm:py-12 md:py-16 bg-[#111714]">
+        <div className="container mx-auto px-2 sm:px-4 lg:px-10 max-w-[1280px]">
+          <div className="flex flex-col gap-6 md:gap-8">
+            <div className="flex flex-col items-center gap-4 text-center max-w-3xl mx-auto px-2">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#38e07b]/10 border border-[#38e07b]/20">
+                <Award className="w-4 h-4 text-[#38e07b]" />
+                <span className="text-[#38e07b] text-xs font-bold uppercase tracking-wide">Результаты студентов</span>
+              </div>
+              <h2 className="text-white text-2xl sm:text-3xl md:text-5xl font-extrabold leading-tight tracking-tight">
+                Реальные <span className="text-[#38e07b]">баллы NUET</span> наших студентов
+            </h2>
+              <p className="text-[#9eb7a8] text-base md:text-lg font-normal leading-relaxed">
+                Посмотрите на реальные результаты студентов, которые прошли наш курс подготовки
+              </p>
+            </div>
+
+            {/* Image Slider */}
+            <div 
+              className="relative w-full max-w-4xl mx-auto"
+              onMouseEnter={() => setIsPaused(true)}
+              onMouseLeave={() => setIsPaused(false)}
+            >
+              <div className="relative overflow-hidden rounded-lg md:rounded-xl bg-[#1c2620] border border-[#29382f] shadow-2xl">
+                {/* Main Image Container - Taller on mobile */}
+                <div className="relative w-full aspect-[3/4] sm:aspect-[4/3] md:aspect-[4/3]">
+                  {[
+                    "/2026-01-05 21.00.02.jpg",
+                    "/2026-01-05 20.59.58.jpg",
+                    "/2026-01-05 20.59.55.jpg",
+                    "/2026-01-05 20.59.52.jpg",
+                    "/2026-01-05 20.59.48.jpg",
+                    "/2026-01-05 20.59.46.jpg",
+                    "/2026-01-05 20.59.44.jpg",
+                    "/2026-01-05 20.59.41.jpg",
+                    "/2026-01-05 20.59.39.jpg",
+                    "/2026-01-05 20.59.36.jpg",
+                    "/2026-01-05 20.59.33.jpg",
+                    "/2026-01-05 20.59.30.jpg",
+                    "/2026-01-05 20.59.26.jpg",
+                  ].map((image, index) => (
+                    <div
+                      key={index}
+                      className={`absolute inset-0 transition-opacity duration-500 ${
+                        index === currentSlide ? "opacity-100 z-10" : "opacity-0 z-0"
+                      }`}
+                    >
+                      <Image
+                        src={image}
+                        alt={`Результат NUET ${index + 1}`}
+                        fill
+                        className="object-contain sm:object-contain"
+                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 90vw, 1200px"
+                        priority={index === 0}
+                      />
+                    </div>
+                  ))}
+                </div>
+
+                {/* Navigation Buttons - Smaller on mobile */}
+                <button
+                  onClick={() => {
+                    setCurrentSlide((prev) => (prev === 0 ? 12 : prev - 1))
+                    setIsPaused(true)
+                    setTimeout(() => setIsPaused(false), 3000) // Resume after 3 seconds
+                  }}
+                  className="absolute left-1 sm:left-2 md:left-4 top-1/2 -translate-y-1/2 z-20 bg-[#1c2620]/90 hover:bg-[#1c2620] border border-[#29382f] rounded-full p-1.5 sm:p-2 md:p-3 text-white transition-all hover:border-[#38e07b]/50 hover:scale-110 shadow-lg"
+                  aria-label="Предыдущее изображение"
+                >
+                  <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6" />
+                </button>
+                <button
+                  onClick={() => {
+                    setCurrentSlide((prev) => (prev === 12 ? 0 : prev + 1))
+                    setIsPaused(true)
+                    setTimeout(() => setIsPaused(false), 3000) // Resume after 3 seconds
+                  }}
+                  className="absolute right-1 sm:right-2 md:right-4 top-1/2 -translate-y-1/2 z-20 bg-[#1c2620]/90 hover:bg-[#1c2620] border border-[#29382f] rounded-full p-1.5 sm:p-2 md:p-3 text-white transition-all hover:border-[#38e07b]/50 hover:scale-110 shadow-lg"
+                  aria-label="Следующее изображение"
+                >
+                  <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6" />
+                </button>
+
+                {/* Dots Indicator - Smaller on mobile */}
+                <div className="absolute bottom-2 sm:bottom-3 md:bottom-4 left-1/2 -translate-x-1/2 z-20 flex gap-1.5 sm:gap-2 px-2">
+                  {Array.from({ length: 13 }).map((_, index) => (
+                    <button
+                      key={index}
+                      onClick={() => {
+                        setCurrentSlide(index)
+                        setIsPaused(true)
+                        setTimeout(() => setIsPaused(false), 3000) // Resume after 3 seconds
+                      }}
+                      className={`h-1.5 sm:h-2 rounded-full transition-all ${
+                        index === currentSlide
+                          ? "w-6 sm:w-8 bg-[#38e07b]"
+                          : "w-1.5 sm:w-2 bg-[#9eb7a8]/40 hover:bg-[#9eb7a8]/60"
+                      }`}
+                      aria-label={`Перейти к слайду ${index + 1}`}
+                    />
+                  ))}
+                </div>
+
+                {/* Slide Counter - Smaller on mobile */}
+                <div className="absolute top-2 sm:top-3 md:top-4 right-2 sm:right-3 md:right-4 z-20 bg-[#1c2620]/90 border border-[#29382f] rounded-full px-2 sm:px-3 md:px-4 py-1 sm:py-1.5 md:py-2">
+                  <span className="text-white text-xs sm:text-sm font-medium">
+                    {currentSlide + 1} / 13
+                  </span>
+                </div>
+              </div>
+
+              {/* Auto-play indicator */}
+              <div className="mt-4 sm:mt-6 text-center px-2">
+                <p className="text-[#9eb7a8] text-xs sm:text-sm">
+                  Используйте стрелки для навигации или кликните на точки внизу
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="program" className="py-8 sm:py-12 md:py-16 bg-[#111714]">
         <div className="container mx-auto px-4 sm:px-8 max-w-[1200px]">
-          <div className="flex flex-col gap-6 text-center mb-16">
+          <div className="flex flex-col gap-4 text-center mb-10 sm:mb-12">
             <h1 className="text-white tracking-tight text-4xl sm:text-5xl font-black leading-[1.1]">
               Программа подготовки к <span className="text-[#38e07b]">NUET</span>
             </h1>
@@ -383,10 +496,10 @@ export default function LandingPage() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 mb-12">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 mb-8 sm:mb-10">
             {/* Mathematics Card */}
             <Card className="border border-[#3d5245] bg-[#1c2620] hover:border-[#38e07b]/50 transition-colors duration-300 shadow-xl shadow-black/20">
-              <CardContent className="p-6 sm:p-8 flex flex-col gap-6">
+              <CardContent className="p-5 sm:p-6 flex flex-col gap-4">
                 <div className="flex items-center gap-4 border-b border-[#3d5245] pb-6">
                   <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-[#38e07b]/10 text-[#38e07b]">
                     <Calculator className="w-8 h-8" />
@@ -399,7 +512,7 @@ export default function LandingPage() {
                 <ul className="flex flex-col gap-4 flex-1">
                   <li className="flex items-start gap-3">
                     <CheckCircle2 className="text-[#38e07b] w-5 h-5 mt-0.5 shrink-0" />
-                    <span className="text-[#d0e0d8] text-base leading-snug">Bearings (азимуты)</span>
+                    <span className="text-[#d0e0d8] text-base leading-snug">Азимуты (Bearings)</span>
                   </li>
                   <li className="flex items-start gap-3">
                     <CheckCircle2 className="text-[#38e07b] w-5 h-5 mt-0.5 shrink-0" />
@@ -411,11 +524,11 @@ export default function LandingPage() {
                   </li>
                   <li className="flex items-start gap-3">
                     <CheckCircle2 className="text-[#38e07b] w-5 h-5 mt-0.5 shrink-0" />
-                    <span className="text-[#d0e0d8] text-base leading-snug">Круги (Circle theorems)</span>
+                    <span className="text-[#d0e0d8] text-base leading-snug">Теоремы о кругах</span>
                   </li>
                   <li className="flex items-start gap-3">
                     <CheckCircle2 className="text-[#38e07b] w-5 h-5 mt-0.5 shrink-0" />
-                    <span className="text-[#d0e0d8] text-base leading-snug">Relations (Отношения и пропорции)</span>
+                    <span className="text-[#d0e0d8] text-base leading-snug">Отношения и пропорции</span>
                   </li>
                   <li className="flex items-start gap-3">
                     <CheckCircle2 className="text-[#38e07b] w-5 h-5 mt-0.5 shrink-0" />
@@ -435,7 +548,7 @@ export default function LandingPage() {
 
             {/* Critical Thinking Card */}
             <Card className="border border-[#3d5245] bg-[#1c2620] hover:border-[#38e07b]/50 transition-colors duration-300 shadow-xl shadow-black/20">
-              <CardContent className="p-6 sm:p-8 flex flex-col gap-6">
+              <CardContent className="p-5 sm:p-6 flex flex-col gap-4">
                 <div className="flex items-center gap-4 border-b border-[#3d5245] pb-6">
                   <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-[#38e07b]/10 text-[#38e07b]">
                     <Brain className="w-8 h-8" />
@@ -482,11 +595,11 @@ export default function LandingPage() {
       </section>
 
       {/* Learning Format Section */}
-      <section id="format" className="py-20 bg-[#111714]">
+      <section id="format" className="py-8 sm:py-12 md:py-16 bg-[#111714]">
         <div className="container mx-auto px-4 md:px-8 lg:px-20 max-w-[1200px]">
-          <div className="text-center mb-16">
+          <div className="text-center mb-10 sm:mb-12">
             <div className="inline-flex items-center justify-center rounded-full bg-[#38e07b]/10 px-4 py-1.5 mb-4">
-              <span className="text-[#38e07b] text-sm font-bold uppercase tracking-wider">How it works</span>
+              <span className="text-[#38e07b] text-sm font-bold uppercase tracking-wider">Как это работает</span>
             </div>
             <h2 className="text-white text-3xl md:text-5xl font-black mb-6 leading-tight tracking-[-0.02em]">
               Как проходит обучение
@@ -496,9 +609,9 @@ export default function LandingPage() {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-10 sm:mb-12">
             <Card className="group border border-[#3d5245] bg-[#1a2c23] hover:border-[#38e07b] transition-all duration-300 hover:shadow-lg hover:shadow-[#38e07b]/5 hover:-translate-y-1">
-              <CardContent className="p-8 flex flex-col">
+              <CardContent className="p-6 sm:p-7 flex flex-col">
                 <div className="flex items-center justify-center w-14 h-14 rounded-full bg-[#38e07b]/10 text-[#38e07b] mb-6 group-hover:bg-[#38e07b] group-hover:text-[#122017] transition-colors duration-300">
                   <Play className="w-8 h-8" />
                 </div>
@@ -510,7 +623,7 @@ export default function LandingPage() {
             </Card>
 
             <Card className="group border border-[#3d5245] bg-[#1a2c23] hover:border-[#38e07b] transition-all duration-300 hover:shadow-lg hover:shadow-[#38e07b]/5 hover:-translate-y-1">
-              <CardContent className="p-8 flex flex-col">
+              <CardContent className="p-6 sm:p-7 flex flex-col">
                 <div className="flex items-center justify-center w-14 h-14 rounded-full bg-[#38e07b]/10 text-[#38e07b] mb-6 group-hover:bg-[#38e07b] group-hover:text-[#122017] transition-colors duration-300">
                   <FileText className="w-8 h-8" />
                 </div>
@@ -522,11 +635,11 @@ export default function LandingPage() {
             </Card>
 
             <Card className="group border border-[#3d5245] bg-[#1a2c23] hover:border-[#38e07b] transition-all duration-300 hover:shadow-lg hover:shadow-[#38e07b]/5 hover:-translate-y-1">
-              <CardContent className="p-8 flex flex-col">
+              <CardContent className="p-6 sm:p-7 flex flex-col">
                 <div className="flex items-center justify-center w-14 h-14 rounded-full bg-[#38e07b]/10 text-[#38e07b] mb-6 group-hover:bg-[#38e07b] group-hover:text-[#122017] transition-colors duration-300">
                   <Timer className="w-8 h-8" />
                 </div>
-                <h3 className="text-white text-xl font-bold leading-tight mb-3">Пробные Mock-тесты</h3>
+                <h3 className="text-white text-xl font-bold leading-tight mb-3">Пробные тесты</h3>
                 <p className="text-[#9eb7a8] text-sm leading-relaxed">
                   Полноформатные симуляции с реальным таймером для развития выносливости и навыков управления временем.
                 </p>
@@ -534,7 +647,7 @@ export default function LandingPage() {
             </Card>
 
             <Card className="group border border-[#3d5245] bg-[#1a2c23] hover:border-[#38e07b] transition-all duration-300 hover:shadow-lg hover:shadow-[#38e07b]/5 hover:-translate-y-1">
-              <CardContent className="p-8 flex flex-col">
+              <CardContent className="p-6 sm:p-7 flex flex-col">
                 <div className="flex items-center justify-center w-14 h-14 rounded-full bg-[#38e07b]/10 text-[#38e07b] mb-6 group-hover:bg-[#38e07b] group-hover:text-[#122017] transition-colors duration-300">
                   <HeadphonesIcon className="w-8 h-8" />
                 </div>
@@ -546,7 +659,7 @@ export default function LandingPage() {
             </Card>
 
             <Card className="group border border-[#3d5245] bg-[#1a2c23] hover:border-[#38e07b] transition-all duration-300 hover:shadow-lg hover:shadow-[#38e07b]/5 hover:-translate-y-1">
-              <CardContent className="p-8 flex flex-col">
+              <CardContent className="p-6 sm:p-7 flex flex-col">
                 <div className="flex items-center justify-center w-14 h-14 rounded-full bg-[#38e07b]/10 text-[#38e07b] mb-6 group-hover:bg-[#38e07b] group-hover:text-[#122017] transition-colors duration-300">
                   <Calendar className="w-8 h-8" />
                 </div>
@@ -558,7 +671,7 @@ export default function LandingPage() {
             </Card>
 
             <Card className="group border border-[#3d5245] bg-[#1a2c23] hover:border-[#38e07b] transition-all duration-300 hover:shadow-lg hover:shadow-[#38e07b]/5 hover:-translate-y-1">
-              <CardContent className="p-8 flex flex-col">
+              <CardContent className="p-6 sm:p-7 flex flex-col">
                 <div className="flex items-center justify-center w-14 h-14 rounded-full bg-[#38e07b]/10 text-[#38e07b] mb-6 group-hover:bg-[#38e07b] group-hover:text-[#122017] transition-colors duration-300">
                   <Calendar className="w-8 h-8" />
                 </div>
@@ -580,15 +693,12 @@ export default function LandingPage() {
       </section>
 
       {/* Teachers Section */}
-      <section id="teachers" className="py-16 md:py-24 bg-[#111714]">
+      <section id="teachers" className="py-8 sm:py-12 md:py-16 bg-[#111714]">
         <div className="container mx-auto px-4 sm:px-10">
-          <div className="max-w-[800px] flex flex-col items-center text-center mb-16 mx-auto">
+          <div className="max-w-[800px] flex flex-col items-center text-center mb-10 sm:mb-12 mx-auto">
             <h1 className="text-3xl md:text-5xl font-black leading-tight tracking-tight mb-6 text-white">
               Наши Преподаватели
             </h1>
-            <p className="text-[#9eb7a8] text-lg font-normal leading-relaxed max-w-[640px]">
-              Наши преподаватели — это эксперты, которые сами сдали NUET и помогли сотням студентов достичь высоких результатов. Мы отбираем лучших из лучших, чтобы гарантировать качество вашего обучения.
-            </p>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-[1100px] w-full mx-auto">
@@ -606,7 +716,7 @@ export default function LandingPage() {
                   </div>
                   <div className="flex items-center gap-1 px-3 py-1 rounded-full bg-[#38e07b]/10 border border-[#38e07b]/20">
                     <Award className="w-4 h-4 text-[#38e07b]" />
-                    <span className="text-[#38e07b] text-xs font-bold uppercase tracking-wider">Expert</span>
+                    <span className="text-[#38e07b] text-xs font-bold uppercase tracking-wider">Эксперт</span>
                   </div>
                 </div>
 
@@ -614,7 +724,7 @@ export default function LandingPage() {
                   <div className="text-center md:text-left mb-4">
                     <h3 className="text-2xl font-bold text-white mb-1">Salim Mussin</h3>
                     <p className="text-[#38e07b] font-bold text-sm tracking-wide uppercase">
-                      Math tutor
+                      Преподаватель математики
                     </p>
                   </div>
 
@@ -624,7 +734,7 @@ export default function LandingPage() {
                         <TrendingUp className="w-3.5 h-3.5" />
                       </div>
                       <span className="text-gray-300 text-sm">
-                        NUET MATH: 120/120 (overall: 217)
+                        NUET Математика: 120/120 (общий: 217)
                       </span>
                     </div>
                     <div className="flex items-start gap-3">
@@ -632,20 +742,20 @@ export default function LandingPage() {
                         <TrendingUp className="w-3.5 h-3.5" />
                       </div>
                       <span className="text-gray-300 text-sm">
-                        SAT MATH 800/800
+                        SAT Математика 800/800
                       </span>
                     </div>
                     <div className="flex items-start gap-3">
                       <div className="mt-1 min-w-5 size-5 rounded-full bg-[#38e07b]/20 flex items-center justify-center text-[#38e07b]">
                         <GraduationCap className="w-3.5 h-3.5" />
                       </div>
-                      <span className="text-gray-300 text-sm">Major: Economics</span>
+                      <span className="text-gray-300 text-sm">Специальность: Экономика</span>
                     </div>
                     <div className="flex items-start gap-3">
                       <div className="mt-1 min-w-5 size-5 rounded-full bg-[#38e07b]/20 flex items-center justify-center text-[#38e07b]">
                         <School className="w-3.5 h-3.5" />
                       </div>
-                      <span className="text-gray-300 text-sm">2+ years of tutoring</span>
+                      <span className="text-gray-300 text-sm">2+ года преподавания</span>
                     </div>
                   </div>
                 </div>
@@ -666,7 +776,7 @@ export default function LandingPage() {
                   </div>
                   <div className="flex items-center gap-1 px-3 py-1 rounded-full bg-[#38e07b]/10 border border-[#38e07b]/20">
                     <Award className="w-4 h-4 text-[#38e07b]" />
-                    <span className="text-[#38e07b] text-xs font-bold uppercase tracking-wider">Expert</span>
+                    <span className="text-[#38e07b] text-xs font-bold uppercase tracking-wider">Эксперт</span>
                   </div>
                 </div>
 
@@ -674,7 +784,7 @@ export default function LandingPage() {
                   <div className="text-center md:text-left mb-4">
                     <h3 className="text-2xl font-bold text-white mb-1">Sanzhar Kyrgyzbayev</h3>
                     <p className="text-[#38e07b] font-bold text-sm tracking-wide uppercase">
-                      Critical Thinking Tutor
+                      Преподаватель критического мышления
                     </p>
                   </div>
 
@@ -683,19 +793,19 @@ export default function LandingPage() {
                       <div className="mt-1 min-w-5 size-5 rounded-full bg-[#38e07b]/20 flex items-center justify-center text-[#38e07b]">
                         <GraduationCap className="w-3.5 h-3.5" />
                       </div>
-                      <span className="text-gray-300 text-sm">Major: PSIR</span>
+                      <span className="text-gray-300 text-sm">Специальность: PSIR</span>
                     </div>
                     <div className="flex items-start gap-3">
                       <div className="mt-1 min-w-5 size-5 rounded-full bg-[#38e07b]/20 flex items-center justify-center text-[#38e07b]">
                         <School className="w-3.5 h-3.5" />
                       </div>
-                      <span className="text-gray-300 text-sm">3+ years of tutoring</span>
+                      <span className="text-gray-300 text-sm">3+ года преподавания</span>
                     </div>
                     <div className="flex items-start gap-3">
                       <div className="mt-1 min-w-5 size-5 rounded-full bg-[#38e07b]/20 flex items-center justify-center text-[#38e07b]">
                         <Users className="w-3.5 h-3.5" />
                       </div>
-                      <span className="text-gray-300 text-sm">helped over 110 students to get into NU</span>
+                      <span className="text-gray-300 text-sm">помог более 110 студентам поступить в НУ</span>
                     </div>
                   </div>
                 </div>
@@ -719,10 +829,10 @@ export default function LandingPage() {
       </section>
 
       {/* Results & Goals Section */}
-      <section id="results" className="relative py-20 px-4 sm:px-6 lg:px-8 bg-[#122017] overflow-hidden">
+      <section id="results" className="relative py-8 sm:py-12 md:py-16 px-4 sm:px-6 lg:px-8 bg-[#122017] overflow-hidden">
         <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-[#38e07b]/5 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/2 pointer-events-none"></div>
 
-        <div className="max-w-6xl mx-auto flex flex-col gap-12 relative z-10">
+        <div className="max-w-6xl mx-auto flex flex-col gap-8 md:gap-10 relative z-10">
           <div className="flex flex-col gap-4 max-w-3xl">
             <h2 className="text-[#38e07b] text-sm font-bold tracking-widest uppercase mb-2">Цели и Результаты</h2>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-white leading-[1.1] tracking-tight">
@@ -733,7 +843,7 @@ export default function LandingPage() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 mt-4">
             <div className="lg:col-span-7 flex flex-col gap-8">
               <Card className="bg-[#1c2620] border border-[#29382f] rounded-lg relative overflow-hidden group hover:border-[#38e07b]/30 transition-colors duration-300">
-                <CardContent className="p-8 md:p-10">
+                <CardContent className="p-6 md:p-8">
                   <div className="absolute top-0 right-0 p-8 opacity-10 group-hover:opacity-20 transition-opacity duration-500">
                     <Target className="w-36 h-36 text-[#38e07b]" />
                   </div>
@@ -819,7 +929,7 @@ export default function LandingPage() {
               <div className="bg-[#38e07b] rounded-lg p-8 flex flex-col sm:flex-row items-center justify-between gap-6 shadow-lg shadow-[#38e07b]/20">
                 <div className="flex flex-col gap-1 text-center sm:text-left">
                   <span className="text-[#111714] font-bold text-lg leading-tight">Готов начать подготовку?</span>
-                  <span className="text-[#111714]/80 text-sm font-medium">Сдай бесплатный mock уже сегодня</span>
+                  <span className="text-[#111714]/80 text-sm font-medium">Сдай бесплатный пробный тест уже сегодня</span>
                 </div>
                 <Button
                   asChild
@@ -833,132 +943,10 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* Reviews Section */}
-      <section id="reviews" className="py-12 md:py-20 bg-[#111714]">
-        <div className="container mx-auto px-2 sm:px-4 lg:px-10 max-w-[1280px]">
-          <div className="flex flex-col gap-8 md:gap-12">
-            <div className="flex flex-col items-center gap-4 text-center max-w-3xl mx-auto px-2">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#38e07b]/10 border border-[#38e07b]/20">
-                <Award className="w-4 h-4 text-[#38e07b]" />
-                <span className="text-[#38e07b] text-xs font-bold uppercase tracking-wide">Результаты студентов</span>
-              </div>
-              <h2 className="text-white text-2xl sm:text-3xl md:text-5xl font-extrabold leading-tight tracking-tight">
-                Реальные <span className="text-[#38e07b]">баллы NUET</span> наших студентов
-            </h2>
-              <p className="text-[#9eb7a8] text-base md:text-lg font-normal leading-relaxed">
-                Посмотрите на реальные результаты студентов, которые прошли наш курс подготовки
-              </p>
-            </div>
-
-            {/* Image Slider */}
-            <div 
-              className="relative w-full max-w-4xl mx-auto"
-              onMouseEnter={() => setIsPaused(true)}
-              onMouseLeave={() => setIsPaused(false)}
-            >
-              <div className="relative overflow-hidden rounded-lg md:rounded-xl bg-[#1c2620] border border-[#29382f] shadow-2xl">
-                {/* Main Image Container - Taller on mobile */}
-                <div className="relative w-full aspect-[3/4] sm:aspect-[4/3] md:aspect-[4/3]">
-                  {[
-                    "/2026-01-05 21.00.02.jpg",
-                    "/2026-01-05 20.59.58.jpg",
-                    "/2026-01-05 20.59.55.jpg",
-                    "/2026-01-05 20.59.52.jpg",
-                    "/2026-01-05 20.59.48.jpg",
-                    "/2026-01-05 20.59.46.jpg",
-                    "/2026-01-05 20.59.44.jpg",
-                    "/2026-01-05 20.59.41.jpg",
-                    "/2026-01-05 20.59.39.jpg",
-                    "/2026-01-05 20.59.36.jpg",
-                    "/2026-01-05 20.59.33.jpg",
-                    "/2026-01-05 20.59.30.jpg",
-                    "/2026-01-05 20.59.26.jpg",
-                  ].map((image, index) => (
-                    <div
-                      key={index}
-                      className={`absolute inset-0 transition-opacity duration-500 ${
-                        index === currentSlide ? "opacity-100 z-10" : "opacity-0 z-0"
-                      }`}
-                    >
-                      <Image
-                        src={image}
-                        alt={`NUET Score Result ${index + 1}`}
-                        fill
-                        className="object-contain sm:object-contain"
-                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 90vw, 1200px"
-                        priority={index === 0}
-                      />
-                    </div>
-                  ))}
-                </div>
-
-                {/* Navigation Buttons - Smaller on mobile */}
-                <button
-                  onClick={() => {
-                    setCurrentSlide((prev) => (prev === 0 ? 12 : prev - 1))
-                    setIsPaused(true)
-                    setTimeout(() => setIsPaused(false), 3000) // Resume after 3 seconds
-                  }}
-                  className="absolute left-1 sm:left-2 md:left-4 top-1/2 -translate-y-1/2 z-20 bg-[#1c2620]/90 hover:bg-[#1c2620] border border-[#29382f] rounded-full p-1.5 sm:p-2 md:p-3 text-white transition-all hover:border-[#38e07b]/50 hover:scale-110 shadow-lg"
-                  aria-label="Previous image"
-                >
-                  <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6" />
-                </button>
-                <button
-                  onClick={() => {
-                    setCurrentSlide((prev) => (prev === 12 ? 0 : prev + 1))
-                    setIsPaused(true)
-                    setTimeout(() => setIsPaused(false), 3000) // Resume after 3 seconds
-                  }}
-                  className="absolute right-1 sm:right-2 md:right-4 top-1/2 -translate-y-1/2 z-20 bg-[#1c2620]/90 hover:bg-[#1c2620] border border-[#29382f] rounded-full p-1.5 sm:p-2 md:p-3 text-white transition-all hover:border-[#38e07b]/50 hover:scale-110 shadow-lg"
-                  aria-label="Next image"
-                >
-                  <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6" />
-                </button>
-
-                {/* Dots Indicator - Smaller on mobile */}
-                <div className="absolute bottom-2 sm:bottom-3 md:bottom-4 left-1/2 -translate-x-1/2 z-20 flex gap-1.5 sm:gap-2 px-2">
-                  {Array.from({ length: 13 }).map((_, index) => (
-                    <button
-                      key={index}
-                      onClick={() => {
-                        setCurrentSlide(index)
-                        setIsPaused(true)
-                        setTimeout(() => setIsPaused(false), 3000) // Resume after 3 seconds
-                      }}
-                      className={`h-1.5 sm:h-2 rounded-full transition-all ${
-                        index === currentSlide
-                          ? "w-6 sm:w-8 bg-[#38e07b]"
-                          : "w-1.5 sm:w-2 bg-[#9eb7a8]/40 hover:bg-[#9eb7a8]/60"
-                      }`}
-                      aria-label={`Go to slide ${index + 1}`}
-                    />
-                  ))}
-                </div>
-
-                {/* Slide Counter - Smaller on mobile */}
-                <div className="absolute top-2 sm:top-3 md:top-4 right-2 sm:right-3 md:right-4 z-20 bg-[#1c2620]/90 border border-[#29382f] rounded-full px-2 sm:px-3 md:px-4 py-1 sm:py-1.5 md:py-2">
-                  <span className="text-white text-xs sm:text-sm font-medium">
-                    {currentSlide + 1} / 13
-                  </span>
-                </div>
-              </div>
-
-              {/* Auto-play indicator */}
-              <div className="mt-4 sm:mt-6 text-center px-2">
-                <p className="text-[#9eb7a8] text-xs sm:text-sm">
-                  Используйте стрелки для навигации или кликните на точки внизу
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* Pricing Section */}
-      <section id="pricing" className="py-20 bg-[#111714] relative">
+      <section id="pricing" className="py-8 sm:py-12 md:py-16 bg-[#111714] relative">
         <div className="container mx-auto px-4 max-w-[1200px]">
-          <div className="text-center mb-16">
+          <div className="text-center mb-10 sm:mb-12">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#38e07b]/10 border border-[#38e07b]/20 mb-4">
               <span className="text-[#38e07b] text-xs font-bold uppercase tracking-wide">Цены</span>
             </div>
@@ -1081,7 +1069,7 @@ export default function LandingPage() {
         </div>
       </section>
 
-      <section id="lead-form" className="py-20 bg-[#111714] relative">
+      <section id="lead-form" className="py-8 sm:py-12 md:py-16 bg-[#111714] relative">
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           <div className="absolute top-20 right-[-10%] w-[500px] h-[500px] rounded-full bg-[#38e07b]/5 blur-[100px]"></div>
           <div className="absolute bottom-0 left-[-10%] w-[600px] h-[600px] rounded-full bg-[#38e07b]/5 blur-[120px]"></div>
@@ -1095,7 +1083,7 @@ export default function LandingPage() {
                   <span className="text-[#38e07b] text-xs font-bold uppercase tracking-wide">Бесплатный доступ</span>
                 </div>
                 <h2 className="text-white tracking-tight text-4xl sm:text-5xl font-black leading-[1.1]">
-                  Сдай Mock тест состоящих из задач прошлых лет NUET и получи пробный доступ к платформе
+                  Сдай пробный тест состоящий из задач прошлых лет NUET и получи пробный доступ к платформе
                 </h2>
                 <p className="text-gray-300 text-lg font-normal leading-relaxed max-w-[600px]">
                   Получи доступ к пробному мини-курсу на нашей платформе и оцени формат обучения перед покупкой полного курса.
@@ -1190,26 +1178,6 @@ export default function LandingPage() {
           </div>
         </div>
       </section>
-
-      <footer className="bg-[#111714] border-t border-[#29382f] text-white">
-        <div className="container mx-auto px-4 py-10 max-w-[960px]">
-          <div className="flex flex-wrap items-center justify-center gap-6 md:gap-12 mb-6">
-            <a className="text-[#9eb7a8] hover:text-[#38e07b] transition-colors text-sm" href="#">
-              Политика конфиденциальности
-            </a>
-            <a className="text-[#9eb7a8] hover:text-[#38e07b] transition-colors text-sm" href="#">
-              Условия использования
-            </a>
-            <a className="text-[#9eb7a8] hover:text-[#38e07b] transition-colors text-sm" href="#">
-              Связаться с нами
-            </a>
-          </div>
-          <div className="flex items-center justify-center gap-4 text-[#9eb7a8]">
-            <GraduationCap className="w-5 h-5" />
-            <p className="text-sm">© 2025 NUET Prep. Все права защищены.</p>
-          </div>
-        </div>
-      </footer>
     </div>
   )
 }
