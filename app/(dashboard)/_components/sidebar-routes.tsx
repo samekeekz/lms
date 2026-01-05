@@ -11,11 +11,6 @@ const guestRoutes = [
     href: "/dashboard",
   },
   {
-    icon: Award,
-    label: "Free Quiz",
-    href: "/free-quiz",
-  },
-  {
     icon: Compass,
     label: "Browse",
     href: "/search",
@@ -53,7 +48,11 @@ const adminRoutes = [
   },
 ];
 
-export const SidebarRoutes = () => {
+interface SidebarRoutesProps {
+  onItemClick?: () => void;
+}
+
+export const SidebarRoutes = ({ onItemClick }: SidebarRoutesProps) => {
   const pathname = usePathname();
 
   const isTeacherPage = pathname?.includes("/teacher");
@@ -61,11 +60,6 @@ export const SidebarRoutes = () => {
   const isSearchPage = pathname === "/search";
 
   let routes = isAdminPage ? adminRoutes : isTeacherPage ? teacherRoutes : guestRoutes;
-  
-  // Remove "Free Quiz" from sidebar when on search page
-  if (isSearchPage && !isAdminPage && !isTeacherPage) {
-    routes = routes.filter((route) => route.label !== "Free Quiz");
-  }
 
   return (
     <div className="flex flex-col w-full">
@@ -75,6 +69,7 @@ export const SidebarRoutes = () => {
           icon={route.icon}
           label={route.label}
           href={route.href}
+          onItemClick={onItemClick}
         />
       ))}
     </div>

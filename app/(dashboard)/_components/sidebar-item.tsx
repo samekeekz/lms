@@ -8,9 +8,10 @@ interface ISidebarItemProps {
   icon: LucideIcon;
   label: string;
   href: string;
+  onItemClick?: () => void;
 }
 
-export const SidebarItem = ({ icon: Icon, label, href }: ISidebarItemProps) => {
+export const SidebarItem = ({ icon: Icon, label, href, onItemClick }: ISidebarItemProps) => {
   const pathname = usePathname();
   const router = useRouter();
 
@@ -21,6 +22,7 @@ export const SidebarItem = ({ icon: Icon, label, href }: ISidebarItemProps) => {
 
   const onClick = () => {
     router.push(href);
+    onItemClick?.();
   };
 
   return (

@@ -62,7 +62,7 @@ export default function LandingPage() {
 
   useEffect(() => {
     if (isLoaded && isSignedIn) {
-      router.push("/dashboard")
+      router.push("/search")
     }
   }, [isLoaded, isSignedIn, router])
 
@@ -373,7 +373,7 @@ export default function LandingPage() {
                 <span className="text-[#38e07b] text-xs font-bold uppercase tracking-wide">Результаты студентов</span>
               </div>
               <h2 className="text-white text-2xl sm:text-3xl md:text-5xl font-extrabold leading-tight tracking-tight">
-                Реальные <span className="text-[#38e07b]">баллы NUET</span> наших студентов
+               Результаты наших студентов
             </h2>
               <p className="text-[#9eb7a8] text-base md:text-lg font-normal leading-relaxed">
                 Посмотрите на реальные результаты студентов, которые прошли наш курс подготовки
