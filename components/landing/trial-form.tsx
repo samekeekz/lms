@@ -88,10 +88,6 @@ export function TrialForm() {
                     <Button type="submit" className="w-full" size="lg">
                       Получить доступ к пробному курсу
                     </Button>
-
-                    <p className="text-xs text-muted-foreground text-center">
-                      Никакого спама. Только материалы по NUET и важные напоминания до экзамена.
-                    </p>
                   </form>
                 </>
               ) : (

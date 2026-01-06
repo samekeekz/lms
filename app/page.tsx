@@ -375,7 +375,7 @@ export default function LandingPage() {
             </div>
 
             {/* Image Slider */}
-            <div 
+            <div
               className="relative w-full max-w-4xl mx-auto"
               onMouseEnter={() => setIsPaused(true)}
               onMouseLeave={() => setIsPaused(false)}
@@ -483,7 +483,7 @@ export default function LandingPage() {
         <div className="container mx-auto px-4 sm:px-8 max-w-[1200px]">
           <div className="flex flex-col gap-4 text-center mb-10 sm:mb-12">
             <h1 className="text-white tracking-tight text-4xl sm:text-5xl font-black leading-[1.1]">
-              Программа Марафона 
+              Программа Марафона
             </h1>
             <p className="text-[#9eb7a8] text-lg sm:text-xl font-normal leading-relaxed max-w-[800px] mx-auto">
               за 4 недели мы пройдем все важные темы и закрепим их на практике
@@ -884,7 +884,7 @@ export default function LandingPage() {
                   </div>
                     <h3 className="text-2xl font-bold text-white">Результаты за 2 года</h3>
                   </div>
-                  
+
                   <div className="flex flex-col gap-6">
                     <div className="flex flex-col gap-2">
                       <div className="flex items-baseline gap-2">
@@ -895,9 +895,9 @@ export default function LandingPage() {
                         средний балл NUET наших учеников
                       </p>
                     </div>
-                    
+
                     <div className="h-px bg-[#29382f]"></div>
-                    
+
                     <div className="flex flex-col gap-2">
                       <div className="flex items-baseline gap-2">
                         <span className="text-5xl font-black text-white">217</span>
@@ -1063,16 +1063,9 @@ export default function LandingPage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
             <div className="flex flex-col gap-8">
               <div className="flex flex-col gap-6">
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#38e07b]/10 border border-[#38e07b]/20 w-fit">
-                  <CheckCircle2 className="w-4 h-4 text-[#38e07b]" />
-                  <span className="text-[#38e07b] text-xs font-bold uppercase tracking-wide">Бесплатный доступ</span>
-                </div>
                 <h2 className="text-white tracking-tight text-4xl sm:text-5xl font-black leading-[1.1]">
-                  Сдай пробный тест состоящий из задач прошлых лет NUET и получи пробный доступ к платформе
+                  Заполни форму чтобы наш менеджер связался с тобой
                 </h2>
-                <p className="text-gray-300 text-lg font-normal leading-relaxed max-w-[600px]">
-                  Получи доступ к платформе и оцени формат обучения перед покупкой полного курса.
-                </p>
               </div>
             </div>
 
@@ -1139,7 +1132,7 @@ export default function LandingPage() {
                     className="mt-4 w-full h-14 bg-[#38e07b] hover:bg-[#2fc468] text-[#111714] font-bold text-base rounded-full shadow-[0_0_20px_rgba(56,224,123,0.3)] hover:shadow-[0_0_30px_rgba(56,224,123,0.5)] transition-all transform active:scale-[0.98] flex items-center justify-center gap-2"
                   >
                     <span>Получить доступ к платформе</span>
-                    <ArrowRight className="w-5 h-5" />  
+                    <ArrowRight className="w-5 h-5" />
                   </Button>
 
                   {/* Consent Text */}
@@ -1147,13 +1140,6 @@ export default function LandingPage() {
                     Нажимая &quot;Отправить&quot;, вы соглашаетесь на обработку персональных данных.
                   </p>
 
-                  {/* Microtext */}
-                  <div className="text-center mt-2 px-2">
-                    <p className="text-xs text-[#9eb7a8] leading-relaxed flex items-start justify-center gap-1.5 opacity-80">
-                      <Lock className="w-[14px] h-[14px] mt-0.5 shrink-0" />
-                      <span>Никакого спама. Только материалы по NUET и важные напоминания до экзамена.</span>
-                    </p>
-                  </div>
                 </form>
               </div>
               {/* Decorative elements */}
