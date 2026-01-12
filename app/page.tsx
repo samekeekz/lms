@@ -27,20 +27,14 @@ import {
   BarChart3,
   Calendar,
   TrendingUp,
-  Lightbulb,
   School,
   Brain,
   Calculator,
-  Download,
   ArrowRight,
-  Quote,
-  Star,
   Award,
   User,
   Phone,
   MessageSquare,
-  Mail,
-  Lock,
   ChevronLeft,
   ChevronRight,
 } from "lucide-react"
@@ -66,7 +60,6 @@ export default function LandingPage() {
     }
   }, [isLoaded, isSignedIn, router])
 
-  // Auto-play slider
   useEffect(() => {
     if (isPaused) return
 
@@ -384,19 +377,19 @@ export default function LandingPage() {
                 {/* Main Image Container - Taller on mobile */}
                 <div className="relative w-full aspect-[3/4] sm:aspect-[4/3] md:aspect-[4/3]">
                   {[
-                    "/2026-01-05 21.00.02.jpg",
-                    "/2026-01-05 20.59.58.jpg",
-                    "/2026-01-05 20.59.55.jpg",
-                    "/2026-01-05 20.59.52.jpg",
-                    "/2026-01-05 20.59.48.jpg",
-                    "/2026-01-05 20.59.46.jpg",
-                    "/2026-01-05 20.59.44.jpg",
-                    "/2026-01-05 20.59.41.jpg",
-                    "/2026-01-05 20.59.39.jpg",
-                    "/2026-01-05 20.59.36.jpg",
-                    "/2026-01-05 20.59.33.jpg",
-                    "/2026-01-05 20.59.30.jpg",
-                    "/2026-01-05 20.59.26.jpg",
+                    "/photo_2026-01-12_14-09-23.jpg",
+                    "/photo_2026-01-12_14-09-29.jpg",
+                    "/photo_2026-01-12_14-09-32.jpg",
+                    "/photo_2026-01-12_14-09-35.jpg",
+                    "/photo_2026-01-12_14-09-38.jpg",
+                    "/photo_2026-01-12_14-09-41.jpg",
+                    "/photo_2026-01-12_14-09-43.jpg",
+                    "/photo_2026-01-12_14-09-56.jpg",
+                    "/photo_2026-01-12_14-09-59.jpg",
+                    "/photo_2026-01-12_14-10-02.jpg",
+                    "/photo_2026-01-12_14-10-04.jpg",
+                    "/photo_2026-01-12_14-10-08.jpg",
+                    "/photo_2026-01-12_14-10-12.jpg",
                   ].map((image, index) => (
                     <div
                       key={index}
