@@ -806,122 +806,65 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* Results & Goals Section */}
       <section id="results" className="relative py-6 md:py-12 px-4 sm:px-6 lg:px-8 bg-[#122017] overflow-hidden">
         <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-[#38e07b]/5 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/2 pointer-events-none"></div>
 
         <div className="max-w-6xl mx-auto flex flex-col gap-8 md:gap-10 relative z-10">
-          <div className="flex flex-col gap-4 max-w-3xl">
+          <div className="flex flex-col gap-4">
             <h2 className="text-[#38e07b] text-sm font-bold tracking-widest uppercase mb-2">Цели и Результаты</h2>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-white leading-[1.1] tracking-tight">
               К чему мы <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#38e07b] to-[#8fffb6]">тебя готовим</span>
             </h1>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 mt-4">
-            <div className="lg:col-span-7 flex flex-col gap-8">
-              <Card className="bg-[#1c2620] border border-[#29382f] rounded-lg relative overflow-hidden group hover:border-[#38e07b]/30 transition-colors duration-300">
-                <CardContent className="p-6 md:p-8">
-                  <div className="absolute top-0 right-0 p-8 opacity-10 group-hover:opacity-20 transition-opacity duration-500">
-                    <Target className="w-36 h-36 text-[#38e07b]" />
-                  </div>
-                  <h3 className="text-2xl font-bold text-white mb-6 relative z-10">Наша миссия</h3>
-                  <p className="text-lg md:text-xl text-gray-200 leading-relaxed font-medium relative z-10">
-                   Наша цель сделать вашу подготовку максимально эффективной за месяц до самого экзамена и помочь вам закрепить ваши знания чтобы на самом экзамене у вас не было слабых сторон.
-                  </p>
-                </CardContent>
-              </Card>
-
-              <div className="grid gap-4">
-                <div className="flex items-start gap-5 p-5 rounded-xl bg-[#1c2620]/50 border border-transparent hover:border-[#29382f] transition-all duration-300">
-                  <div className="flex-shrink-0 mt-1 w-10 h-10 rounded-full bg-[#38e07b]/10 flex items-center justify-center text-[#38e07b]">
-                    <BookOpen className="w-5 h-5" />
-                  </div>
-                  <div>
-                    <h4 className="text-lg font-bold text-white mb-1">Фундамент</h4>
-                    <p className="text-[#9eb7a8]">ты повторишь все важные темы из экзамена и закрепишь их перед самим экзаменом</p>
-                  </div>
+          <div className="flex flex-col gap-8 mt-4">
+            <Card className="bg-[#1c2620] border border-[#29382f] rounded-lg relative overflow-hidden group hover:border-[#38e07b]/30 transition-colors duration-300">
+              <CardContent className="p-6 md:p-8">
+                <div className="absolute top-0 right-0 p-8 opacity-10 group-hover:opacity-20 transition-opacity duration-500">
+                  <Target className="w-36 h-36 text-[#38e07b]" />
                 </div>
+                <h3 className="text-2xl font-bold text-white mb-6 relative z-10">Наша миссия</h3>
+                <p className="text-lg md:text-xl text-gray-200 leading-relaxed font-medium relative z-10">
+                 Наша цель сделать вашу подготовку максимально эффективной за месяц до самого экзамена и помочь вам закрепить ваши знания чтобы на самом экзамене у вас не было слабых сторон.
+                </p>
+              </CardContent>
+            </Card>
 
-                <div className="flex items-start gap-5 p-5 rounded-xl bg-[#1c2620]/50 border border-transparent hover:border-[#29382f] transition-all duration-300">
-                  <div className="flex-shrink-0 mt-1 w-10 h-10 rounded-full bg-[#38e07b]/10 flex items-center justify-center text-[#38e07b]">
-                    <BarChart3 className="w-5 h-5" />
-                  </div>
-                  <div>
-                    <h4 className="text-lg font-bold text-white mb-1">Формат</h4>
-                    <p className="text-[#9eb7a8]">за 4 недели ты привыкнешь к формату и улучшишь свои навыки решения задач</p>
-                  </div>
+            <div className="grid gap-4">
+              <div className="flex items-start gap-5 p-5 rounded-xl bg-[#1c2620]/50 border border-transparent hover:border-[#29382f] transition-all duration-300">
+                <div className="flex-shrink-0 mt-1 w-10 h-10 rounded-full bg-[#38e07b]/10 flex items-center justify-center text-[#38e07b]">
+                  <BookOpen className="w-5 h-5" />
                 </div>
-
-                <div className="flex items-start gap-5 p-5 rounded-xl bg-[#1c2620]/50 border border-transparent hover:border-[#29382f] transition-all duration-300">
-                  <div className="flex-shrink-0 mt-1 w-10 h-10 rounded-full bg-[#38e07b]/10 flex items-center justify-center text-[#38e07b]">
-                    <Brain className="w-5 h-5" />
-                  </div>
-                  <div>
-                    <h4 className="text-lg font-bold text-white mb-1">Уверенность</h4>
-                    <p className="text-[#9eb7a8]">У нас проверенная база материалов с задачами из прошлых годов экзамена, что помогает нашим ученикам набирать хорошие баллы на реальном экзамене</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="lg:col-span-5 flex flex-col gap-6">
-              <div className="h-full flex flex-col rounded-lg bg-[#1c2620] border border-[#29382f] relative overflow-hidden group hover:border-[#38e07b]/30 transition-colors">
-                <div className="absolute top-0 right-0 p-8 opacity-5 group-hover:opacity-10 transition-opacity duration-500">
-                  <TrendingUp className="w-36 h-36 text-[#38e07b]" />
-                  </div>
-                <div className="flex-1 flex flex-col p-8 gap-8 relative z-10">
-                  <div className="flex items-center gap-3">
-                    <div className="w-12 h-12 rounded-full bg-[#38e07b]/10 flex items-center justify-center">
-                      <TrendingUp className="w-6 h-6 text-[#38e07b]" />
-                  </div>
-                    <h3 className="text-2xl font-bold text-white">Результаты за 2 года</h3>
-                  </div>
-
-                  <div className="flex flex-col gap-6">
-                    <div className="flex flex-col gap-2">
-                      <div className="flex items-baseline gap-2">
-                        <span className="text-5xl font-black text-[#38e07b]">155</span>
-                        <span className="text-xl text-white font-bold">баллов</span>
-                </div>
-                      <p className="text-[#9eb7a8] text-sm leading-relaxed">
-                        средний балл NUET наших учеников
-                      </p>
-                    </div>
-
-                    <div className="h-px bg-[#29382f]"></div>
-
-                    <div className="flex flex-col gap-2">
-                      <div className="flex items-baseline gap-2">
-                        <span className="text-5xl font-black text-white">217</span>
-                        <span className="text-xl text-[#9eb7a8] font-medium">учеников</span>
-                    </div>
-                      <p className="text-[#9eb7a8] text-sm leading-relaxed">
-                        поступили в НУ за последние 2 года
-                      </p>
-                  </div>
-                  </div>
+                <div>
+                  <h4 className="text-lg font-bold text-white mb-1">Фундамент</h4>
+                  <p className="text-[#9eb7a8]">ты повторишь все важные темы из экзамена и закрепишь их перед самим экзаменом</p>
                 </div>
               </div>
 
-              <div className="bg-[#38e07b] rounded-lg p-8 flex flex-col sm:flex-row items-center justify-between gap-6 shadow-lg shadow-[#38e07b]/20">
-                <div className="flex flex-col gap-1 text-center sm:text-left">
-                  <span className="text-[#111714] font-bold text-lg leading-tight">Готов начать подготовку?</span>
-                  <span className="text-[#111714]/80 text-sm font-medium">Получи пробный доступ на платформу уже сегодня</span>
+              <div className="flex items-start gap-5 p-5 rounded-xl bg-[#1c2620]/50 border border-transparent hover:border-[#29382f] transition-all duration-300">
+                <div className="flex-shrink-0 mt-1 w-10 h-10 rounded-full bg-[#38e07b]/10 flex items-center justify-center text-[#38e07b]">
+                  <BarChart3 className="w-5 h-5" />
                 </div>
-                <Button
-                  asChild
-                  className="bg-[#111714] hover:bg-black text-white font-bold py-3 px-6 rounded-full transition-colors whitespace-nowrap shadow-md"
-                >
-                  <a href="#lead-form">Начать сейчас</a>
-                </Button>
+                <div>
+                  <h4 className="text-lg font-bold text-white mb-1">Формат</h4>
+                  <p className="text-[#9eb7a8]">за 4 недели ты привыкнешь к формату и улучшишь свои навыки решения задач</p>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-5 p-5 rounded-xl bg-[#1c2620]/50 border border-transparent hover:border-[#29382f] transition-all duration-300">
+                <div className="flex-shrink-0 mt-1 w-10 h-10 rounded-full bg-[#38e07b]/10 flex items-center justify-center text-[#38e07b]">
+                  <Brain className="w-5 h-5" />
+                </div>
+                <div>
+                  <h4 className="text-lg font-bold text-white mb-1">Уверенность</h4>
+                  <p className="text-[#9eb7a8]">У нас проверенная база материалов с задачами из прошлых годов экзамена, что помогает нашим ученикам набирать хорошие баллы на реальном экзамене</p>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Pricing Section */}
       <section id="pricing" className="py-6 md:py-12 bg-[#111714] relative">
         <div className="container mx-auto px-4 max-w-[1200px]">
           <div className="text-center mb-10 sm:mb-12">
@@ -941,7 +884,6 @@ export default function LandingPage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-[900px] mx-auto">
-            {/* 1 Subject Plan */}
             <Card className="border border-[#3d5245] bg-[#1c2620] hover:border-[#38e07b]/50 transition-all duration-300 relative">
               <CardContent className="p-8">
                 <div className="text-center mb-6">
