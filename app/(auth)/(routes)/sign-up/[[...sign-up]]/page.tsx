@@ -4,7 +4,7 @@ export default function Page() {
   return (
     <SignUp 
       afterSignUpUrl="/search"
-      afterSignInUrl="/search"
+      fallbackRedirectUrl="/search"
     />
   );
 }
