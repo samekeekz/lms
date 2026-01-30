@@ -5,8 +5,8 @@ import { ToasterProvider } from "@/components/providers/toaster-provider";
 import { ConfettiProvider } from "@/components/providers/confetti-provider";
 import { AuthLoadingProvider } from "@/components/providers/auth-loading-provider";
 import { MetricsProvider } from "@/components/providers/metrics-provider";
+import { Analytics } from "@vercel/analytics/next"
 import "./globals.css";
-
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -37,6 +37,7 @@ export default function RootLayout({
             <ToasterProvider />
             <MetricsProvider />
             {children}
+            <Analytics />
           </AuthLoadingProvider>
         </body>
       </html>
